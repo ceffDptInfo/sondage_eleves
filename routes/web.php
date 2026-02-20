@@ -18,6 +18,18 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// ----------------------------------------------------------------------
+// Routes pour les élèves
+Route::get('students/home', function () {
+    return Inertia::render('students/Home');
+})->name('students.home');
+
+// Route pour les enseignants
+Route::get('teachers/home', function () {
+    return Inertia::render('teachers/Home');
+})->middleware(['auth', 'verified'])->name('teachers.home');
+// ----------------------------------------------------------------------
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
