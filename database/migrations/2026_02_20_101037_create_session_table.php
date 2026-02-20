@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('class')->nullable();
             $table->string('remark')->nullable();
-            $table->foreignId('survey_id')->constrained('surveys')->onDelete('cascade');
+            $table->foreignId('survey_id')->constrained('survey')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('archive', function (Blueprint $table) {
             $table->id();
-            $table->blob('document');
+            $table->binary('document');
             $table->string('filename');
             $table->string('teacher_name');
             $table->string('teacher_mail_address');
