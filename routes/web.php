@@ -28,6 +28,14 @@ Route::get('students/home', function () {
 Route::get('teachers/home', function () {
     return Inertia::render('teachers/Home');
 })->middleware(['auth', 'verified'])->name('teachers.home');
+
+Route::get('teachers/create-survey', function () {
+    return Inertia::render('teachers/Create_survey');
+})->middleware(['auth', 'verified'])->name('teachers.create-survey');
+
+Route::get('teachers/archive-surveys', function () {
+    return Inertia::render('teachers/Archives');
+})->middleware(['auth', 'verified'])->name('teachers.archive-surveys');
 // ----------------------------------------------------------------------
 
 Route::middleware('auth')->group(function () {
