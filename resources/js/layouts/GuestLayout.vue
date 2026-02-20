@@ -1,9 +1,11 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import Header from '@/components/navigation/header.vue';
 import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
+    <Header />
     <div
         class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0"
     >

@@ -1,5 +1,4 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -38,6 +37,7 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit">
+            <h1 class="text-4xl font-bold text-center mb-4 p-2">Connexion enseignant</h1>
             <div>
                 <InputLabel for="email" value="Email" />
 

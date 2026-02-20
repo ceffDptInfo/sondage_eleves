@@ -7,6 +7,16 @@ const linksVisitor = ref([
     { name: 'Élèves', to: '/students/home', method: 'get' },
     { name: 'Enseignants', to: '/teachers/home', method: 'get' },
 ]);
+const linksAuth = ref([
+    { name: 'Login', to: '/login', method: 'get' },
+    { name: 'Register', to: '/register', method: 'get' },
+]);
+const linksStudent = ref([
+    { name: 'Accueil', to: '/', method: 'get' },
+]);
+const linksTeacher = ref([
+    { name: 'Dashboard', to: '/dashboard', method: 'get' },
+]);
 </script>
 
 <template>
@@ -19,7 +29,19 @@ const linksVisitor = ref([
         </div>
 
         <nav class="hidden md:flex items-center gap-8 flex-none">
-            <template v-if="$page.props.auth.user">
+            <template v-if="$page.url == '/login' || $page.url == '/register'">
+                <Link v-for="link in linksAuth" :key="link.name" :href="link.to" :method="link.method"
+                    v-on:finish="link.action" :class="[
+                        'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
+                        $page.url === link.to
+                            ? 'after:scale-x-100 text-amber-500 font-medium'
+                            : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
+                    ]">
+                    {{ link.name }}
+                </Link>
+                
+            </template>
+            <template v-else-if="$page.props.auth.user">
                 <!-- <Link v-for="link in linksVisitor" :key="link.name" :href="link.to" :method="link.method"
                     v-on:finish="link.action" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
