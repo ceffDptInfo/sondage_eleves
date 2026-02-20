@@ -29,13 +29,13 @@ Route::get('teachers/home', function () {
     return Inertia::render('teachers/Home');
 })->middleware(['auth', 'verified'])->name('teachers.home');
 
-Route::get('teachers/create-survey', function () {
+Route::get('teachers/create_survey', function () {
     return Inertia::render('teachers/Create_survey');
 })->middleware(['auth', 'verified'])->name('teachers.create-survey');
 
-Route::get('teachers/archive-surveys', function () {
+Route::get('teachers/archives', function () {
     return Inertia::render('teachers/Archives');
-})->middleware(['auth', 'verified'])->name('teachers.archive-surveys');
+})->middleware(['auth', 'verified'])->name('teachers.archives');
 // ----------------------------------------------------------------------
 
 Route::middleware('auth')->group(function () {

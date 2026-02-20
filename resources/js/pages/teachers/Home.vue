@@ -11,13 +11,13 @@ import SurveyListItem from '@/components/teachers/home/survey_list_item.vue';
             <h2 class="text-2xl md:text-3xl font-bold">Page d'accueil enseignant</h2>
 
             <div class="grid grid-cols-2 gap-8 mt-20">
-                <Link href="/teachers/create-survey">
+                <Link href="/teachers/create_survey">
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold mb-4">Créer un sondage</h3>
                         <img src="/icons/survey.png" alt="Créer un sondage" class="w-20 h-20">
                     </div>
                 </Link>
-                <Link href="/teachers/archive-surveys">
+                <Link href="/teachers/archives">
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold mb-4">Consulter les archives</h3>
                         <img src="/icons/archive.png" alt="Consulter les archives" class="w-20 h-20">
