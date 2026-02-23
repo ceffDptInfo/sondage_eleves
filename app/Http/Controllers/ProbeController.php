@@ -23,7 +23,7 @@ class ProbeController extends Controller
         return response()->json(['message' => 'Sondage configuré avec succès', 'session' => $session]);
     }
 
-    public function get($id)
+    public function getById($id)
     {
         $session = Session::findOrFail($id);
         return response()->json($session);

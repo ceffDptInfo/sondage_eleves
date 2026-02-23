@@ -23,7 +23,13 @@ class SurveyController extends Controller
         return response()->json(['message' => 'Sondage créé avec succès', 'survey' => $survey], 201);
     }
 
-    public function get($id)
+    public function getByTeacher()
+    {
+        $surveys = Survey::where('user_id', auth()->id())->get();
+        return response()->json($surveys);
+    }
+
+    public function getById($id)
     {
         $survey = Survey::findOrFail($id);
         return response()->json($survey);

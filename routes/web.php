@@ -11,10 +11,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('Welcome');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Welcome');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // ----------------------------------------------------------------------
 
 // Routes pour les élèves
@@ -51,11 +47,9 @@ Route::get('teachers/archives', function () {
 })->middleware(['auth', 'verified'])->name('teachers.archives');
 
 // GET
-Route::get('teachers/surveys', function () {
-    return Survey::all();
-})->middleware(['auth', 'verified'])->name('survey.list');
-Route::get('teachers/survey/{id}', [SurveyController::class, 'get'])->middleware(['auth', 'verified'])->name('survey.get');
-Route::get('teachers/probe/session/{id}', [ProbeController::class, 'get'])->middleware(['auth', 'verified'])->name('probe.session.get');
+Route::get('teachers/surveys', [SurveyController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/survey/{id}', [SurveyController::class, 'getById'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
 
 // POST
 Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
