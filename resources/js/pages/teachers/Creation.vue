@@ -5,7 +5,6 @@ import axios from 'axios';
 
 let survey = ref({
     name: '',
-    password: '',
     creation_date: '',
     description: '',
     question: '',
@@ -33,11 +32,6 @@ function submit() {
             <div>
             <label for="name" class="block text-sm font-medium">Nom du sondage:</label>
             <input type="text" id="name" name="name" v-model="survey.name" class="w-full px-3 py-2 border border-gray-300 rounded">
-            </div>
-
-            <div>
-            <label for="password" class="block text-sm font-medium">Mot de passe:</label>
-            <input type="password" autocomplete="new-password" id="password" name="password" v-model="survey.password" class="w-full px-3 py-2 border border-gray-300 rounded">
             </div>
 
             <div>

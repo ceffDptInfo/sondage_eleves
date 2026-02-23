@@ -4,20 +4,21 @@ import { ref } from 'vue';
 import axios from 'axios';
 
 const id = window.location.pathname.split('/')[4];
+
 let session = ref({
     survey_id: id,
     status: 'created',
     class: '',
     remark: '',
-    code: Math.floor(Math.random() * 1000000)
+    code: Math.floor(Math.random() * 1000000),
+    password: ''
 });
 
 function setUp() {
-    alert(JSON.stringify(session.value));
     axios.post(`/teachers/probe/session`, session.value)
         .then(response => {
             console.log('Sondage configuré avec succès:', response.data);
-            window.location.href = '/teachers/probe/display';
+            window.location.href = '/teachers/probe/display/' + id;
         })
         .catch(error => {
             console.error('Erreur lors de la configuration du sondage:', error);
@@ -36,6 +37,9 @@ function setUp() {
 
             <label for="remark">Remarque : </label>
             <input type="text" id="remark" name="remark" v-model="session.remark" class="border border-gray-300 rounded-md p-2 w-full">
+
+            <label for="password">Mot de passe : </label>
+            <input type="password" id="password" name="password" v-model="session.password" class="border border-gray-300 rounded-md p-2 w-full">
         </div>
         <div class="mx-auto mt-40">
             <button @click="setUp()"

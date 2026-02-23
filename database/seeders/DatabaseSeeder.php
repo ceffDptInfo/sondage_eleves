@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         ]);
         
         Survey::factory(10)->create();
-        Session::factory(20)->create();
-        Remark::factory(50)->create();
-        Vote::factory(50)->create();
+        // Session::factory(20)->create();
+        // Remark::factory(50)->create();
+        // Vote::factory(50)->create();
     }
 }

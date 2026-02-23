@@ -18,9 +18,9 @@ class SurveyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->word(),
             'description' => fake()->sentence(),
-            'password' => Hash::make('password'),
+            'creation_date' => fake()->date(),
             'question' => fake()->sentence(),
             'user_id' => fake()->numberBetween(1, 10),
         ];

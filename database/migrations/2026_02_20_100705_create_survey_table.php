@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->date('creation_date')->nullable();
-            $table->string('password');
             $table->string('question');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

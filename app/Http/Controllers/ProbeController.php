@@ -12,13 +12,20 @@ class ProbeController extends Controller
         $validatedData = $request->validate([
             'survey_id' => 'required|exists:survey,id',
             'status' => 'required|in:created',
-            'class' => 'required|string|max:255',
+            'class' => 'nullable|string|max:255',
             'remark' => 'nullable|string|max:1000',
             'code' => 'required|integer|unique:sessions,code',
+            'password' => 'nullable|string|max:255',
         ]);
 
-        $survey = Session::create($validatedData);
+        $session = Session::create($validatedData);
 
-        return response()->json(['message' => 'Sondage configuré avec succès']);
+        return response()->json(['message' => 'Sondage configuré avec succès', 'session' => $session]);
+    }
+
+    public function get($id)
+    {
+        $session = Session::findOrFail($id);
+        return response()->json($session);
     }
 }

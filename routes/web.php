@@ -25,38 +25,39 @@ Route::get('students/home', function () {
 // ----------------------------------------------------------------------
 
 // Route pour les enseignants
-// Home
+// Pages
 Route::get('teachers/home', function () {
     return Inertia::render('Teachers/Home');
 })->middleware(['auth', 'verified'])->name('teachers.home');
 
-// Creation
 Route::get('teachers/create_survey', function () {
     return Inertia::render('Teachers/Creation');
 })->middleware(['auth', 'verified'])->name('teachers.create-survey');
 
-Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
-
-// Sondages 
 Route::get('teachers/probe/set_up/{id}', function ($id) {
     return Inertia::render('Teachers/Probe/Set_up', ['surveyId' => $id]);
 })->middleware(['auth', 'verified'])->name('teachers.probe.set_up');
 
-Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
-
-
-Route::get('teachers/probe/display', function () {
-    return Inertia::render('Teachers/Probe/Display');
+Route::get('teachers/probe/display/{id}', function ($id) {
+    return Inertia::render('Teachers/Probe/Display', ['surveyId' => $id]);
 })->middleware(['auth', 'verified'])->name('teachers.probe.display');
 
 Route::get('teachers/probe/results', function () {
     return Inertia::render('Teachers/Probe/Results_list');
 })->middleware(['auth', 'verified'])->name('teachers.probe.results_list');
 
-// Archives
 Route::get('teachers/archives', function () {
     return Inertia::render('Teachers/Archives');
 })->middleware(['auth', 'verified'])->name('teachers.archives');
+
+// GET
+Route::get('teachers/survey/{id}', [SurveyController::class, 'get'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/probe/session/{id}', [ProbeController::class, 'get'])->middleware(['auth', 'verified'])->name('probe.session.get');
+
+// POST
+Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
+
+Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
 
 // ----------------------------------------------------------------------
 

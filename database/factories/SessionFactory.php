@@ -20,6 +20,8 @@ class SessionFactory extends Factory
             'status' => fake()->randomElement(['created', 'active', 'completed']),
             'class' => fake()->optional()->word(),
             'remark' => fake()->optional()->sentence(),
+            'code' => fake()->unique()->numberBetween(100000, 999999),
+            'password' => fake()->optional()->word(),
             'survey_id' => fake()->numberBetween(1, 10),
         ];
     }
