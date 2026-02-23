@@ -18,7 +18,7 @@ function setUp() {
     axios.post(`/teachers/probe/session`, session.value)
         .then(response => {
             console.log('Sondage configuré avec succès:', response.data);
-            window.location.href = '/teachers/probe/display/' + id;
+            window.location.href = '/teachers/probe/display/' + response.data.session.id;
         })
         .catch(error => {
             console.error('Erreur lors de la configuration du sondage:', error);

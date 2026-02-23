@@ -10,20 +10,16 @@ const survey = ref(null);
 onMounted(() => {
     axios.get(`/teachers/probe/session/${id}`)
         .then(response => {
-            console.log('Données du sondage récupérées avec succès:', response.data);
+            console.log('Données de la session récupérées avec succès:', response.data);
             session.value = response.data;
+            return axios.get(`/teachers/survey/${session.value.survey_id}`);
         })
-        .catch(error => {
-            console.error('Erreur lors de la récupération des données du sondage:', error);
-        });
-
-    axios.get(`/teachers/survey/${id}`)
         .then(response => {
             console.log('Données du sondage récupérées avec succès:', response.data);
             survey.value = response.data;
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des données du sondage:', error);
+            console.error('Erreur lors de la récupération des données:', error);
         });
 });
 
@@ -39,24 +35,26 @@ function end() {
         </div>
         <div>
 
-            <div class="flex">
-                <span>Le nom du sondage : </span>
-                <h3>{{ survey?.name }}</h3>
-            </div>
+            <div class="space-y-6">
+                <div class="border-b pb-4">
+                    <p class="text-sm text-gray-600">Nom du sondage</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ survey?.name }}</p>
+                </div>
 
-            <div class="flex">
-                <span>La question du sondage : </span>
-                <h3>{{ survey?.question }}</h3>
-            </div>
+                <div class="border-b pb-4">
+                    <p class="text-sm text-gray-600">Question</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ survey?.question }}</p>
+                </div>
 
-            <div class="flex">
-                <span>Le code du sondage : </span>
-                <h3>{{ session?.code }}</h3>
-            </div>
+                <div class="border-b pb-4">
+                    <p class="text-sm text-gray-600">Code d'accès</p>
+                    <p class="text-lg font-mono font-bold text-blue-600">{{ session?.code }}</p>
+                </div>
 
-            <div class="flex">
-                <span>Le mot de passe du sondage : </span>
-                <h3>{{ session?.password }}</h3>
+                <div class="pb-4">
+                    <p class="text-sm text-gray-600">Mot de passe</p>
+                    <p class="text-lg font-mono font-bold text-blue-600">{{ session?.password }}</p>
+                </div>
             </div>
 
             <button @click="end()"
