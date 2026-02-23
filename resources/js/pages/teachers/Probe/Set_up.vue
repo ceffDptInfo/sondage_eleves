@@ -1,10 +1,25 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
+import { ref } from 'vue';
+import axios from 'axios';
 
 const id = window.location.pathname.split('/')[4];
+let session = ref({
+    survey_id: id,
+    status: 'created',
+    class: '',
+    remark: '',
+});
 
 function setUp() {
-    window.location.href = '/teachers/probe/display';
+    axios.post(`/teachers/probe/session`, session.value)
+        .then(response => {
+            console.log('Sondage configuré avec succès:', response.data);
+            window.location.href = '/teachers/probe/display';
+        })
+        .catch(error => {
+            console.error('Erreur lors de la configuration du sondage:', error);
+        });
 }
 </script>
 
@@ -15,10 +30,10 @@ function setUp() {
         </div>
         <div>
             <label for="class">Classe : </label>
-            <input type="text" id="class" name="class" class="border border-gray-300 rounded-md p-2 w-full">
+            <input type="text" id="class" name="class" v-model="session.class" class="border border-gray-300 rounded-md p-2 w-full">
 
             <label for="remark">Remarque : </label>
-            <input type="text" id="remark" name="remark" class="border border-gray-300 rounded-md p-2 w-full">
+            <input type="text" id="remark" name="remark" v-model="session.remark" class="border border-gray-300 rounded-md p-2 w-full">
         </div>
         <div class="mx-auto mt-40">
             <button @click="setUp()"

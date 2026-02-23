@@ -12,7 +12,7 @@ let survey = ref({
 });
 
 function submit() {
-    axios.post('/survey', survey.value)
+    axios.post('/teachers/survey', survey.value)
         .then(response => {
             console.log('Sondage créé avec succès:', response.data);
             window.location.href = '/teachers/home';

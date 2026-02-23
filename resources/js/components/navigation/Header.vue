@@ -20,7 +20,7 @@ const linksTeacher = ref([
     { name: 'Archives', to: '/teachers/archives', method: 'get' },
 ]);
 const linksProbe = ref([
-    { name: 'Accueil', to: '/', method: 'get',},
+    { name: 'Accueil', to: '/teachers/home', method: 'get',},
     { name: 'Sondages', method: 'get' },
     { name: 'Création', to: '/teachers/create_survey', method: 'get' },
     { name: 'Archives', to: '/teachers/archives', method: 'get' },

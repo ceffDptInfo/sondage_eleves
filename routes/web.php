@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProbeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Foundation\Application;
@@ -34,12 +35,15 @@ Route::get('teachers/create_survey', function () {
     return Inertia::render('Teachers/Creation');
 })->middleware(['auth', 'verified'])->name('teachers.create-survey');
 
-Route::post('survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
+Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
 
 // Sondages 
 Route::get('teachers/probe/set_up/{id}', function ($id) {
     return Inertia::render('Teachers/Probe/Set_up', ['surveyId' => $id]);
 })->middleware(['auth', 'verified'])->name('teachers.probe.set_up');
+
+Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
+
 
 Route::get('teachers/probe/display', function () {
     return Inertia::render('Teachers/Probe/Display');
