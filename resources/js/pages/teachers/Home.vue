@@ -9,7 +9,7 @@ import SurveyListItem from '@/components/teachers/home/survey_list_item.vue';
 const surveys = ref([]);
 
 onMounted(() => {
-    axios.get('/api/surveys')
+    axios.get('/teachers/surveys')
         .then(data => {
             surveys.value = data.data;
             console.log('Sondages récupérés:', surveys.value);

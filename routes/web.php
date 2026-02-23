@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProbeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveyController;
-use Illuminate\Foundation\Application;
+use App\Models\Survey;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -51,6 +51,9 @@ Route::get('teachers/archives', function () {
 })->middleware(['auth', 'verified'])->name('teachers.archives');
 
 // GET
+Route::get('teachers/surveys', function () {
+    return Survey::all();
+})->middleware(['auth', 'verified'])->name('survey.list');
 Route::get('teachers/survey/{id}', [SurveyController::class, 'get'])->middleware(['auth', 'verified'])->name('survey.get');
 Route::get('teachers/probe/session/{id}', [ProbeController::class, 'get'])->middleware(['auth', 'verified'])->name('probe.session.get');
 
