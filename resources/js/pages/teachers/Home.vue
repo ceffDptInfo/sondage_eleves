@@ -1,8 +1,23 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 
 import SurveyListItem from '@/components/teachers/home/survey_list_item.vue';
+
+const surveys = ref([]);
+
+onMounted(() => {
+    axios.get('/api/surveys')
+        .then(data => {
+            surveys.value = data.data;
+            console.log('Sondages récupérés:', surveys.value);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des sondages:', error);
+        });
+});
 </script>
 
 <template>
@@ -28,9 +43,7 @@ import SurveyListItem from '@/components/teachers/home/survey_list_item.vue';
             <div class="mt-20">
                 <h2 class="text-xl font-semibold">Vos sondages :</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                    <SurveyListItem />
-                    <SurveyListItem />
-                    <SurveyListItem />
+                    <SurveyListItem v-for="survey in surveys.slice(0,6)" :key="survey.id" :survey="survey" />
                 </div>
             </div>
         </div>
