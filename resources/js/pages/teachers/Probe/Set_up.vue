@@ -9,9 +9,11 @@ let session = ref({
     status: 'created',
     class: '',
     remark: '',
+    code: Math.floor(Math.random() * 1000000)
 });
 
 function setUp() {
+    alert(JSON.stringify(session.value));
     axios.post(`/teachers/probe/session`, session.value)
         .then(response => {
             console.log('Sondage configuré avec succès:', response.data);

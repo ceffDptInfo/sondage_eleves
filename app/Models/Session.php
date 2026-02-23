@@ -15,6 +15,7 @@ class Session extends Model
         'status',
         'class',
         'remark',
+        'code',
         'survey_id',
     ];
 }

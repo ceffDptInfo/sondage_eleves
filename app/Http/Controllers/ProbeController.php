@@ -14,6 +14,7 @@ class ProbeController extends Controller
             'status' => 'required|in:created',
             'class' => 'required|string|max:255',
             'remark' => 'nullable|string|max:1000',
+            'code' => 'required|integer|unique:sessions,code',
         ]);
 
         $survey = Session::create($validatedData);

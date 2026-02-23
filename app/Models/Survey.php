@@ -15,6 +15,7 @@ class Survey extends Model
         'name',
         'description',
         'password',
+        'creation_date',
         'question',
         'user_id',
     ];
