@@ -20,16 +20,8 @@ Route::get('students/home', function () {
     return Inertia::render('Students/Home');
 })->name('students.home');
 
-Route::get('students/survey/{code}', function ($code) {
-    $survey = Survey::whereHas('sessions', function ($query) use ($code) {
-        $query->where('code', $code);
-    })->firstOrFail();
-
-    return Inertia::render('Students/Survey', ['survey' => $survey, 'code' => $code]);
-})->name('students.survey');
-
+Route::get('students/connection', [HomeController::class, 'connection'])->middleware('check.student.access')->name('students.connection');
 // POST
-Route::post('students/connection', [HomeController::class, 'connection'])->name('students.connection');
 
 // ----------------------------------------------------------------------
 
