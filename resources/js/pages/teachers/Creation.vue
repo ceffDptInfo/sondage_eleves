@@ -31,7 +31,7 @@ function submit() {
         <form class="max-w-lg mx-auto space-y-4" @submit.prevent="submit()" autocomplete="off">
             <div>
             <label for="name" class="block text-sm font-medium">Nom du sondage:</label>
-            <input type="text" id="name" name="name" v-model="survey.name" class="w-full px-3 py-2 border border-gray-300 rounded">
+            <input type="text" id="name" name="name" v-model="survey.name" class="w-full px-3 py-2 border border-gray-300 rounded-xl">
             </div>
 
             <div>
@@ -41,15 +41,15 @@ function submit() {
 
             <div>
             <label for="description" class="block text-sm font-medium">Description:</label>
-            <textarea id="description" name="description" v-model="survey.description" class="w-full px-3 py-2 border border-gray-300 rounded"></textarea>
+            <textarea id="description" name="description" v-model="survey.description" class="w-full px-3 py-2 border border-gray-300 rounded-xl"></textarea>
             </div>
 
             <div>
             <label for="question" class="block text-sm font-medium">Question:</label>
-            <input type="text" id="question" name="question" v-model="survey.question" class="w-full px-3 py-2 border border-gray-300 rounded">
+            <input type="text" id="question" name="question" v-model="survey.question" class="w-full px-3 py-2 border border-gray-300 rounded-xl">
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Créer le sondage</button>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700">Créer le sondage</button>
         </form>
     </AppLayout>
 </template>

@@ -17,7 +17,7 @@ function handleImageError() {
         <div class="flex items-center justify-center min-h-screen">
             <div class="grid grid-cols-2 gap-8">
                 <Link href="/students/home">
-                    <div class="bg-gray-500 text-white flex items-center justify-center">
+                    <div class="bg-gray-500 text-white flex items-center justify-center p-8">
                         <h1 class="text-8xl font-bold">Élèves</h1>
                     </div>
                 </Link>
