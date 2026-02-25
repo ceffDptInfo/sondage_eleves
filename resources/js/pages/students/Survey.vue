@@ -2,7 +2,6 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 
 const props = defineProps({
-    survey: Object,
     code: String
 });
 </script>

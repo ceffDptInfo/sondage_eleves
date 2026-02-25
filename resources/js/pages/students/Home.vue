@@ -8,6 +8,8 @@ const credentials = ref({
     password: ''
 });
 
+const errorMsg = ref('');
+
 function submitForm() {
     axios.post('/students/connection', credentials.value)
         .then(response => {
@@ -16,6 +18,7 @@ function submitForm() {
         })
         .catch(error => {
             console.error('Erreur lors de la connexion:', error);
+            errorMsg.value = 'Code ou mot de passe incorrect.';
         });
 }
 </script>
@@ -50,6 +53,7 @@ function submitForm() {
                     Valider
                 </button>
             </form>
+            <div v-if="errorMsg" class="mt-4 text-red-600">{{ errorMsg }}</div>
         </div>
     </AppLayout>
 </template>

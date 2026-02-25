@@ -41,8 +41,8 @@ function setUp() {
                 <input type="text" id="remark" name="remark" v-model="session.remark"
                     class="border border-gray-300 rounded-md p-2 w-full">
 
-                <label for="password">Mot de passe : </label>
-                <input type="password" id="password" name="password" v-model="session.password"
+                <label for="survey_password">Mot de passe : </label>
+                <input type="password" id="survey_password" name="survey_password" v-model="session.password" required="true"
                     class="border border-gray-300 rounded-md p-2 w-full">
             </div>
             <div class="mx-auto mt-40">

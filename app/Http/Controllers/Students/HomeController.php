@@ -29,15 +29,4 @@ class HomeController extends Controller
 
         return response()->json(['message' => 'Connexion réussie', 'session' => $session]);
     }
-
-    public function accessToSurvey(Request $request, $code)
-    {
-        $session = Session::where('code', $code)->first();
-
-        if (!$session) {
-            return response()->json(['message' => 'Code de session invalide'], 404);
-        }
-
-        return response()->json(['message' => 'Accès au sondage réussi', 'session' => $session]);
-    }
 }

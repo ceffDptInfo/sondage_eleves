@@ -18,9 +18,4 @@ class Survey extends Model
         'question',
         'user_id',
     ];
-
-    public function sessions()
-    {
-        return $this->hasMany(Session::class, 'survey_id');
-    }
 }

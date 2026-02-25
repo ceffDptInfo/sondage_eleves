@@ -8,23 +8,23 @@ const linksVisitor = ref([
     { name: 'Enseignants', to: '/teachers/home', method: 'get' },
 ]);
 const linksAuth = ref([
+    { name: 'Accueil', to: '/', method: 'get' },
     { name: 'Login', to: '/login', method: 'get' },
     { name: 'Register', to: '/register', method: 'get' },
-    { name: 'Élèves', to: '/students/home', method: 'get' },
 ]);
 const linksStudent = ref([
-    { name: 'Accueil', to: '/students/home', method: 'get' },
-    { name: 'Enseignants', to: '/teachers/home', method: 'get' },
+    { name: 'Accueil', to: '/', method: 'get' },
+    { name: 'Portail', to: '/students/home', method: 'get' },
 ]);
 const linksTeacher = ref([
-    { name: 'Accueil', to: '/teachers/home', method: 'get' },
-    { name: 'Création', to: '/teachers/create_survey', method: 'get' },
+    { name: 'Tableau de bord', to: '/teachers/home', method: 'get' },
+    { name: 'Conception', to: '/teachers/create_survey', method: 'get' },
     { name: 'Archives', to: '/teachers/archives', method: 'get' },
 ]);
 const linksProbe = ref([
-    { name: 'Accueil', to: '/teachers/home', method: 'get',},
+    { name: 'Tableau de bord', to: '/teachers/home', method: 'get',},
     { name: 'Sondages', method: 'get' },
-    { name: 'Création', to: '/teachers/create_survey', method: 'get' },
+    { name: 'Conception', to: '/teachers/create_survey', method: 'get' },
     { name: 'Archives', to: '/teachers/archives', method: 'get' },
 ]);
 </script>
@@ -34,8 +34,7 @@ const linksProbe = ref([
         class="flex items-center justify-between px-8 py-4 z-[1001] fixed top-0 left-0 right-0 bg-zinc-950/95 dark:bg-zinc-50/95 backdrop-blur-md border-b border-zinc-800 dark:border-zinc-200 transition">
         <div class="flex items-center gap-3 flex-1">
             <span class="font-semibold text-xl tracking-tight text-zinc-100 dark:text-zinc-900">
-                <Link v-if="!$page.props.auth.user" href="/">Sondage Élèves</Link>
-                <Link v-else href="/teachers/home">Sondage Élèves</Link>
+                <Link href="/">Sondage Élèves</Link>
             </span>
         </div>
 
