@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teachers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Survey;
 use Illuminate\Http\Request;
 

@@ -31,19 +31,24 @@ function setUp() {
         <div class="flex-col items-center mb-10 mt-24">
             <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder</h2>
         </div>
-        <div>
-            <label for="class">Classe : </label>
-            <input type="text" id="class" name="class" v-model="session.class" class="border border-gray-300 rounded-md p-2 w-full">
+        <form method="POST" @submit.prevent="setUp" class="max-w-2xl mx-auto" autocomplete="off">
+            <div>
+                <label for="class">Classe : </label>
+                <input type="text" id="class" name="class" v-model="session.class"
+                    class="border border-gray-300 rounded-md p-2 w-full">
 
-            <label for="remark">Remarque : </label>
-            <input type="text" id="remark" name="remark" v-model="session.remark" class="border border-gray-300 rounded-md p-2 w-full">
+                <label for="remark">Remarque : </label>
+                <input type="text" id="remark" name="remark" v-model="session.remark"
+                    class="border border-gray-300 rounded-md p-2 w-full">
 
-            <label for="password">Mot de passe : </label>
-            <input type="password" id="password" name="password" v-model="session.password" class="border border-gray-300 rounded-md p-2 w-full">
-        </div>
-        <div class="mx-auto mt-40">
-            <button @click="setUp()"
-                class="bg-green-500 hover:bg-green-700 text-white font-bold px-12 py-6 rounded text-8xl">Valider</button>
-        </div>
+                <label for="password">Mot de passe : </label>
+                <input type="password" id="password" name="password" v-model="session.password"
+                    class="border border-gray-300 rounded-md p-2 w-full">
+            </div>
+            <div class="mx-auto mt-40">
+                <button type="submit"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold px-12 py-6 rounded text-8xl">Valider</button>
+            </div>
+        </form>
     </AppLayout>
 </template>

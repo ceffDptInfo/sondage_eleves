@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProbeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\Teachers\ProbeController;
+use App\Http\Controllers\Teachers\ProfileController;
+use App\Http\Controllers\Teachers\SurveyController;
+use App\Http\Controllers\Students\HomeController;
 use App\Models\Survey;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,9 +15,21 @@ Route::get('/', function () {
 // ----------------------------------------------------------------------
 
 // Routes pour les élèves
+// Pages
 Route::get('students/home', function () {
     return Inertia::render('Students/Home');
 })->name('students.home');
+
+Route::get('students/survey/{code}', function ($code) {
+    $survey = Survey::whereHas('sessions', function ($query) use ($code) {
+        $query->where('code', $code);
+    })->firstOrFail();
+
+    return Inertia::render('Students/Survey', ['survey' => $survey, 'code' => $code]);
+})->name('students.survey');
+
+// POST
+Route::post('students/connection', [HomeController::class, 'connection'])->name('students.connection');
 
 // ----------------------------------------------------------------------
 

@@ -1,5 +1,23 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
+import { ref } from 'vue';
+import axios from 'axios';
+
+const credentials = ref({
+    code: '',
+    password: ''
+});
+
+function submitForm() {
+    axios.post('/students/connection', credentials.value)
+        .then(response => {
+            console.log('Connexion réussie:', response.data);
+            window.location.href = '/students/survey/' + credentials.value.code;    
+        })
+        .catch(error => {
+            console.error('Erreur lors de la connexion:', error);
+        });
+}
 </script>
 
 <template>
@@ -8,28 +26,30 @@ import AppLayout from '@/layouts/AppLayout.vue';
             <h2 class="text-2xl md:text-3xl font-bold">Page d'accueil élèves</h2>
         </div>
         <div class="w-full mx-auto max-w-md p-8 rounded-lg">
+            <form @submit.prevent="submitForm">
+                <div class="mb-6">
+                    <label for="inputCode" class="block text-sm font-medium text-gray-700 mb-2">
+                        Entrez le code du sondage
+                    </label>
+                    <input type="text" id="inputCode" name="inputCode" v-model="credentials.code"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Code">
+                </div>
 
-            <div class="mb-6">
-                <label for="inputCode" class="block text-sm font-medium text-gray-700 mb-2">
-                    Entrez le code du sondage
-                </label>
-                <input type="text" id="inputCode" name="inputCode"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Code">
-            </div>
+                <div class="mb-6">
+                    <label for="inputPassword" class="block text-sm font-medium text-gray-700 mb-2">
+                        Entrez le mot de passe du sondage
+                    </label>
+                    <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Mot de passe">
+                </div>
 
-            <div class="mb-6">
-                <label for="inputPassword" class="block text-sm font-medium text-gray-700 mb-2">
-                    Entrez le mot de passe du sondage
-                </label>
-                <input type="password" id="inputPassword" name="inputPassword"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Mot de passe">
-            </div>
-
-            <button class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition">
-                Valider
-            </button>
+                <button
+                    class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition">
+                    Valider
+                </button>
+            </form>
         </div>
     </AppLayout>
 </template>
