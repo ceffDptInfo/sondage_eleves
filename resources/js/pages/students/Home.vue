@@ -12,7 +12,7 @@ function submitForm() {
     axios.post('/students/connection', credentials.value)
         .then(response => {
             console.log('Connexion réussie:', response.data);
-            window.location.href = '/students/survey/' + credentials.value.code;    
+            window.location.href = `/students/survey/${credentials.value.code}`;
         })
         .catch(error => {
             console.error('Erreur lors de la connexion:', error);

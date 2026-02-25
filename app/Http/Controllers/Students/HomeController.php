@@ -21,8 +21,13 @@ class HomeController extends Controller
             return response()->json(['message' => 'Mot de passe incorrect'], 401);
         }
 
+        $request->session()->put('student_session_code', $validatedData['code']);
+        $request->session()->put('student_session_id', $session->id);
+        $request->session()->put('student_authentificated', 'true');
+        $request->session()->save();
+        $request->session()->regenerate();
+
         return response()->json(['message' => 'Connexion réussie', 'session' => $session]);
-        
     }
 
     public function accessToSurvey(Request $request, $code)

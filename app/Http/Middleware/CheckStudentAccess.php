@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,6 +16,16 @@ class CheckStudentAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $codes = Session::pluck('code')->toArray();
+        if (!in_array($request->code, $codes)) {
+            abort(401, 'Unauthorized access');
+        } 
+        else {
+            $session = Session::where('code', $request->code)->first();
+            if ($request->session()->get('student_authentificated') !== 'true' || $request->session()->get('student_session_code') !== $request->code) {
+                abort(401, 'Unauthorized access');
+            }
+        }
         return $next($request);
     }
 }

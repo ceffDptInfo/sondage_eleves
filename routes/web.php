@@ -20,8 +20,12 @@ Route::get('students/home', function () {
     return Inertia::render('Students/Home');
 })->name('students.home');
 
-Route::get('students/connection', [HomeController::class, 'connection'])->middleware('check.student.access')->name('students.connection');
+Route::get('students/survey/{code}', function ($code) {
+    return Inertia::render('Students/Survey', ['code' => $code]);
+})->middleware('check.student.access')->name('students.access_survey');
+
 // POST
+Route::post('students/connection', [HomeController::class, 'connection'])->name('students.connection');
 
 // ----------------------------------------------------------------------
 
