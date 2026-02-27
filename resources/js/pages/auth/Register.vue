@@ -23,7 +23,7 @@ const submit = () => {
 <template>
     <GuestLayout>
 
-        <Head title="Register" />
+        <Head title="Inscription enseignant" />
 
         <form @submit.prevent="submit">
             <h1 class="text-4xl font-bold text-center mb-4 p-2">Inscription enseignant</h1>

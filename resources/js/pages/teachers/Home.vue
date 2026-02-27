@@ -1,4 +1,5 @@
 <script setup>
+import { Head } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3';
 import { onMounted, ref } from 'vue';
@@ -21,6 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
+    <Head title="Tableau de bord" />
     <AppLayout>
         <div class="flex-col items-center mb-10 mt-24">
             <h2 class="text-2xl md:text-3xl font-bold">Page d'accueil enseignant</h2>
