@@ -19,4 +19,9 @@ class Session extends Model
         'password',
         'survey_id',
     ];
+
+    public function remarks()
+    {
+        return $this->hasMany(Remark::class);
+    }
 }

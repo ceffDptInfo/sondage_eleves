@@ -1,12 +1,12 @@
 <script setup>
 import { defineProps } from 'vue';
 const props = defineProps({
-    message: Object
+    remark: Object
 });
 </script>
 <template>
     <div class="flex items-center mb-4 space-x-4">
-        <span class="text-2xl">Message</span>
+        <span class="text-2xl">{{ props.remark.value }}</span>
         <button class="rounded-full bg-green-500 h-8 w-8">
             <img src="/icons/like.png" class="p-2" alt="Icone de like">
         </button>

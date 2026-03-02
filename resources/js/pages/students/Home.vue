@@ -31,23 +31,21 @@ function submitForm() {
             <h2 class="text-2xl md:text-3xl font-bold">Page d'accueil élèves</h2>
         </div>
         <div class="w-full mx-auto max-w-md p-8 rounded-lg">
-            <form @submit.prevent="submitForm">
+            <form @submit.prevent="submitForm" autocomplete="off">
                 <div class="mb-6">
                     <label for="inputCode" class="block text-sm font-medium text-gray-700 mb-2">
                         Entrez le code du sondage
                     </label>
-                    <input type="text" id="inputCode" name="inputCode" v-model="credentials.code"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Code">
+                    <input type="text" id="inputCode" name="inputCode" v-model="credentials.code" placeholder="Code"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <div class="mb-6">
                     <label for="inputPassword" class="block text-sm font-medium text-gray-700 mb-2">
                         Entrez le mot de passe du sondage
                     </label>
-                    <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Mot de passe">
+                    <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password" placeholder="Mot de passe"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <button

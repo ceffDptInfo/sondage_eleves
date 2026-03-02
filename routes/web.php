@@ -4,6 +4,7 @@ use App\Http\Controllers\Teachers\ProbeController;
 use App\Http\Controllers\Teachers\ProfileController;
 use App\Http\Controllers\Teachers\SurveyController;
 use App\Http\Controllers\Students\HomeController;
+use App\Http\Controllers\Students\SurveyController as StudentsSurveyController;
 use App\Models\Survey;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +25,12 @@ Route::get('students/survey/{code}', function ($code) {
     return Inertia::render('Students/Survey', ['code' => $code]);
 })->middleware('check.student.access')->name('students.access_survey');
 
+// GET
+Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->name('students.get_remarks');
+
 // POST
 Route::post('students/connection', [HomeController::class, 'connection'])->name('students.connection');
+Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->name('students.post_remark');
 
 // ----------------------------------------------------------------------
 
