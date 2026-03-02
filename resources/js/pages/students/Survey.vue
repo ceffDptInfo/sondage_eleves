@@ -50,45 +50,52 @@ function submitForm() {
     <Head title="Sondage" />
     <AppLayout>
         <div class="flex-col items-center mb-10 mt-24">
-            <h2 class="text-2xl md:text-3xl font-bold">Sondage</h2>
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold">Sondage - {{ props.code }}</h2>
+                <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent">
+                </div>
+            </div>
 
-            <MessageListItem v-for="remark in remarks" :key="remark.id" :remark="remark" />
+            <MessageListItem class="mt-4" v-for="remark in remarks" :key="remark.id" :remark="remark" />
 
             <div class="fixed bottom-0 border-t border-gray-200 h-16 px-4 flex items-center gap-3">
                 <form @submit.prevent="submitForm">
-                    <input type="text" v-model="remark.value" required="true"
-                        class="flex-1 h-10 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Votre remarque...">
+                    <div class="flex space-x-2">
+                        <input type="text" v-model="remark.value" required="true"
+                            class="flex-1 h-10 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Votre remarque...">
 
-                    <div class="flex gap-2">
-                        <div class="flex gap-4">
-                            <label class="relative inline-block cursor-pointer">
-                                <input type="radio" v-model="remark.status" value="positive" class="peer sr-only" required="true">
-                                <div class="h-10 w-10 rounded-full bg-green-300 text-gray-500 hover:bg-green-400 transition flex items-center justify-center 
+                        <label class="relative inline-block cursor-pointer">
+                            <input type="radio" id="positiveStatus" v-model="remark.status" value="positive"
+                                class="peer sr-only" required="true">
+                            <div class="h-10 rounded-lg px-2 bg-green-300 text-white hover:bg-green-400 transition flex items-center justify-center 
                                         peer-checked:bg-green-600 peer-checked:text-white">
-                                    <img src="/icons/checkmark.png"
-                                        class="h-5 w-5 brightness-0 invert peer-checked:brightness-100 peer-checked:invert-0"
-                                        alt="Positive">
-                                </div>
-                            </label>
+                                <img src="/icons/checkmark.png"
+                                    class="h-5 w-5 brightness-0 invert peer-checked:brightness-100 peer-checked:invert-0"
+                                    alt="Positive">
+                                <span class="ml-1.5">Positive</span>
+                            </div>
+                        </label>
 
-                            <label class="relative inline-block cursor-pointer">
-                                <input type="radio" v-model="remark.status" value="negative" class="peer sr-only" required="true">
-                                <div class="h-10 w-10 rounded-full bg-red-300 text-gray-500 hover:bg-red-400 transition flex items-center justify-center 
+                        <label class="relative inline-block cursor-pointer">
+                            <input type="radio" id="negativeStatus" v-model="remark.status" value="negative"
+                                class="peer sr-only" required="true">
+                            <div class="h-10 rounded-lg px-2 bg-red-300 text-white hover:bg-red-400 transition flex items-center justify-center 
                                         peer-checked:bg-red-600 peer-checked:text-white">
-                                    <img src="/icons/close.png"
-                                        class="h-5 w-5 brightness-0 invert peer-checked:brightness-100 peer-checked:invert-0"
-                                        alt="Negative">
-                                </div>
-                            </label>
-                        </div>
+                                <img src="/icons/close.png"
+                                    class="h-5 w-5 brightness-0 invert peer-checked:brightness-100 peer-checked:invert-0"
+                                    alt="Negative">
+                                <span class="ml-1.5">Négative</span>
+                            </div>
+                        </label>
                         <label class="relative inline-block cursor-pointer">
                             <input name="private" type="checkbox" class="peer sr-only" v-model="remark.private"
                                 value="true">
 
                             <div
-                                class="h-10 w-10 rounded-full bg-gray-300 hover:bg-gray-400 transition flex items-center justify-center peer-checked:bg-gray-600">
+                                class="h-10 rounded-lg px-2 bg-gray-300 text-black hover:bg-gray-400 transition flex items-center justify-center peer-checked:bg-gray-500 peer-checked:text-white">
                                 <img src="/icons/lock.png" class="h-5 w-5" alt="Private status">
+                                <span class="ml-1.5">Privé</span>
                             </div>
                         </label>
                         <button type="submit" class="ms-8 rounded-full hover:bg-gray-200 h-10 w-10 transition">

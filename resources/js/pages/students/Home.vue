@@ -25,10 +25,14 @@ function submitForm() {
 </script>
 
 <template>
+
     <Head title="Portail" />
     <AppLayout>
         <div class="flex-col items-center mb-10 mt-24">
-            <h2 class="text-2xl md:text-3xl font-bold">Page d'accueil élèves</h2>
+            <h2 class="text-2xl md:text-3xl font-bold">Portail élèves</h2>
+            <div
+                class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent">
+            </div>
         </div>
         <div class="w-full mx-auto max-w-md p-8 rounded-lg">
             <form @submit.prevent="submitForm" autocomplete="off">
@@ -44,7 +48,8 @@ function submitForm() {
                     <label for="inputPassword" class="block text-sm font-medium text-gray-700 mb-2">
                         Entrez le mot de passe du sondage
                     </label>
-                    <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password" placeholder="Mot de passe"
+                    <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password"
+                        placeholder="Mot de passe"
                         class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
