@@ -36,15 +36,15 @@ function setUp() {
         <form method="POST" @submit.prevent="setUp" class="max-w-2xl mx-auto" autocomplete="off">
             <div>
                 <label for="class">Classe : </label>
-                <input type="text" id="class" name="class" v-model="session.class"
+                <input type="text" id="class" name="class" v-model="session.class" placeholder="Classe"
                     class="border border-gray-300 rounded-md p-2 w-full">
 
                 <label for="remark">Remarque : </label>
-                <input type="text" id="remark" name="remark" v-model="session.remark"
+                <input type="text" id="remark" name="remark" v-model="session.remark" placeholder="Remarque"
                     class="border border-gray-300 rounded-md p-2 w-full">
 
                 <label for="survey_password">Mot de passe : </label>
-                <input type="password" id="survey_password" name="survey_password" v-model="session.password" required="true"
+                <input type="password" id="survey_password" name="survey_password" v-model="session.password" required="true" placeholder="Mot de passe"
                     class="border border-gray-300 rounded-md p-2 w-full">
             </div>
             <div class="mx-auto mt-40">

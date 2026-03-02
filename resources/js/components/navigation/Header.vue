@@ -2,31 +2,29 @@
 import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-const linksVisitor = ref([
+const pageUrl = ref(window.location.pathname);
+
+const linksVisitor = [
     { name: 'Accueil', to: '/', method: 'get' },
     { name: 'Élèves', to: '/students/home', method: 'get' },
     { name: 'Enseignants', to: '/teachers/home', method: 'get' },
-]);
-const linksAuth = ref([
+];
+const linksAuth = [
     { name: 'Accueil', to: '/', method: 'get' },
     { name: 'Login', to: '/login', method: 'get' },
     { name: 'Register', to: '/register', method: 'get' },
-]);
-const linksStudent = ref([
+];
+const linksStudent = [
     { name: 'Accueil', to: '/', method: 'get' },
+    { name: 'Sondages', method: 'get', show: pageUrl.value.includes('/survey') },
     { name: 'Portail', to: '/students/home', method: 'get' },
-]);
-const linksTeacher = ref([
-    { name: 'Tableau de bord', to: '/teachers/home', method: 'get' },
+];
+const linksTeacher = [
+    { name: 'Tableau de bord', to: '/teachers/home', method: 'get', },
+    { name: 'Sondages', method: 'get', show: pageUrl.value.includes('/teachers/probe') },
     { name: 'Conception', to: '/teachers/create_survey', method: 'get' },
     { name: 'Archives', to: '/teachers/archives', method: 'get' },
-]);
-const linksProbe = ref([
-    { name: 'Tableau de bord', to: '/teachers/home', method: 'get',},
-    { name: 'Sondages', method: 'get' },
-    { name: 'Conception', to: '/teachers/create_survey', method: 'get' },
-    { name: 'Archives', to: '/teachers/archives', method: 'get' },
-]);
+];
 </script>
 
 <template>
@@ -49,36 +47,25 @@ const linksProbe = ref([
                     ]">
                     {{ link.name }}
                 </Link>
-                
+
             </template>
             <template v-else-if="$page.url.includes('students')">
-                <Link v-for="link in linksStudent" :key="link.name" :href="link.to" :method="link.method"
-                    v-on:finish="link.action" :class="[
+                <Link v-for="link in linksStudent.filter(link => link.show !== false)" :key="link.name" :href="link.to"
+                    :method="link.method" v-on:finish="link.action" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                        $page.url === link.to
+                        $page.url === link.to || link.name === 'Sondages'
                             ? 'after:scale-x-100 text-amber-500 font-medium'
                             : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
                     ]">
                     {{ link.name }}
                 </Link>
-                
-            </template>
-            <template v-else-if="$page.url.includes('probe') && $page.props.auth.user">
-                <Link v-for="link in linksProbe" :key="link.name" :href="link.to" :method="link.method"
-                    v-on:finish="link.action" :class="[
-                        'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                            link.name === 'Sondages'
-                            ? 'after:scale-x-100 text-amber-500 font-medium'
-                            : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
-                    ]">
-                    {{ link.name }}
-                </Link>
+
             </template>
             <template v-else-if="$page.props.auth.user">
-                <Link v-for="link in linksTeacher" :key="link.name" :href="link.to" :method="link.method"
-                    v-on:finish="link.action" :class="[
+                <Link v-for="link in linksTeacher.filter(link => link.show !== false)" :key="link.name" :href="link.to"
+                    :method="link.method" v-on:finish="link.action" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                        $page.url === link.to
+                        $page.url === link.to || link.name === 'Sondages'
                             ? 'after:scale-x-100 text-amber-500 font-medium'
                             : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
                     ]">
