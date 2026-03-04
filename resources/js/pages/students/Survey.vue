@@ -10,13 +10,24 @@ const remark = ref({
     status: 'positive',
     private: false
 });
+
 const remarks = ref([]);
+let ipAddress = '';
 
 onMounted(() => {
+     axios.get('/ip')
+            .then(response => {
+                ipAddress = response.data;
+                console.log('Adresse IP récupérée :', ipAddress);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération de l\'adresse IP :', error);
+            });
     setInterval(() => {
         axios.get(`/students/survey/${props.code}/remarks`)
             .then(response => {
                 remarks.value = response.data.messages;
+                remarks.value = remarks.value.filter(remark => !remark.private || remark.ip_address == ipAddress);
             })
             .catch(error => {
                 console.error('Erreur lors de la récupération des messages :', error);
@@ -32,8 +43,8 @@ function submitForm() {
     axios.post(`/students/survey/${props.code}/remark`, remark.value)
         .then(response => {
             console.log('Remarque ajoutée :', response.data);
-            remarks.value.unshift(response.data.remark);
-            remark.value = {
+            remarks.value.unshift(response.data.remark); // mettre au début
+            remark.value = { // nécessaire pour réinitialiser le formulaire - ne pas avoir de rechargement sur le input
                 value: '',
                 status: 'positive',
                 private: false
@@ -56,7 +67,7 @@ function submitForm() {
                 </div>
             </div>
 
-            <MessageListItem class="mt-4" v-for="remark in remarks" :key="remark.id" :remark="remark" />
+            <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress" />
 
             <div class="fixed bottom-0 border-t border-gray-200 h-16 px-4 flex items-center gap-3">
                 <form @submit.prevent="submitForm">

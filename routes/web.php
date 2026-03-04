@@ -12,6 +12,12 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('Welcome');
+// ----------------------------------------------------------------------
+// Routes autres
+// Adresse IP
+Route::get('/ip', function () {
+    return request()->ip();
+})->name('ip');
 
 // ----------------------------------------------------------------------
 

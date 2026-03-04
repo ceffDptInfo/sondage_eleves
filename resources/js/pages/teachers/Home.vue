@@ -45,7 +45,7 @@ onMounted(() => {
             <div class="mt-20">
                 <h2 class="text-xl font-semibold">Vos sondages :</h2>
                 <div v-if="surveys.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                    <SurveyListItem v-for="survey in surveys.slice(0,6)" :key="survey.id" :survey="survey" />
+                    <SurveyListItem v-for="survey in surveys.slice(0,6)" :survey="survey" />
                 </div>
                 <p v-else class="mt-4 text-gray-500">Vous n'avez pas encore créé de sondages.</p>
             </div>
