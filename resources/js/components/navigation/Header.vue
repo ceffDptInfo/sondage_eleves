@@ -2,7 +2,8 @@
 import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-const pageUrl = ref(window.location.pathname);
+const pageUrl = window.location.pathname;
+const currentLinks = ref([]);
 
 const linksVisitor = [
     { name: 'Accueil', to: '/' },
@@ -11,20 +12,35 @@ const linksVisitor = [
 ];
 const linksAuth = [
     { name: 'Accueil', to: '/' },
-    { name: 'Login', to: '/login' },
-    { name: 'Register', to: '/register' },
+    { name: 'Connexion', to: '/login' },
+    { name: 'Enregistrement', to: '/register' },
 ];
 const linksStudent = [
     { name: 'Accueil', to: '/' },
-    { name: 'Sondages', show: pageUrl.value.includes('/survey') },
+    { name: 'Sondages', show: pageUrl.includes('/survey') },
     { name: 'Portail', to: '/students/home' },
 ];
 const linksTeacher = [
     { name: 'Tableau de bord', to: '/teachers/home', },
-    { name: 'Sondages', show: pageUrl.value.includes('/teachers/probe') },
+    { name: 'Sondages', show: pageUrl.includes('/teachers/probe') },
     { name: 'Conception', to: '/teachers/create_survey' },
     { name: 'Archives', to: '/teachers/archives' },
 ];
+
+switch (true) {
+    case pageUrl === '/login' || pageUrl === '/register':
+        currentLinks.value = linksAuth;
+        break;
+    case pageUrl.includes('/students'):
+        currentLinks.value = linksStudent;
+        break;
+    case pageUrl.includes('/teachers'):
+        currentLinks.value = linksTeacher;
+        break;
+    default:
+        currentLinks.value = linksVisitor;
+        break;
+}
 </script>
 
 <template>
@@ -37,51 +53,15 @@ const linksTeacher = [
         </div>
 
         <nav class="hidden md:flex items-center gap-8 flex-none">
-            <template v-if="$page.url == '/login' || $page.url == '/register'">
-                <Link v-for="link in linksAuth" :key="link.name" :href="link.to"
-                    v-on:finish="link.action" :class="[
-                        'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                        $page.url === link.to
-                            ? 'after:scale-x-100 text-amber-500 font-medium'
-                            : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
-                    ]">
-                    {{ link.name }}
-                </Link>
-
-            </template>
-            <template v-else-if="$page.url.includes('students')">
-                <Link v-for="link in linksStudent.filter(link => link.show !== false)" :key="link.name" :href="link.to"
-                    :method="link.method" :class="[
-                        'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                        $page.url === link.to || link.name === 'Sondages'
-                            ? 'after:scale-x-100 text-amber-500 font-medium'
-                            : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
-                    ]">
-                    {{ link.name }}
-                </Link>
-
-            </template>
-            <template v-else-if="$page.props.auth.user">
-                <Link v-for="link in linksTeacher.filter(link => link.show !== false)" :key="link.name" :href="link.to"
-                    :method="link.method" :class="[
-                        'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                        $page.url === link.to || link.name === 'Sondages'
-                            ? 'after:scale-x-100 text-amber-500 font-medium'
-                            : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
-                    ]">
-                    {{ link.name }}
-                </Link>
-            </template>
-            <template v-else>
-                <Link v-for="link in linksVisitor" :key="link.name" :href="link.to" :method="link.method" :class="[
-                        'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                        $page.url === link.to
-                            ? 'after:scale-x-100 text-amber-500 font-medium'
-                            : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
-                    ]">
-                    {{ link.name }}
-                </Link>
-            </template>
+            <Link v-for="link in currentLinks.filter(link => link.show !== false)"
+                :href="link.to" :class="[
+                    'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
+                    $page.url === link.to || link.show
+                        ? 'after:scale-x-100 text-amber-500 font-medium'
+                        : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
+                ]">
+                {{ link.name }}
+            </Link>
         </nav>
 
         <div class="flex items-center justify-end gap-6 flex-1">
