@@ -33,12 +33,12 @@ Route::get('students/survey/{code}', function ($code) {
 
 // GET
 Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->name('students.get_remarks');
+Route::get('students/survey/{code}/votes', [StudentsSurveyController::class, 'getVotes'])->name('students.get_votes');
 
 // POST
 Route::post('students/connection', [HomeController::class, 'connection'])->name('students.connection');
 Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->name('students.post_remark');
-Route::post('students/survey/{code}/remark/{id}/vote', [StudentsSurveyController::class, 'vote'])->name('students.like_remark');
-// Route::post('students/survey/{code}/remark/{id}/dislike', [StudentsSurveyController::class, 'dislikeRemark'])->name('students.dislike_remark');
+Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'vote'])->name('students.like_remark');
 
 // ----------------------------------------------------------------------
 

@@ -22,9 +22,9 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
-        $messages = $session->remarks()->orderBy('created_at', 'desc')->get();
+        $remarks = $session->remarks()->orderBy('created_at', 'desc')->get();
 
-        return response()->json(['messages' => $messages]);
+        return response()->json(['remarks' => $remarks]);
     }
 
     public function postRemark(Request $request, $code)
@@ -53,7 +53,24 @@ class SurveyController extends Controller
         return response()->json(['message' => 'Remarque ajoutée avec succès', 'remark' => $remark]);
     }
 
-    public function vote(Request $request, $code, $id) {
+    public function getVotes(Request $request, $code) {
+        $session = Session::where('code', $code)->first();
+
+        if (! $session) {
+            return response()->json(['message' => 'Session non trouvée'], 404);
+        }
+
+        if ($request->session()->get('student_session_code') !== $code) {
+            return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
+        }
+
+        $votes = Vote::whereIn('remark_id', $session->remarks()->pluck('id'))->get(); // wherein methode pour supprimer les éléments non conformes de la liste
+        // pluck permet de récupérer une liste d'id de remarque associée à la session, puis on récupère tous les votes associés à ces remarques
+
+        return response()->json(['votes' => $votes]);
+    }
+
+    public function vote(Request $request, $id) {
         $remark = Remark::where('id', $id)->first();
 
         if (!$remark) {

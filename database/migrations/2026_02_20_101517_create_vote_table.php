@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vote', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('ip_address')->unique();
+            $table->string('ip_address');
             $table->foreignId('remark_id')->constrained('remark')->onDelete('cascade');
             $table->timestamps();
         });

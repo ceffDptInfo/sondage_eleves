@@ -12,6 +12,7 @@ const remark = ref({
 });
 
 const remarks = ref([]);
+const votes = ref([]);
 let ipAddress = '';
 
 onMounted(() => {
@@ -26,11 +27,17 @@ onMounted(() => {
     setInterval(() => {
         axios.get(`/students/survey/${props.code}/remarks`)
             .then(response => {
-                remarks.value = response.data.messages;
-                remarks.value = remarks.value.filter(remark => !remark.private || remark.ip_address == ipAddress);
+                remarks.value = (response.data.remarks).filter(remark => !remark.private || remark.ip_address == ipAddress);
             })
             .catch(error => {
                 console.error('Erreur lors de la récupération des messages :', error);
+            });
+        axios.get(`/students/survey/${props.code}/votes`)
+            .then(response => {
+                votes.value = response.data.votes;
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des votes :', error);
             });
     }, 1000);
 });
@@ -67,7 +74,7 @@ function submitForm() {
                 </div>
             </div>
 
-            <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress" />
+            <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress" :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0]"/>
 
             <div class="fixed bottom-0 left-0 right-0 h-16 px-4 flex items-center bg-white">
                 <form @submit.prevent="submitForm" class="w-full max-w-7xl mx-auto border-t pt-4 mb-8 border-gray-200">
