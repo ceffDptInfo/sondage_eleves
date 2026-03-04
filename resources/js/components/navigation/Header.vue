@@ -5,25 +5,25 @@ import { ref } from 'vue';
 const pageUrl = ref(window.location.pathname);
 
 const linksVisitor = [
-    { name: 'Accueil', to: '/', method: 'get' },
-    { name: 'Élèves', to: '/students/home', method: 'get' },
-    { name: 'Enseignants', to: '/teachers/home', method: 'get' },
+    { name: 'Accueil', to: '/' },
+    { name: 'Élèves', to: '/students/home' },
+    { name: 'Enseignants', to: '/teachers/home' },
 ];
 const linksAuth = [
-    { name: 'Accueil', to: '/', method: 'get' },
-    { name: 'Login', to: '/login', method: 'get' },
-    { name: 'Register', to: '/register', method: 'get' },
+    { name: 'Accueil', to: '/' },
+    { name: 'Login', to: '/login' },
+    { name: 'Register', to: '/register' },
 ];
 const linksStudent = [
-    { name: 'Accueil', to: '/', method: 'get' },
-    { name: 'Sondages', method: 'get', show: pageUrl.value.includes('/survey') },
-    { name: 'Portail', to: '/students/home', method: 'get' },
+    { name: 'Accueil', to: '/' },
+    { name: 'Sondages', show: pageUrl.value.includes('/survey') },
+    { name: 'Portail', to: '/students/home' },
 ];
 const linksTeacher = [
-    { name: 'Tableau de bord', to: '/teachers/home', method: 'get', },
-    { name: 'Sondages', method: 'get', show: pageUrl.value.includes('/teachers/probe') },
-    { name: 'Conception', to: '/teachers/create_survey', method: 'get' },
-    { name: 'Archives', to: '/teachers/archives', method: 'get' },
+    { name: 'Tableau de bord', to: '/teachers/home', },
+    { name: 'Sondages', show: pageUrl.value.includes('/teachers/probe') },
+    { name: 'Conception', to: '/teachers/create_survey' },
+    { name: 'Archives', to: '/teachers/archives' },
 ];
 </script>
 
@@ -38,7 +38,7 @@ const linksTeacher = [
 
         <nav class="hidden md:flex items-center gap-8 flex-none">
             <template v-if="$page.url == '/login' || $page.url == '/register'">
-                <Link v-for="link in linksAuth" :key="link.name" :href="link.to" :method="link.method"
+                <Link v-for="link in linksAuth" :key="link.name" :href="link.to"
                     v-on:finish="link.action" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
                         $page.url === link.to
@@ -51,7 +51,7 @@ const linksTeacher = [
             </template>
             <template v-else-if="$page.url.includes('students')">
                 <Link v-for="link in linksStudent.filter(link => link.show !== false)" :key="link.name" :href="link.to"
-                    :method="link.method" v-on:finish="link.action" :class="[
+                    :method="link.method" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
                         $page.url === link.to || link.name === 'Sondages'
                             ? 'after:scale-x-100 text-amber-500 font-medium'
@@ -63,7 +63,7 @@ const linksTeacher = [
             </template>
             <template v-else-if="$page.props.auth.user">
                 <Link v-for="link in linksTeacher.filter(link => link.show !== false)" :key="link.name" :href="link.to"
-                    :method="link.method" v-on:finish="link.action" :class="[
+                    :method="link.method" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
                         $page.url === link.to || link.name === 'Sondages'
                             ? 'after:scale-x-100 text-amber-500 font-medium'
@@ -73,8 +73,7 @@ const linksTeacher = [
                 </Link>
             </template>
             <template v-else>
-                <Link v-for="link in linksVisitor" :key="link.name" :href="link.to" :method="link.method"
-                    v-on:finish="link.action" :class="[
+                <Link v-for="link in linksVisitor" :key="link.name" :href="link.to" :method="link.method" :class="[
                         'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
                         $page.url === link.to
                             ? 'after:scale-x-100 text-amber-500 font-medium'
