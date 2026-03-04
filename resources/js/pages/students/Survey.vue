@@ -15,14 +15,14 @@ const remarks = ref([]);
 let ipAddress = '';
 
 onMounted(() => {
-     axios.get('/ip')
-            .then(response => {
-                ipAddress = response.data;
-                console.log('Adresse IP récupérée :', ipAddress);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération de l\'adresse IP :', error);
-            });
+    axios.get('/ip')
+        .then(response => {
+            ipAddress = response.data;
+            console.log('Adresse IP récupérée :', ipAddress);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération de l\'adresse IP :', error);
+        });
     setInterval(() => {
         axios.get(`/students/survey/${props.code}/remarks`)
             .then(response => {
@@ -69,11 +69,11 @@ function submitForm() {
 
             <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress" />
 
-            <div class="fixed bottom-0 border-t border-gray-200 h-16 px-4 flex items-center gap-3">
-                <form @submit.prevent="submitForm">
-                    <div class="flex space-x-2">
-                        <input type="text" v-model="remark.value" required="true"
-                            class="flex-1 h-10 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <div class="fixed bottom-0 left-0 right-0 h-16 px-4 flex items-center bg-white">
+                <form @submit.prevent="submitForm" class="w-full max-w-7xl mx-auto border-t pt-4 mb-8 border-gray-200">
+                    <div class="flex w-full items-center space-x-2">
+                        <input type="text" v-model="remark.value" required
+                            class="min-w-0 flex-1 h-10 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Votre remarque...">
 
                         <label class="relative inline-block cursor-pointer">
