@@ -4,7 +4,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { ref } from 'vue';
 import axios from 'axios';
 
-let survey = ref({
+const survey = ref({
     name: '',
     creation_date: '',
     description: '',
@@ -12,6 +12,9 @@ let survey = ref({
 });
 
 function submit() {
+    if (survey.value.creation_date == "") {
+        survey.value.creation_date = new Date().toISOString().split('T')[0];
+    }
     axios.post('/teachers/survey', survey.value)
         .then(response => {
             console.log('Sondage créé avec succès:', response.data);
