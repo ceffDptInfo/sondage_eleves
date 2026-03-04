@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Students;
 use App\Http\Controllers\Controller;
 use App\Models\Remark;
 use App\Models\Session;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -50,5 +51,30 @@ class SurveyController extends Controller
         $remark = Remark::create($validatedData);
 
         return response()->json(['message' => 'Remarque ajoutée avec succès', 'remark' => $remark]);
+    }
+
+    public function vote(Request $request, $code, $id) {
+        $remark = Remark::where('id', $id)->first();
+
+        if (!$remark) {
+            return response()->json(['message' => 'Session ou remarque non trouvée'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'type' => 'required|string|in:like,dislike',
+        ]);
+
+        $validatedData['ip_address'] = $request->ip();
+        $validatedData['remark_id'] = $remark->id;
+
+        if (Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->where('type', $validatedData['type'])->exists()) {
+            return response()->json(['message' => 'Vous avez déjà voté pour cette remarque'], 400);
+        } elseif (Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->exists()) {
+            Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->update(['type' => $validatedData['type']]);
+        } else {
+            Vote::create($validatedData);
+        }
+
+        return response()->json(['message' => 'Remarque votée avec succès']);
     }
 }

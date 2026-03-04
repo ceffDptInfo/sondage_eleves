@@ -14,11 +14,11 @@ class Vote extends Model
     protected $fillable = [
         'type',
         'ip_address',
-        'session_id',
+        'remark_id',
     ];
 
-    public function session()
-    {
-        return $this->belongsTo(Session::class);
-    }
+    // public function remark()
+    // {
+    //     return $this->belongsTo(Remark::class, 'remark_id');
+    // }
 }
