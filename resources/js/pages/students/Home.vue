@@ -19,7 +19,7 @@ function submitForm() {
         })
         .catch(error => {
             console.error('Erreur lors de la connexion:', error);
-            errorMsg.value = 'Code ou mot de passe incorrect.';
+            errorMsg.value = error.response.data.message || 'Une erreur est survenue lors de la connexion.';
         });
 }
 </script>
