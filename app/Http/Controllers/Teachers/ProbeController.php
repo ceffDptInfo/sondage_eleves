@@ -29,4 +29,12 @@ class ProbeController extends Controller
         $session = Session::findOrFail($id);
         return response()->json($session);
     }
+
+    function complete($id) {
+        $session = Session::findOrFail($id);
+        $session->status = 'completed';
+        $session->save();
+
+        return response()->json(['message' => 'Sondage terminé avec succès', 'session' => $session]);
+    }
 }

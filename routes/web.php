@@ -76,6 +76,7 @@ Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->
 // POST
 Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
 Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
+Route::post('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
 
 // ----------------------------------------------------------------------
 

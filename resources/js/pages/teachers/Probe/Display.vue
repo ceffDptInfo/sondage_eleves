@@ -25,7 +25,14 @@ onMounted(() => {
 });
 
 function end() {
-    window.location.href = '/teachers/probe/results';
+    axios.post(`/teachers/probe/session/${id}/complete`)
+        .then(response => {
+            console.log('Sondage terminé avec succès. Statut : ', response.data.session.status);
+            window.location.href = '/teachers/probe/results';
+        })
+        .catch(error => {
+            console.error('Erreur lors de la terminaison du sondage:', error);
+        });
 }
 </script>
 
