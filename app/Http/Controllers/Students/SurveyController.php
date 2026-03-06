@@ -70,7 +70,7 @@ class SurveyController extends Controller
         return response()->json(['votes' => $votes]);
     }
 
-    public function vote(Request $request, $id) {
+    public function postVote(Request $request, $id) {
         $remark = Remark::where('id', $id)->first();
 
         if (!$remark) {
@@ -93,5 +93,19 @@ class SurveyController extends Controller
         }
 
         return response()->json(['message' => 'Remarque votée avec succès']);
+    }
+
+    public function getSession(Request $request, $code) {
+        $session = Session::where('code', $code)->first();
+
+        if (! $session) {
+            return response()->json(['message' => 'Session non trouvée'], 404);
+        }
+
+        if ($request->session()->get('student_session_code') !== $code) {
+            return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
+        }
+
+        return response()->json(['session' => $session]);
     }
 }

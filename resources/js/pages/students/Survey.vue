@@ -39,6 +39,16 @@ onMounted(() => {
             .catch(error => {
                 console.error('Erreur lors de la récupération des votes :', error);
             });
+
+        axios.get(`/students/session/${props.code}`)
+            .then(response => {
+                if (response.data.session.status === 'completed') {
+                    window.location.href = '/students/home';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération du statut de la session :', error);
+            });
     }, 1000);
 });
 

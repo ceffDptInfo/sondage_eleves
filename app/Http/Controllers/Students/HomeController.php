@@ -17,6 +17,14 @@ class HomeController extends Controller
 
         $session = Session::where('code', $validatedData['code'])->first();
 
+        if (! $session) {
+            return response()->json(['message' => 'Session non trouvée'], 404);
+        }
+
+        if($session->status === 'completed') {
+            return response()->json(['message' => 'Cette session est terminée'], 403);
+        }
+
         if ($session->password && $session->password !== $validatedData['password']) {
             return response()->json(['message' => 'Mot de passe incorrect'], 401);
         }
