@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -22,7 +23,7 @@ class SurveyFactory extends Factory
             'description' => fake()->sentence(),
             'creation_date' => fake()->date(),
             'question' => fake()->sentence(),
-            'user_id' => fake()->numberBetween(1, 10),
+            'user_id' => User::factory(),
         ];
     }
 }

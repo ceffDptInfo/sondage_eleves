@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Survey;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -21,8 +22,8 @@ class SessionFactory extends Factory
             'class' => fake()->optional()->word(),
             'remark' => fake()->optional()->sentence(),
             'code' => fake()->unique()->numberBetween(100000, 999999),
-            'password' => fake()->optional()->word(),
-            'survey_id' => fake()->numberBetween(1, 10),
+            'password' => fake()->word(),
+            'survey_id' => Survey::factory(),
         ];
     }
 }

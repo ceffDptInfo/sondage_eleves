@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Session;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -21,7 +22,7 @@ class RemarkFactory extends Factory
             'status' => fake()->randomElement(['positive', 'negative', 'neutral']),
             'private' => fake()->boolean(),
             'ip_address' => fake()->ipv4(),
-            'session_id' => fake()->numberBetween(1, 20),
+            'session_id' => Session::factory(),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Remark;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -19,7 +20,7 @@ class VoteFactory extends Factory
         return [
             'type' => fake()->randomElement(['upvote', 'downvote']),
             'ip_address' => fake()->ipv4(),
-            'remark_id' => fake()->numberBetween(1, 50),
+            'remark_id' => Remark::factory(),
         ];
     }
 }
