@@ -23,4 +23,9 @@ class Remark extends Model
     {
         return $this->belongsTo(Session::class);
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

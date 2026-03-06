@@ -4,12 +4,15 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
-const id = window.location.pathname.split('/')[4];
+const props = defineProps({
+    sessionId: Number
+});
+
 const session = ref(null);
 const survey = ref(null);
 
 onMounted(() => {
-    axios.get(`/teachers/probe/session/${id}`)
+    axios.get(`/teachers/probe/session/${props.sessionId}`)
         .then(response => {
             console.log('Données de la session récupérées avec succès:', response.data);
             session.value = response.data;
@@ -25,10 +28,10 @@ onMounted(() => {
 });
 
 function end() {
-    axios.post(`/teachers/probe/session/${id}/complete`)
+    axios.post(`/teachers/probe/session/${props.sessionId}/complete`)
         .then(response => {
             console.log('Sondage terminé avec succès. Statut : ', response.data.session.status);
-            window.location.href = '/teachers/probe/results';
+            window.location.href = '/teachers/probe/results/' + props.sessionId;
         })
         .catch(error => {
             console.error('Erreur lors de la terminaison du sondage:', error);

@@ -4,10 +4,12 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { ref } from 'vue';
 import axios from 'axios';
 
-const id = window.location.pathname.split('/')[4];
+const props = defineProps({
+    surveyId: Number
+});
 
 let session = ref({
-    survey_id: id,
+    survey_id: props.surveyId,
     status: 'active',
     class: '',
     remark: '',

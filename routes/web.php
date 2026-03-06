@@ -58,11 +58,11 @@ Route::get('teachers/probe/set_up/{id}', function ($id) {
 })->middleware(['auth', 'verified'])->name('teachers.probe.set_up');
 
 Route::get('teachers/probe/display/{id}', function ($id) {
-    return Inertia::render('Teachers/Probe/Display', ['surveyId' => $id]);
+    return Inertia::render('Teachers/Probe/Display', ['sessionId' => $id]);
 })->middleware(['auth', 'verified'])->name('teachers.probe.display');
 
-Route::get('teachers/probe/results', function () {
-    return Inertia::render('Teachers/Probe/Results_list');
+Route::get('teachers/probe/results/{id}', function ($id) {
+    return Inertia::render('Teachers/Probe/Results_list', ['sessionId' => $id]);
 })->middleware(['auth', 'verified'])->name('teachers.probe.results_list');
 
 Route::get('teachers/archives', function () {
@@ -73,6 +73,7 @@ Route::get('teachers/archives', function () {
 Route::get('teachers/surveys', [SurveyController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
 Route::get('teachers/survey/{id}', [SurveyController::class, 'getById'])->middleware(['auth', 'verified'])->name('survey.get');
 Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
+Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth', 'verified'])->name('probe.session.results');
 
 // POST
 Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
