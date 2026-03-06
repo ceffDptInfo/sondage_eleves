@@ -18,7 +18,7 @@ class SessionFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => fake()->randomElement(['created', 'active', 'completed']),
+            'status' => fake()->randomElement(['active', 'completed']),
             'class' => fake()->optional()->word(),
             'remark' => fake()->optional()->sentence(),
             'code' => fake()->unique()->numberBetween(100000, 999999),

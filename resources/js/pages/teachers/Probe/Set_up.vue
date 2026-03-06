@@ -8,7 +8,7 @@ const id = window.location.pathname.split('/')[4];
 
 let session = ref({
     survey_id: id,
-    status: 'created',
+    status: 'active',
     class: '',
     remark: '',
     code: Math.floor(Math.random() * 1000000),
