@@ -39,8 +39,12 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
+        if (strlen($request->value) > 100) {
+            return response()->json(['message' => 'La remarque ne doit pas dépasser 100 caractères'], 400);
+        }
+
         $validatedData = $request->validate([
-            'value' => 'required|string|max:255',
+            'value' => 'required|string|max:100',
             'status' => 'required|string|in:positive,negative',
             'private' => 'required|boolean',
         ]);

@@ -68,7 +68,8 @@ function submitForm() {
             };
         })
         .catch(error => {
-            console.error('Erreur lors de l\'ajout de la remarque :', error);
+            console.error('Erreur lors de l\'ajout de la remarque :', error.response.data.message);
+            alert(error.response.data.message || 'Une erreur est survenue lors de l\'ajout de la remarque.');
         });
 }
 </script>

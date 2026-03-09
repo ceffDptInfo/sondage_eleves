@@ -55,7 +55,7 @@ function submitForm() {
 
                 <button
                     class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition">
-                    Valider
+                    Ouvrir le sondage
                 </button>
             </form>
             <div v-if="errorMsg" class="mt-4 text-red-600">{{ errorMsg }}</div>

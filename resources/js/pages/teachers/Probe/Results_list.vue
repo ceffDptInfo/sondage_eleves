@@ -2,7 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
 import ResultsListItem from '@/components/teachers/probe/results/results_list_item.vue';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
