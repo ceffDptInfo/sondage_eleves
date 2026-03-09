@@ -1,14 +1,14 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
     surveyId: Number
 });
 
-let session = ref({
+const session = ref({
     survey_id: props.surveyId,
     status: 'active',
     class: '',
@@ -18,6 +18,20 @@ let session = ref({
 });
 
 const errorMsg = ref('');
+
+onMounted(() => {
+    axios.get('/teachers/surveys')
+        .then(response => {
+            if (!response.data.some(survey => survey.id == props.surveyId)) {
+                console.error('Sondage non trouvé ou accès refusé');
+                window.location.href = '/teachers/home';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération du sondage:', error);
+            errorMsg.value = error.response.data.message || 'Une erreur est survenue lors de la récupération du sondage.';
+        });
+});
 
 function setUp() {
     axios.post(`/teachers/probe/session`, session.value)

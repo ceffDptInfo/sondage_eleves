@@ -22,7 +22,7 @@ class SurveyController extends Controller
             'question.string' => 'La question du sondage doit être une chaîne de caractères.',
         ];
 
-         $validatedData = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'creation_date' => 'required|date',
             'description' => 'required|string',
@@ -39,12 +39,14 @@ class SurveyController extends Controller
     public function getByTeacher()
     {
         $surveys = Survey::where('user_id', auth()->id())->get();
+
         return response()->json($surveys);
     }
 
     public function getById($id)
     {
         $survey = Survey::findOrFail($id);
+
         return response()->json($survey);
     }
 }

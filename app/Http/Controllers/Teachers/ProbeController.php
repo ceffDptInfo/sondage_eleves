@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Teachers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Session;
+use App\Models\Survey;
 
 class ProbeController extends Controller
 {
     public function setUp(Request $request)
     {
+        if (Survey::find($request->survey_id)->user_id !== auth()->id()) {
+            return response()->json(['message' => 'Vous n\'êtes pas autorisé à configurer une session pour ce sondage.'], 403);
+        }
+
         $messages = [
             'survey_id.required' => 'L\'ID du sondage est requis.',
             'survey_id.exists' => 'Le sondage spécifié n\'existe pas.',
