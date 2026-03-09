@@ -29,8 +29,10 @@ function submit() {
 <template>
     <Head title="Conception" />
     <AppLayout>
-        <div class="flex-col items-center mb-10 mt-24">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
             <h2 class="text-2xl md:text-3xl font-bold">Conception d'un sondage</h2>
+            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+            
         </div>
 
         <form class="max-w-lg mx-auto space-y-4" @submit.prevent="submit()" autocomplete="off">

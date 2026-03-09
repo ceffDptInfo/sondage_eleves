@@ -30,29 +30,33 @@ function setUp() {
 </script>
 
 <template>
+
     <Head title="Mise en place" />
     <AppLayout>
-        <div class="flex-col items-center mb-10 mt-24">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
             <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder</h2>
+            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+            
+            <form method="POST" @submit.prevent="setUp" class="max-w-2xl mx-auto mt-8" autocomplete="off">
+                <div>
+                    <label for="class">Classe : </label>
+                    <input type="text" id="class" name="class" v-model="session.class" placeholder="Classe"
+                        class="border border-gray-300 rounded-md p-2 w-full">
+
+                    <label for="remark">Remarque : </label>
+                    <input type="text" id="remark" name="remark" v-model="session.remark" placeholder="Remarque"
+                        class="border border-gray-300 rounded-md p-2 w-full">
+
+                    <label for="survey_password">Mot de passe : </label>
+                    <input type="password" id="survey_password" name="survey_password" v-model="session.password"
+                        required="true" placeholder="Mot de passe" class="border border-gray-300 rounded-md p-2 w-full">
+                </div>
+                <div class="mx-auto mt-8">
+                    <button type="submit"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold px-4 py-2 rounded text-xl">Valider</button>
+                </div>
+            </form>
         </div>
-        <form method="POST" @submit.prevent="setUp" class="max-w-2xl mx-auto" autocomplete="off">
-            <div>
-                <label for="class">Classe : </label>
-                <input type="text" id="class" name="class" v-model="session.class" placeholder="Classe"
-                    class="border border-gray-300 rounded-md p-2 w-full">
 
-                <label for="remark">Remarque : </label>
-                <input type="text" id="remark" name="remark" v-model="session.remark" placeholder="Remarque"
-                    class="border border-gray-300 rounded-md p-2 w-full">
-
-                <label for="survey_password">Mot de passe : </label>
-                <input type="password" id="survey_password" name="survey_password" v-model="session.password" required="true" placeholder="Mot de passe"
-                    class="border border-gray-300 rounded-md p-2 w-full">
-            </div>
-            <div class="mx-auto mt-40">
-                <button type="submit"
-                    class="bg-green-500 hover:bg-green-700 text-white font-bold px-12 py-6 rounded text-8xl">Valider</button>
-            </div>
-        </form>
     </AppLayout>
 </template>

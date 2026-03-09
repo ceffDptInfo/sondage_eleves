@@ -40,14 +40,14 @@ function end() {
 </script>
 
 <template>
+
     <Head title="Affichage" />
     <AppLayout>
-        <div class="flex-col items-center mb-10 mt-24">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
             <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder <br>Affichage</h2>
-        </div>
-        <div>
-
-            <div class="space-y-6">
+            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+            
+            <div class="space-y-6 mt-8">
                 <div class="border-b pb-4">
                     <p class="text-sm text-gray-600">Nom du sondage</p>
                     <p class="text-lg font-semibold text-gray-900">{{ survey?.name }}</p>
@@ -72,5 +72,6 @@ function end() {
             <button @click="end()"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 py-2 rounded mt-4">Terminer</button>
         </div>
+
     </AppLayout>
 </template>

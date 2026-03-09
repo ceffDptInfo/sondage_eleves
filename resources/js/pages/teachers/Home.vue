@@ -24,25 +24,26 @@ onMounted(() => {
 <template>
     <Head title="Tableau de bord" />
     <AppLayout>
-        <div class="flex-col items-center mb-10 mt-24">
-            <h2 class="text-2xl md:text-3xl font-bold">Page d'accueil enseignant</h2>
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-left">Page d'accueil enseignant</h2>
+            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
 
-            <div class="grid grid-cols-2 gap-8 mt-20">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-20">
                 <Link href="/teachers/create_survey">
-                    <div class="bg-white rounded-lg shadow p-6">
+                    <div class="bg-white rounded-lg shadow p-6 h-full">
                         <h3 class="text-xl font-semibold mb-4">Créer un sondage</h3>
                         <img src="/icons/survey.png" alt="Créer un sondage" class="w-20 h-20">
                     </div>
                 </Link>
                 <Link href="/teachers/archives">
-                    <div class="bg-white rounded-lg shadow p-6">
+                    <div class="bg-white rounded-lg shadow p-6 h-full">
                         <h3 class="text-xl font-semibold mb-4">Consulter les archives</h3>
                         <img src="/icons/archive.png" alt="Consulter les archives" class="w-20 h-20">
                     </div>
                 </Link>
             </div>
 
-            <div class="mt-20">
+            <div class="mt-12 lg:mt-24">
                 <h2 class="text-xl font-semibold">Vos sondages :</h2>
                 <div v-if="surveys.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                     <SurveyListItem v-for="survey in surveys.slice(0,6)" :survey="survey" />
