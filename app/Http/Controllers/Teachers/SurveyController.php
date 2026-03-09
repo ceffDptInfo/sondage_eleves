@@ -10,12 +10,24 @@ class SurveyController extends Controller
 {
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $messages = [
+            'name.required' => 'Le nom du sondage est requis.',
+            'name.string' => 'Le nom du sondage doit être une chaîne de caractères.',
+            'name.max' => 'Le nom du sondage ne doit pas dépasser 255 caractères.',
+            'creation_date.required' => 'La date de création est requise.',
+            'creation_date.date' => 'La date de création doit être une date valide.',
+            'description.required' => 'La description est requise.',
+            'description.string' => 'La description doit être une chaîne de caractères.',
+            'question.required' => 'La question du sondage est requise.',
+            'question.string' => 'La question du sondage doit être une chaîne de caractères.',
+        ];
+
+         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'creation_date' => 'required|date',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'question' => 'required|string',
-        ]);
+        ], $messages);
 
         $validatedData['user_id'] = auth()->id();
 

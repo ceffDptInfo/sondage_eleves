@@ -10,10 +10,18 @@ class HomeController extends Controller
 {
     public function connection(Request $request)
     {
+        $messages = [
+            'code.required' => 'Le code de session est requis.',
+            'code.integer' => 'Le code de session doit être un nombre entier.',
+            'password.required' => 'Le mot de passe est requis.',
+            'password.string' => 'Le mot de passe doit être une chaîne de caractères.',
+            'password.max' => 'Le mot de passe ne doit pas dépasser 255 caractères.',
+        ];
+        
         $validatedData = $request->validate([
             'code' => 'required|integer',
             'password' => 'required|string|max:255',
-        ]);
+        ], $messages);
 
         $session = Session::where('code', $validatedData['code'])->first();
 

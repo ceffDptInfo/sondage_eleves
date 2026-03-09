@@ -17,6 +17,8 @@ let session = ref({
     password: ''
 });
 
+const errorMsg = ref('');
+
 function setUp() {
     axios.post(`/teachers/probe/session`, session.value)
         .then(response => {
@@ -25,6 +27,7 @@ function setUp() {
         })
         .catch(error => {
             console.error('Erreur lors de la configuration du sondage:', error);
+            errorMsg.value = error.response.data.message || 'Une erreur est survenue lors de la configuration du sondage.';
         });
 }
 </script>
@@ -36,7 +39,7 @@ function setUp() {
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
             <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder</h2>
             <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
-            
+
             <form method="POST" @submit.prevent="setUp" class="max-w-2xl mx-auto mt-8" autocomplete="off">
                 <div>
                     <label for="class">Classe : </label>
@@ -56,6 +59,7 @@ function setUp() {
                         class="bg-green-500 hover:bg-green-700 text-white font-bold px-4 py-2 rounded text-xl">Valider</button>
                 </div>
             </form>
+            <div class="text-red-500 text-center mt-8">{{ errorMsg }}</div>
         </div>
 
     </AppLayout>

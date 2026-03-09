@@ -10,14 +10,31 @@ class ProbeController extends Controller
 {
     public function setUp(Request $request)
     {
+        $messages = [
+            'survey_id.required' => 'L\'ID du sondage est requis.',
+            'survey_id.exists' => 'Le sondage spécifié n\'existe pas.',
+            'status.required' => 'Le statut de la session est requis.',
+            'status.in' => 'Le statut doit être "active".',
+            'class.string' => 'La classe doit être une chaîne de caractères.',
+            'class.max' => 'La classe ne doit pas dépasser 255 caractères.',
+            'remark.string' => 'La remarque doit être une chaîne de caractères.',
+            'remark.max' => 'La remarque ne doit pas dépasser 1000 caractères.',
+            'code.required' => 'Le code de session est requis.',
+            'code.integer' => 'Le code de session doit être un entier.',
+            'code.unique' => 'Le code de session doit être unique.',
+            'password.required' => 'Le mot de passe est requis.',
+            'password.string' => 'Le mot de passe doit être une chaîne de caractères.',
+            'password.max' => 'Le mot de passe ne doit pas dépasser 255 caractères.',
+        ];
+
         $validatedData = $request->validate([
             'survey_id' => 'required|exists:survey,id',
             'status' => 'required|in:active',
             'class' => 'nullable|string|max:255',
             'remark' => 'nullable|string|max:1000',
             'code' => 'required|integer|unique:sessions,code',
-            'password' => 'nullable|string|max:255',
-        ]);
+            'password' => 'required|string|max:255',
+        ], $messages);
 
         $session = Session::create($validatedData);
 
