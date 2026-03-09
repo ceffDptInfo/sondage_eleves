@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 const pageUrl = window.location.pathname;
 const currentLinks = ref([]);
+const isMenuOpen = ref(false);
 
 const linksVisitor = [
     { name: 'Accueil', to: '/' },
@@ -53,13 +54,12 @@ switch (true) {
         </div>
 
         <nav class="hidden md:flex items-center gap-8 flex-none">
-            <Link v-for="link in currentLinks.filter(link => link.show !== false)"
-                :href="link.to" :class="[
-                    'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
-                    $page.url === link.to || link.show
-                        ? 'after:scale-x-100 text-amber-500 font-medium'
-                        : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
-                ]">
+            <Link v-for="link in currentLinks.filter(link => link.show !== false)" :href="link.to" :class="[
+                'hidden text-md md:flex mx-4 py-3 relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-amber-500 after:origin-left after:transition-transform after:duration-300',
+                $page.url === link.to || link.show
+                    ? 'after:scale-x-100 text-amber-500 font-medium'
+                    : 'after:scale-x-0 hover:after:scale-x-100 text-zinc-400 hover:text-zinc-100 dark:text-zinc-600 dark:hover:text-zinc-900'
+            ]">
                 {{ link.name }}
             </Link>
         </nav>
@@ -82,6 +82,39 @@ switch (true) {
                     </svg>
                 </Link>
             </div>
+            <button @click="isMenuOpen = !isMenuOpen"
+                class="md:hidden text-zinc-400 dark:text-zinc-600 hover:bg-zinc-800/10 dark:hover:bg-zinc-200/50 rounded-lg transition">
+                <div class="h-6 w-6 flex items-center justify-center">
+                    <svg v-if="!isMenuOpen" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 stroke-current" aria-hidden="true">
+                        <path d="M4 6H20M4 12H20M4 18H20" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+
+                    <svg v-else viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 stroke-current" aria-hidden="true">
+                        <path d="M19 5L5 19M5 5L19 19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>
+                </div>
+            </button>
         </div>
+        <div v-if="isMenuOpen" class="md:hidden fixed inset-0 top-[65px] bg-zinc-950/50 backdrop-blur-sm"
+            @click="isMenuOpen = false">
+        </div>
+        <nav :class="[
+            'md:hidden fixed top-[60px] left-0 w-full bg-zinc-950 dark:bg-zinc-50 border-b border-zinc-800 dark:border-zinc-200 transition-all duration-300 transform origin-top',
+            isMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
+        ]">
+            <div class="flex flex-col p-6 gap-4">
+                <Link v-for="link in currentLinks.filter(l => l.show !== false)" :key="link.name" :href="link.to"
+                    @click="isMenuOpen = false" :class="[
+                        'text-lg py-2 transition',
+                        $page.url === link.to ? 'text-amber-500 font-bold' : 'text-zinc-400 dark:text-zinc-600'
+                    ]">
+                    {{ link.name }}
+                </Link>
+            </div>
+        </nav>
     </header>
 </template>
