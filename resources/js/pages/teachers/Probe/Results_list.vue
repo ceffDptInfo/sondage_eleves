@@ -44,11 +44,11 @@ function filterRemarks() {
             <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder <br>Résultats</h2>
         </div>
         <div>
-            <ResultsListItem v-for="remark in filteredRemarks" :key="remark.id" :remark="remark" />
+            <ResultsListItem v-for="remark in filteredRemarks.sort" :key="remark.id" :remark="remark" />
         </div>
         <div class="space-x-3">
             <button class="border p-2" @click="">Archiver et enregistrer</button>
-            <button @click="filterRemarks()" class="border p-2 bg-red-500 text-white">{{ privateMode ? 'Cacher' : 'Afficher' }} les remarques privées</button>
+            <button v-if="remarks.some(r => r.private)" @click="filterRemarks()" class="border p-2 bg-red-500 text-white">{{ privateMode ? 'Cacher' : 'Afficher' }} les remarques privées</button>
         </div>
     </AppLayout>
 </template>
