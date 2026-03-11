@@ -28,7 +28,7 @@ onMounted(() => {
 });
 
 function end() {
-    axios.post(`/teachers/probe/session/${props.sessionId}/complete`)
+    axios.patch(`/teachers/probe/session/${props.sessionId}/complete`)
         .then(response => {
             console.log('Sondage terminé avec succès. Statut : ', response.data.session.status);
             window.location.href = '/teachers/probe/results/' + props.sessionId;

@@ -57,10 +57,11 @@ function filterRemarks() {
 }
 
 function generatePdf() {
-    axios.post('/teachers/probe/session/results/pdf', { session: session.value, survey: survey.value, remarks: remarks.value }, { responseType: 'blob' })
+    axios.get('/teachers/probe/session/' + props.sessionId + '/results/pdf', { responseType: 'blob' })
         .then(response => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
-            window.open(url);
+
+            let pdf = window.open(url, '_blank');
         })
         .catch(error => {
             console.error('Erreur lors de la génération du PDF:', error);

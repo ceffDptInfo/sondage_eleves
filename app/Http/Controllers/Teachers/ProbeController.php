@@ -78,18 +78,16 @@ class ProbeController extends Controller
         return response()->json($survey);
     }
 
-    public function generatePdf(Request $request, $id)
+    public function generatePdf($id)
     {
-        $validatedData = $request->validate([
-            'survey' => 'required|array',
-            'session' => 'required|array',
-            'remarks' => 'required|array',
-        ]);
+        $session = Session::findOrFail($id);
+        $survey = Survey::findOrFail($session['survey_id']);
+        $remarks = $session->remarks()->with('votes')->get();
         
         $data = [
-            'survey' => $validatedData['survey'],
-            'session' => $validatedData['session'],
-            'remarks' => $validatedData['remarks'],
+            'survey' => $survey,
+            'session' => $session,
+            'remarks' => $remarks,
         ];
         
         $pdf = Pdf::loadView('result_survey_pdf', $data);
