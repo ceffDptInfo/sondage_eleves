@@ -34,6 +34,10 @@ function filterRemarks() {
         filteredRemarks.value = remarks.value;
     }
 }
+
+function generatePdf() {
+    window.open('/teachers/probe/session/' + props.sessionId + '/results/pdf', '_blank');
+}
 </script>
 
 <template>
@@ -48,7 +52,7 @@ function filterRemarks() {
                 <ResultsListItem v-for="remark in filteredRemarks" :key="remark.id" :remark="remark" />
             </div>
             <div class="space-x-3">
-                <button class="border p-2" @click="">Archiver et enregistrer</button>
+                <button class="border p-2" @click="generatePdf">Générer et archiver le PDF</button>
                 <button v-if="remarks.some(r => r.private)" @click="filterRemarks()"
                     class="border p-2 bg-red-500 text-white">{{ privateMode ? 'Cacher' : 'Afficher' }} les remarques
                     privées</button>

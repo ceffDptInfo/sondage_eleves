@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teachers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Session;
@@ -65,5 +66,11 @@ class ProbeController extends Controller
         $remarks = $session->remarks()->with('votes')->get();
 
         return response()->json($remarks);
+    }
+
+    public function generatePdf()
+    {
+        $pdf = Pdf::loadView('result_survey_pdf');
+        return $pdf->stream('result_survey.pdf');
     }
 }
