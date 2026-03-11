@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Teachers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Session;
 use App\Models\Survey;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class ProbeController extends Controller
 {
@@ -50,10 +50,12 @@ class ProbeController extends Controller
     public function getById($id)
     {
         $session = Session::findOrFail($id);
+
         return response()->json($session);
     }
 
-    function complete($id) {
+    public function complete($id)
+    {
         $session = Session::findOrFail($id);
         $session->status = 'completed';
         $session->save();
@@ -61,16 +63,37 @@ class ProbeController extends Controller
         return response()->json(['message' => 'Sondage terminé avec succès', 'session' => $session]);
     }
 
-    function getResults($id) {
+    public function getResults($id)
+    {
         $session = Session::findOrFail($id);
         $remarks = $session->remarks()->with('votes')->get();
 
         return response()->json($remarks);
     }
 
-    public function generatePdf()
+    public function getSurveyById($id)
     {
-        $pdf = Pdf::loadView('result_survey_pdf');
+        $survey = Survey::findOrFail($id);
+
+        return response()->json($survey);
+    }
+
+    public function generatePdf(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'survey' => 'required|array',
+            'session' => 'required|array',
+            'remarks' => 'required|array',
+        ]);
+
+        $data = [
+            'survey' => $validatedData['survey'],
+            'session' => $validatedData['session'],
+            'remarks' => $validatedData['remarks'],
+        ];
+        
+        $pdf = Pdf::loadView('result_survey_pdf', $data);
+        
         return $pdf->stream('result_survey.pdf');
     }
 }

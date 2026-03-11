@@ -14,11 +14,4 @@ class HomeController extends Controller
 
         return response()->json($surveys);
     }
-
-    // public function getById($id)
-    // {
-    //     $survey = Survey::findOrFail($id);
-
-    //     return response()->json($survey);
-    // }
 }

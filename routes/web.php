@@ -52,15 +52,15 @@ Route::get('teachers/archives', function () {
 
 // GET
 Route::get('teachers/surveys', [HomeController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
-// Route::get('teachers/survey/{id}', [HomeController::class, 'getById'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/survey/{id}', [ProbeController::class, 'getSurveyById'])->middleware(['auth', 'verified'])->name('survey.get');
 Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
 Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth', 'verified'])->name('probe.session.results');
-Route::get('teachers/probe/session/{id}/results/pdf', [ProbeController::class, 'generatePdf'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
 
 // POST
 Route::post('teachers/survey', [CreationController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
 Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
 Route::post('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
+Route::post('teachers/probe/session/{id}/results/pdf', [ProbeController::class, 'generatePdf'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
 
 // ----------------------------------------------------------------------
 

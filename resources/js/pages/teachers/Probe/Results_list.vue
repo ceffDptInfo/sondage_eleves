@@ -12,8 +12,30 @@ const props = defineProps({
 const remarks = ref([]);
 const filteredRemarks = ref([]);
 const privateMode = ref(false);
+const survey = ref({});
+const session = ref({});
 
 onMounted(() => {
+    axios.get('/teachers/probe/session/' + props.sessionId)
+        .then(response => {
+            console.log('Données de la session récupérées avec succès:', response.data);
+            session.value = response.data;
+
+            axios.get('/teachers/survey/' + session.value.survey_id)
+                .then(response => {
+                    console.log('Données du sondage récupérées avec succès:', response.data);
+                    survey.value = response.data;
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération du sondage:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération de la session:', error);
+        });
+
+
+
     axios.get('/teachers/probe/session/' + props.sessionId + '/results')
         .then(response => {
             console.log('Données des résultats récupérées avec succès:', response.data);
@@ -36,7 +58,14 @@ function filterRemarks() {
 }
 
 function generatePdf() {
-    window.open('/teachers/probe/session/' + props.sessionId + '/results/pdf', '_blank');
+    axios.post('/teachers/probe/session/' + props.sessionId + '/results/pdf', { session: session.value, survey: survey.value, remarks: remarks.value }, { responseType: 'blob' })
+        .then(response => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            window.open(url);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la génération du PDF:', error);
+        });
 }
 </script>
 
