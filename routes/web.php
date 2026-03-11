@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Teachers\CreationController;
+use App\Http\Controllers\Teachers\HomeController;
 use App\Http\Controllers\Teachers\ProbeController;
 use App\Http\Controllers\Teachers\ProfileController;
 use App\Http\Controllers\Teachers\SurveyController;
-use App\Http\Controllers\Students\HomeController;
+
+use App\Http\Controllers\Students\HomeController as StudentsHomeController;
 use App\Http\Controllers\Students\SurveyController as StudentsSurveyController;
-use App\Models\Survey;
+
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,28 +21,6 @@ Route::get('/', function () {
 Route::get('/ip', function () {
     return request()->ip();
 })->name('ip');
-
-// ----------------------------------------------------------------------
-
-// Routes pour les élèves
-// Pages
-Route::get('students/home', function () {
-    return Inertia::render('Students/Home');
-})->name('students.home');
-
-Route::get('students/survey/{code}', function ($code) {
-    return Inertia::render('Students/Survey', ['code' => $code]);
-})->middleware('check.student.access')->name('students.access_survey');
-
-// GET
-Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->name('students.get_remarks');
-Route::get('students/survey/{code}/votes', [StudentsSurveyController::class, 'getVotes'])->name('students.get_votes');
-Route::get('students/session/{code}', [StudentsSurveyController::class, 'getSession'])->name('students.get_session');
-
-// POST
-Route::post('students/connection', [HomeController::class, 'connection'])->name('students.connection');
-Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->name('students.post_remark');
-Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'postVote'])->name('students.vote');
 
 // ----------------------------------------------------------------------
 
@@ -70,15 +51,37 @@ Route::get('teachers/archives', function () {
 })->middleware(['auth', 'verified'])->name('teachers.archives');
 
 // GET
-Route::get('teachers/surveys', [SurveyController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
-Route::get('teachers/survey/{id}', [SurveyController::class, 'getById'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/surveys', [HomeController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
+// Route::get('teachers/survey/{id}', [HomeController::class, 'getById'])->middleware(['auth', 'verified'])->name('survey.get');
 Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
 Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth', 'verified'])->name('probe.session.results');
 
 // POST
-Route::post('teachers/survey', [SurveyController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
+Route::post('teachers/survey', [CreationController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
 Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
 Route::post('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
+
+// ----------------------------------------------------------------------
+
+// Routes pour les élèves
+// Pages
+Route::get('students/home', function () {
+    return Inertia::render('Students/Home');
+})->name('students.home');
+
+Route::get('students/survey/{code}', function ($code) {
+    return Inertia::render('Students/Survey', ['code' => $code]);
+})->middleware('check.student.access')->name('students.access_survey');
+
+// GET
+Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->name('students.get_remarks');
+Route::get('students/survey/{code}/votes', [StudentsSurveyController::class, 'getVotes'])->name('students.get_votes');
+Route::get('students/session/{code}', [StudentsSurveyController::class, 'getSession'])->name('students.get_session');
+
+// POST
+Route::post('students/connection', [StudentsHomeController::class, 'connection'])->name('students.connection');
+Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->name('students.post_remark');
+Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'postVote'])->name('students.vote');
 
 // ----------------------------------------------------------------------
 

@@ -45,7 +45,7 @@ function filterRemarks() {
             <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
 
             <div class="mt-8">
-                <ResultsListItem v-for="remark in filteredRemarks.sort" :key="remark.id" :remark="remark" />
+                <ResultsListItem v-for="remark in filteredRemarks" :key="remark.id" :remark="remark" />
             </div>
             <div class="space-x-3">
                 <button class="border p-2" @click="">Archiver et enregistrer</button>
