@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppContent from '@/components/base/AppContent.vue';
-import Header from '@/components/navigation/header.vue';
+import Header from '@/components/navigation/Header.vue';
 import AppShell from '@/components/base/AppShell.vue';
 import type { BreadcrumbItem } from '@/types';
 
