@@ -35,7 +35,6 @@ onMounted(() => {
         });
 
 
-
     axios.get('/teachers/probe/session/' + props.sessionId + '/results')
         .then(response => {
             console.log('Données des résultats récupérées avec succès:', response.data);
@@ -58,10 +57,7 @@ function filterRemarks() {
 }
 
 function generatePdf() {
-    // const likes = remarks.value.votes.filter(vote => vote.type === 'like').length;
-    // const dislikes = remarks.value.votes.filter(vote => vote.type === 'dislike').length;
-    // alert(likes + ' ' + dislikes);
-    axios.post('/teachers/probe/session/' + props.sessionId + '/results/pdf', { session: session.value, survey: survey.value, remarks: remarks.value }, { responseType: 'blob' })
+    axios.post('/teachers/probe/session/results/pdf', { session: session.value, survey: survey.value, remarks: remarks.value }, { responseType: 'blob' })
         .then(response => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             window.open(url);
@@ -81,7 +77,7 @@ function generatePdf() {
             <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
 
             <div class="mt-8">
-                <ResultsListItem v-for="remark in filteredRemarks" :key="remark.id" :remark="remark" />
+                <ResultsListItem v-for="remark in filteredRemarks" :remark="remark" />
             </div>
             <div class="space-x-3">
                 <button class="border p-2" @click="generatePdf">Générer et archiver le PDF</button>

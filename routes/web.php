@@ -59,8 +59,10 @@ Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getR
 // POST
 Route::post('teachers/survey', [CreationController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
 Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
-Route::post('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
-Route::post('teachers/probe/session/{id}/results/pdf', [ProbeController::class, 'generatePdf'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
+Route::post('teachers/probe/session/results/pdf', [ProbeController::class, 'generatePdf'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
+
+// PATCH
+Route::patch('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
 
 // ----------------------------------------------------------------------
 
