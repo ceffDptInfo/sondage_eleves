@@ -85,7 +85,7 @@ class ProbeController extends Controller
             'session' => 'required|array',
             'remarks' => 'required|array',
         ]);
-
+        
         $data = [
             'survey' => $validatedData['survey'],
             'session' => $validatedData['session'],

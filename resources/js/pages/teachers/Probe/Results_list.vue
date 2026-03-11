@@ -58,6 +58,9 @@ function filterRemarks() {
 }
 
 function generatePdf() {
+    // const likes = remarks.value.votes.filter(vote => vote.type === 'like').length;
+    // const dislikes = remarks.value.votes.filter(vote => vote.type === 'dislike').length;
+    // alert(likes + ' ' + dislikes);
     axios.post('/teachers/probe/session/' + props.sessionId + '/results/pdf', { session: session.value, survey: survey.value, remarks: remarks.value }, { responseType: 'blob' })
         .then(response => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
