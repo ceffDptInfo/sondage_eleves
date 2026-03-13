@@ -29,7 +29,7 @@ const navigateToSetup = () => {
         </div>
 
         <button @click="navigateToSetup"
-            class="mt-6 w-full bg-gray-50 group-hover:bg-blue-600 text-gray-700 group-hover:text-white font-bold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2">
+            class="mt-6 w-full bg-gray-50 group-hover:bg-amber-500 group-hover:text-white text-gray-700 font-bold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2">
             Lancer la session
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">

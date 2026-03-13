@@ -18,8 +18,8 @@ const linksAuth = [
 ];
 const linksStudent = [
     { name: 'Accueil', to: '/' },
-    { name: 'Sondages', show: pageUrl.includes('/survey') },
     { name: 'Portail', to: '/students/home' },
+    { name: 'Sondages', show: pageUrl.includes('/survey') },
 ];
 const linksTeacher = [
     { name: 'Tableau de bord', to: '/teachers/home', },

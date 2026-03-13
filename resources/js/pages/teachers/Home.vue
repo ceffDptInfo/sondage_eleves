@@ -27,7 +27,7 @@ onMounted(() => {
     <AppLayout>
         <div class="mb-10">
             <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace Enseignant</h2>
-            <div class="mt-3 h-1.5 w-20 bg-black rounded-full"></div>
+            <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
@@ -73,7 +73,7 @@ onMounted(() => {
             <div v-else class="bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center">
                 <p class="text-gray-500">Vous n'avez pas encore créé de sondages.</p>
                 <Link href="/teachers/create_survey"
-                    class="text-blue-600 font-semibold mt-2 inline-block hover:underline">Créer mon premier sondage →
+                    class="text-amber-500 font-semibold mt-2 inline-block hover:underline">Créer mon premier sondage →
                 </Link>
             </div>
         </section>

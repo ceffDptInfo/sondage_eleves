@@ -50,37 +50,37 @@ function setUp() {
     <Head title="Mise en place" />
     <AppLayout>
             <div class="mb-10">
-                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Enseignant - Sonder</h2>
-                <div class="mt-3 h-1.5 w-20 bg-green-500 rounded-full"></div>
+                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Configuration</h2>
+                <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
             </div>
 
             <div class="max-w-4xl mx-auto">
-                <form @submit.prevent="setUp" class="bg-white border border-gray-100 shadow-sm rounded-2xl p-8 space-y-6" autocomplete="off">
+                <form @submit.prevent="setUp" class="rounded-2xl p-8 space-y-6" autocomplete="off">
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="class" class="block text-sm font-semibold text-gray-700 mb-1">Classe</label>
-                            <input type="text" id="class" v-model="session.class" placeholder="Ex: Terminale G1"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                            <input type="text" id="class" v-model="session.class" placeholder="Ex: MPT_3M"
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                         </div>
 
                         <div>
-                            <label for="survey_password" class="block text-sm font-semibold text-gray-700 mb-1">Mot de passe de session</label>
+                            <label for="survey_password" class="block text-sm font-semibold text-gray-700 mb-1">Mot de passe de session *</label>
                             <input type="text" id="survey_password" v-model="session.password" required
                                 placeholder="Définit l'accès pour les élèves"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                         </div>
                     </div>
 
                     <div>
-                        <label for="remark" class="block text-sm font-semibold text-gray-700 mb-1">Remarque (optionnel)</label>
-                        <input type="text" id="remark" v-model="session.remark" placeholder="Ex: Séance de révision"
-                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                        <label for="remark" class="block text-sm font-semibold text-gray-700 mb-1">Remarque</label>
+                        <input type="text" id="remark" v-model="session.remark" placeholder="Ex: 2026-2027, matu multilingue"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                     </div>
 
                     <div class="pt-4 flex justify-center">
                         <button type="submit"
-                            class="w-full md:w-1/2 bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-100 transition-all active:scale-[0.98]">
+                            class="w-full md:w-1/2 bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-amber-100 transition-all active:scale-[0.98]">
                             Ouvrir le sondage
                         </button>
                     </div>

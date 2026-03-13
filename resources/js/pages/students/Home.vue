@@ -28,9 +28,11 @@ function submitForm() {
 
     <Head title="Portail" />
     <AppLayout>
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold">Portail élèves</h2>
-            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+            <div>
+                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace élèves - Portail</h2>
+                <p class="text-gray-500 mt-1">Entrez les informations de connexion.</p>
+                <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
+            </div>
 
             <div class="w-full mx-auto max-w-md p-8 rounded-lg">
                 <form @submit.prevent="submitForm" autocomplete="off">
@@ -39,7 +41,7 @@ function submitForm() {
                             Entrez le code du sondage
                         </label>
                         <input type="text" id="inputCode" name="inputCode" v-model="credentials.code" placeholder="Code"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
 
                     <div class="mb-6">
@@ -48,16 +50,15 @@ function submitForm() {
                         </label>
                         <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password"
                             placeholder="Mot de passe"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
 
                     <button
-                        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition">
+                        class="w-full px-4 py-2 bg-amber-500 text-white font-medium rounded-xl hover:bg-amber-700 transition">
                         Ouvrir le sondage
                     </button>
                 </form>
                 <div v-if="errorMsg" class="mt-4 text-red-600">{{ errorMsg }}</div>
             </div>
-        </div>
     </AppLayout>
 </template>

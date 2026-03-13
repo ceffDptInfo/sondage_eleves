@@ -74,12 +74,12 @@ function generatePdf() {
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                 <div class="flex-grow">
                     <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Résultats du sondage</h2>
-                    <div class="mt-3 h-1.5 w-20 bg-blue-600 rounded-full"></div>
+                    <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
                 </div>
                 
                 <div class="flex gap-3">
                     <button v-if="remarks.some(r => r.private)" @click="filterRemarks()"
-                        :class="[privateMode ? 'bg-gray-800' : 'bg-red-500']"
+                        :class="[privateMode ? 'bg-gray-800' : 'bg-amber-500']"
                         class="flex items-center gap-2 text-white font-bold px-5 py-2.5 rounded-xl transition-all shadow-sm active:scale-95">
                         {{ privateMode ? 'Cacher' : 'Afficher' }} les privées
                     </button>

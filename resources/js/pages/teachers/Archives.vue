@@ -7,10 +7,9 @@ import AppLayout from '@/layouts/AppLayout.vue';
 
     <Head title="Archives" />
     <AppLayout>
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold">Archives des sondages</h2>
-            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
-            
+        <div class="mb-10">
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Archives</h2>
+            <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
     </AppLayout>
 </template>

@@ -7,7 +7,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 
     <Head title="Accueil" />
     <AppLayout>
-        <div class="flex items-center justify-center min-h-screen bg-white p-8">
+        <div class="flex items-center justify-center min-h-screen bg-white p-8 -mt-32">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-5xl">
 
                 <Link href="/students/home" class="group">

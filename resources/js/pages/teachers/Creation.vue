@@ -34,8 +34,8 @@ function submit() {
     <Head title="Conception" />
     <AppLayout>
         <div class="mb-10">
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Conception d'un sondage</h2>
-            <div class="mt-3 h-1.5 w-20 bg-blue-600 rounded-full"></div>
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Conception</h2>
+            <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
 
         <div class="rounded-2xl p-8 max-w-4xl mx-auto">
@@ -43,7 +43,7 @@ function submit() {
                 <div>
                     <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nom du sondage</label>
                     <input type="text" id="name" v-model="survey.name" placeholder="Ex: ICH-0183"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -51,7 +51,7 @@ function submit() {
                         <label for="creation_date" class="block text-sm font-semibold text-gray-700 mb-1">Date de
                             création</label>
                         <input type="date" id="creation_date" v-model="survey.creation_date"
-                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@ function submit() {
                     <label for="question" class="block text-sm font-semibold text-gray-700 mb-1">Question
                         principale</label>
                     <input type="text" id="question" v-model="survey.question" placeholder="Quelle est votre question ?"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                 </div>
 
                 <div>
@@ -67,12 +67,12 @@ function submit() {
                         (optionnel)</label>
                     <textarea id="description" v-model="survey.description" rows="3"
                         placeholder="Précisez le contexte du sondage..."
-                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"></textarea>
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"></textarea>
                 </div>
 
                 <div class="pt-4">
                     <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-[0.98]">
+                        class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-[0.98]">
                         Créer le sondage
                     </button>
                 </div>
