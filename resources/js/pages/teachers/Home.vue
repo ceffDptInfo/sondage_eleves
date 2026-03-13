@@ -33,7 +33,7 @@ onMounted(() => {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             <Link href="/teachers/create_survey" class="group">
                 <div
-                    class="bg-white border border-gray-100 rounded-2xl shadow-sm p-8 transition-all hover:shadow-md hover:-translate-y-1 flex items-center justify-between">
+                    class="bg-white border border-gray-100 hover:border-amber-500 rounded-2xl shadow-sm p-8 transition-all hover:shadow-md hover:-translate-y-1 flex items-center justify-between">
                     <div>
                         <h3 class="text-xl font-bold text-gray-800">Créer un sondage</h3>
                         <p class="text-gray-500 mt-1 text-sm">Lancez une nouvelle évaluation en direct.</p>
@@ -46,7 +46,7 @@ onMounted(() => {
 
             <Link href="/teachers/archives" class="group">
                 <div
-                    class="bg-white border border-gray-100 rounded-2xl shadow-sm p-8 transition-all hover:shadow-md hover:-translate-y-1 flex items-center justify-between">
+                    class="bg-white border border-gray-100 hover:border-amber-500 rounded-2xl shadow-sm p-8 transition-all hover:shadow-md hover:-translate-y-1 flex items-center justify-between">
                     <div>
                         <h3 class="text-xl font-bold text-gray-800">Consulter les archives</h3>
                         <p class="text-gray-500 mt-1 text-sm">Retrouvez les résultats de vos anciennes sessions.</p>
