@@ -70,22 +70,30 @@ function generatePdf() {
 </script>
 
 <template>
-
-    <Head title="Résultats" />
     <AppLayout>
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder <br>Résultats</h2>
-            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div class="flex-grow">
+                    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Résultats du sondage</h2>
+                    <div class="mt-3 h-1.5 w-20 bg-blue-600 rounded-full"></div>
+                </div>
+                
+                <div class="flex gap-3">
+                    <button v-if="remarks.some(r => r.private)" @click="filterRemarks()"
+                        :class="[privateMode ? 'bg-gray-800' : 'bg-red-500']"
+                        class="flex items-center gap-2 text-white font-bold px-5 py-2.5 rounded-xl transition-all shadow-sm active:scale-95">
+                        {{ privateMode ? 'Cacher' : 'Afficher' }} les privées
+                    </button>
+                    
+                    <button @click="generatePdf"
+                        class="flex items-center gap-2 bg-white border border-1 border-black text-black hover:bg-black/5 font-bold px-5 py-2.5 rounded-xl transition-all active:scale-95">
+                        <img src="/icons/archive.png" class="w-5 h-5 opacity-70" alt="">
+                        PDF & Archiver
+                    </button>
+                </div>
+            </div>
 
-            <div class="mt-8">
-                <ResultsListItem v-for="remark in filteredRemarks" :remark="remark" />
+            <div class="space-y-4">
+                <ResultsListItem v-for="remark in filteredRemarks" :key="remark.id" :remark="remark" />
             </div>
-            <div class="space-x-3">
-                <button class="border p-2" @click="generatePdf">Générer et archiver le PDF</button>
-                <button v-if="remarks.some(r => r.private)" @click="filterRemarks()"
-                    class="border p-2 bg-red-500 text-white">{{ privateMode ? 'Cacher' : 'Afficher' }} les remarques
-                    privées</button>
-            </div>
-        </div>
     </AppLayout>
 </template>

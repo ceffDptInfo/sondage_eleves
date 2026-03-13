@@ -47,34 +47,48 @@ function setUp() {
 </script>
 
 <template>
-
     <Head title="Mise en place" />
     <AppLayout>
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold">Enseignant - Sonder</h2>
-            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+            <div class="mb-10">
+                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Enseignant - Sonder</h2>
+                <div class="mt-3 h-1.5 w-20 bg-green-500 rounded-full"></div>
+            </div>
 
-            <form method="POST" @submit.prevent="setUp" class="max-w-2xl mx-auto mt-8" autocomplete="off">
-                <div>
-                    <label for="class">Classe : </label>
-                    <input type="text" id="class" name="class" v-model="session.class" placeholder="Classe"
-                        class="border border-gray-300 rounded-md p-2 w-full">
+            <div class="max-w-4xl mx-auto">
+                <form @submit.prevent="setUp" class="bg-white border border-gray-100 shadow-sm rounded-2xl p-8 space-y-6" autocomplete="off">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="class" class="block text-sm font-semibold text-gray-700 mb-1">Classe</label>
+                            <input type="text" id="class" v-model="session.class" placeholder="Ex: Terminale G1"
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                        </div>
 
-                    <label for="remark">Remarque : </label>
-                    <input type="text" id="remark" name="remark" v-model="session.remark" placeholder="Remarque"
-                        class="border border-gray-300 rounded-md p-2 w-full">
+                        <div>
+                            <label for="survey_password" class="block text-sm font-semibold text-gray-700 mb-1">Mot de passe de session</label>
+                            <input type="text" id="survey_password" v-model="session.password" required
+                                placeholder="Définit l'accès pour les élèves"
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                        </div>
+                    </div>
 
-                    <label for="survey_password">Mot de passe : </label>
-                    <input type="password" id="survey_password" name="survey_password" v-model="session.password"
-                        required="true" placeholder="Mot de passe" class="border border-gray-300 rounded-md p-2 w-full">
-                </div>
-                <div class="mx-auto mt-8">
-                    <button type="submit"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold px-4 py-2 rounded text-xl">Valider</button>
-                </div>
-            </form>
-            <div class="text-red-500 text-center mt-8">{{ errorMsg }}</div>
-        </div>
+                    <div>
+                        <label for="remark" class="block text-sm font-semibold text-gray-700 mb-1">Remarque (optionnel)</label>
+                        <input type="text" id="remark" v-model="session.remark" placeholder="Ex: Séance de révision"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                    </div>
 
+                    <div class="pt-4 flex justify-center">
+                        <button type="submit"
+                            class="w-full md:w-1/2 bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-100 transition-all active:scale-[0.98]">
+                            Ouvrir le sondage
+                        </button>
+                    </div>
+                </form>
+
+                <p v-if="errorMsg" class="text-red-500 text-sm font-medium text-center mt-6 bg-red-50 py-2 rounded-lg">
+                    {{ errorMsg }}
+                </p>
+            </div>
     </AppLayout>
 </template>

@@ -33,39 +33,54 @@ function submit() {
 
     <Head title="Conception" />
     <AppLayout>
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold">Conception d'un sondage</h2>
-            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
+        <div class="mb-10">
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Conception d'un sondage</h2>
+            <div class="mt-3 h-1.5 w-20 bg-blue-600 rounded-full"></div>
+        </div>
 
-            <form class="max-w-lg mx-auto space-y-4 mt-8" @submit.prevent="submit()" autocomplete="off">
+        <div class="rounded-2xl p-8 max-w-4xl mx-auto">
+            <form class="space-y-6" @submit.prevent="submit()" autocomplete="off">
                 <div>
-                    <label for="name" class="block text-sm font-medium">Nom du sondage:</label>
-                    <input type="text" id="name" name="name" v-model="survey.name"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-xl">
+                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nom du sondage</label>
+                    <input type="text" id="name" v-model="survey.name" placeholder="Ex: ICH-0183"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="creation_date" class="block text-sm font-semibold text-gray-700 mb-1">Date de
+                            création</label>
+                        <input type="date" id="creation_date" v-model="survey.creation_date"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
+                    </div>
                 </div>
 
                 <div>
-                    <label for="creation_date" class="block text-sm font-medium">Date de création:</label>
-                    <input type="date" id="creation_date" name="creation_date" v-model="survey.creation_date"
-                        class="w-full px-3 py-2 border border-gray-300 rounded">
+                    <label for="question" class="block text-sm font-semibold text-gray-700 mb-1">Question
+                        principale</label>
+                    <input type="text" id="question" v-model="survey.question" placeholder="Quelle est votre question ?"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all">
                 </div>
 
                 <div>
-                    <label for="description" class="block text-sm font-medium">Description:</label>
-                    <textarea id="description" name="description" v-model="survey.description"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-xl"></textarea>
+                    <label for="description" class="block text-sm font-semibold text-gray-700 mb-1">Description
+                        (optionnel)</label>
+                    <textarea id="description" v-model="survey.description" rows="3"
+                        placeholder="Précisez le contexte du sondage..."
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"></textarea>
                 </div>
 
-                <div>
-                    <label for="question" class="block text-sm font-medium">Question:</label>
-                    <input type="text" id="question" name="question" v-model="survey.question"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-xl">
+                <div class="pt-4">
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-[0.98]">
+                        Créer le sondage
+                    </button>
                 </div>
-
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700">Créer le
-                    sondage</button>
             </form>
-            <div class="text-red-500 text-center mt-8">{{ errorMsg }}</div>
+
+            <p v-if="errorMsg" class="text-red-500 text-sm font-medium text-center mt-6 bg-red-50 py-2 rounded-lg">
+                {{ errorMsg }}
+            </p>
         </div>
     </AppLayout>
 </template>

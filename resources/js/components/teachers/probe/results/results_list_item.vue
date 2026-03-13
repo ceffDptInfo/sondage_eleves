@@ -9,28 +9,34 @@ const likes = props.remark.votes.filter(vote => vote.type === 'like').length;
 const dislikes = props.remark.votes.filter(vote => vote.type === 'dislike').length;
 </script>
 <template>
-    <div class="flex items-center gap-4 p-6 mb-4 rounded-lg">
+    <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex items-center gap-6 hover:border-gray-200 transition-all">
         <div class="flex-1">
-            <h3 :class="[props.remark.status === 'positive' ? 'text-green-500' : 'text-red-500', 'text-xl font-semibold']">{{ props.remark.value }}</h3>
+            <h3 :class="[props.remark.status === 'positive' ? 'text-green-600' : 'text-red-600', 'text-lg font-bold leading-tight']">
+                {{ props.remark.value }}
+            </h3>
+            <p v-if="props.remark.private" class="text-xs text-gray-400 font-medium uppercase mt-1 tracking-wider">Note privée</p>
         </div>
 
-        <div class="flex items-center gap-2" v-if="!props.remark.private">
-            <span class="text-sm font-medium">{{ likes }}</span>
-            <div class="rounded-full bg-green-500 w-10 h-10 flex items-center justify-center">
-                <img src="/icons/like.png" alt="icone de like" class="w-5 h-5 brightness-0 invert">
+        <div class="flex items-center gap-4">
+            <div v-if="!props.remark.private" class="flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-xl">
+                <span class="text-green-700 font-bold text-sm">{{ likes }}</span>
+                <div class="bg-green-500 p-1.5 rounded-full shadow-sm shadow-green-200">
+                    <img src="/icons/like.png" alt="Like" class="w-4 h-4 brightness-0 invert">
+                </div>
             </div>
-        </div>
 
-        <div class="flex items-center gap-2" v-if="!props.remark.private">
-            <span class="text-sm font-medium">{{ dislikes }}</span>
-            <div class="rounded-full bg-red-500 w-10 h-10 flex items-center justify-center">
-                <img src="/icons/dislike.png" alt="icone de dislike" class="w-5 h-5 brightness-0 invert">
+            <div v-if="!props.remark.private" class="flex items-center gap-2 bg-red-50 px-3 py-1.5 rounded-xl">
+                <span class="text-red-700 font-bold text-sm">{{ dislikes }}</span>
+                <div class="bg-red-500 p-1.5 rounded-full shadow-sm shadow-red-200">
+                    <img src="/icons/dislike.png" alt="Dislike" class="w-4 h-4 brightness-0 invert">
+                </div>
             </div>
-        </div>
 
-        <div class="flex items-center gap-2" v-if="props.remark.private">
-            <div class="rounded-full bg-gray-300 w-10 h-10 flex items-center justify-center">
-                <img src="/icons/lock.png" alt="icone de lock" class="w-5 h-5 brightness-0 invert">
+            <div v-if="props.remark.private" class="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-xl">
+                <span class="text-gray-500 font-bold text-xs uppercase">Privé</span>
+                <div class="bg-gray-400 p-1.5 rounded-full">
+                    <img src="/icons/lock.png" alt="Lock" class="w-4 h-4 brightness-0 invert">
+                </div>
             </div>
         </div>
     </div>

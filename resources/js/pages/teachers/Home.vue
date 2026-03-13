@@ -22,34 +22,60 @@ onMounted(() => {
 </script>
 
 <template>
+
     <Head title="Tableau de bord" />
     <AppLayout>
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-10">
-            <h2 class="text-2xl md:text-3xl font-bold text-left">Page d'accueil enseignant</h2>
-            <div class="mt-2 h-px flex-grow bg-gradient-to-r from-gray-500 to-transparent"></div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-20">
-                <Link href="/teachers/create_survey">
-                    <div class="bg-white rounded-lg shadow p-6 h-full">
-                        <h3 class="text-xl font-semibold mb-4">Créer un sondage</h3>
-                        <img src="/icons/survey.png" alt="Créer un sondage" class="w-20 h-20">
-                    </div>
-                </Link>
-                <Link href="/teachers/archives">
-                    <div class="bg-white rounded-lg shadow p-6 h-full">
-                        <h3 class="text-xl font-semibold mb-4">Consulter les archives</h3>
-                        <img src="/icons/archive.png" alt="Consulter les archives" class="w-20 h-20">
-                    </div>
-                </Link>
-            </div>
-
-            <div class="mt-12 lg:mt-24">
-                <h2 class="text-xl font-semibold">Vos sondages :</h2>
-                <div v-if="surveys.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                    <SurveyListItem v-for="survey in surveys.slice(0,6)" :survey="survey" />
-                </div>
-                <p v-else class="mt-4 text-gray-500">Vous n'avez pas encore créé de sondages.</p>
-            </div>
+        <div class="mb-10">
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace Enseignant</h2>
+            <div class="mt-3 h-1.5 w-20 bg-black rounded-full"></div>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <Link href="/teachers/create_survey" class="group">
+                <div
+                    class="bg-white border border-gray-100 rounded-2xl shadow-sm p-8 transition-all hover:shadow-md hover:-translate-y-1 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Créer un sondage</h3>
+                        <p class="text-gray-500 mt-1 text-sm">Lancez une nouvelle évaluation en direct.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl">
+                        <img src="/icons/survey.png" alt="Icon" class="w-10 h-10">
+                    </div>
+                </div>
+            </Link>
+
+            <Link href="/teachers/archives" class="group">
+                <div
+                    class="bg-white border border-gray-100 rounded-2xl shadow-sm p-8 transition-all hover:shadow-md hover:-translate-y-1 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Consulter les archives</h3>
+                        <p class="text-gray-500 mt-1 text-sm">Retrouvez les résultats de vos anciennes sessions.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl">
+                        <img src="/icons/archive.png" alt="Icon" class="w-10 h-10">
+                    </div>
+                </div>
+            </Link>
+        </div>
+
+        <section>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                    Vos sondages
+                    <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full">{{ surveys.length }}</span>
+                </h2>
+            </div>
+
+            <div v-if="surveys.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <SurveyListItem v-for="survey in surveys" :key="survey.id" :survey="survey" />
+            </div>
+
+            <div v-else class="bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center">
+                <p class="text-gray-500">Vous n'avez pas encore créé de sondages.</p>
+                <Link href="/teachers/create_survey"
+                    class="text-blue-600 font-semibold mt-2 inline-block hover:underline">Créer mon premier sondage →
+                </Link>
+            </div>
+        </section>
     </AppLayout>
 </template>
