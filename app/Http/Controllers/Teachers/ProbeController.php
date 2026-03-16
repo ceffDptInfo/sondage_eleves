@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Teachers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Archives;
 use App\Models\Session;
 use App\Models\Survey;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -78,20 +80,49 @@ class ProbeController extends Controller
         return response()->json($survey);
     }
 
-    public function generatePdf($id)
+    public function closeSession($id)
     {
         $session = Session::findOrFail($id);
         $survey = Survey::findOrFail($session['survey_id']);
         $remarks = $session->remarks()->with('votes')->get();
-        
-        $data = [
+        $user = User::findOrFail($survey['user_id']);
+
+        $dataPdf = [
             'survey' => $survey,
             'session' => $session,
             'remarks' => $remarks,
         ];
-        
-        $pdf = Pdf::loadView('result_survey_pdf', $data);
-        
+
+        $pdf = $this->generatePdf($dataPdf);
+
+        $base64 = base64_encode($pdf->output());
+
+        $dataArchive = [
+            'document' => $base64,
+            'file_name' => 'result_survey.pdf',
+            'adding_date' => now(),
+            'teacher_name' => $user['name'],
+            'teacher_email' => $user['email'],
+            'survey_name' => $survey['name'],
+            'survey_description' => $survey['description'],
+            'survey_question' => $survey['question'],
+            'session_class' => $session['class'],
+            'session_remark' => $session['remark'],
+        ];
+
+        $this->saveArchive($dataArchive);
+
         return $pdf->stream('result_survey.pdf');
+    }
+
+    public function generatePdf($data)
+    {
+        $pdf = Pdf::loadView('result_survey_pdf', $data);
+        return $pdf;
+    }
+
+    public function saveArchive($data)
+    {
+        Archives::create($data);
     }
 }

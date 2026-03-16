@@ -70,7 +70,7 @@ onMounted(() => {
                 <SurveyListItem v-for="survey in surveys" :key="survey.id" :survey="survey" />
             </div>
 
-            <div v-else class="bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center">
+            <div v-else class="border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center">
                 <p class="text-gray-500">Vous n'avez pas encore créé de sondages.</p>
                 <Link href="/teachers/create_survey"
                     class="text-amber-500 font-semibold mt-2 inline-block hover:underline">Créer mon premier sondage →

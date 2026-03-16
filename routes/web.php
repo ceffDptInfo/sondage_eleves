@@ -1,14 +1,13 @@
 <?php
 
+use App\Http\Controllers\Teachers\ArchivesController;
 use App\Http\Controllers\Teachers\CreationController;
 use App\Http\Controllers\Teachers\HomeController;
 use App\Http\Controllers\Teachers\ProbeController;
 use App\Http\Controllers\Teachers\ProfileController;
-use App\Http\Controllers\Teachers\SurveyController;
 
 use App\Http\Controllers\Students\HomeController as StudentsHomeController;
 use App\Http\Controllers\Students\SurveyController as StudentsSurveyController;
-use App\Http\Controllers\Teachers\PdfGeneration;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -55,7 +54,8 @@ Route::get('teachers/surveys', [HomeController::class, 'getByTeacher'])->middlew
 Route::get('teachers/survey/{id}', [ProbeController::class, 'getSurveyById'])->middleware(['auth', 'verified'])->name('survey.get');
 Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
 Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth', 'verified'])->name('probe.session.results');
-Route::get('teachers/probe/session/{id}/results/pdf', [ProbeController::class, 'generatePdf'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
+Route::get('teachers/probe/session/{id}/results/close', [ProbeController::class, 'closeSession'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
+Route::get('teachers/archives/list', [ArchivesController::class, 'getArchives'])->middleware(['auth', 'verified'])->name('teachers.archives.list');
 
 // POST
 Route::post('teachers/survey', [CreationController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');

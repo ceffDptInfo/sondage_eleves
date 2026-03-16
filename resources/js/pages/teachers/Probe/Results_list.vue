@@ -57,14 +57,24 @@ function filterRemarks() {
 }
 
 function generatePdf() {
-    axios.get('/teachers/probe/session/' + props.sessionId + '/results/pdf', { responseType: 'blob' })
+    // axios.get('/teachers/probe/session/' + props.sessionId + '/results/close', { responseType: 'blob' })
+    //     .then(response => {
+    //         const url = window.URL.createObjectURL(new Blob([response.data]));
+
+    //         let pdf = window.open(url, '_blank');
+    //     })
+    //     .catch(error => {
+    //         console.error('Erreur lors de la génération du PDF:', error);
+    //     });
+    axios.get('/teachers/probe/session/' + props.sessionId + '/results/close', { responseType: 'blob' })
         .then(response => {
+            window.location.href = '/teachers/archives';
             const url = window.URL.createObjectURL(new Blob([response.data]));
 
             let pdf = window.open(url, '_blank');
         })
         .catch(error => {
-            console.error('Erreur lors de la génération du PDF:', error);
+            console.error('Erreur lors de la génération du PDF:', error.response.data);
         });
 }
 </script>
