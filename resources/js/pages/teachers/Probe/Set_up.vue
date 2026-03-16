@@ -67,7 +67,7 @@ function setUp() {
                         <div>
                             <label for="survey_password" class="block text-sm font-semibold text-gray-700 mb-1">Mot de passe de session *</label>
                             <input type="text" id="survey_password" v-model="session.password" required
-                                placeholder="Définit l'accès pour les élèves"
+                                placeholder="Définit l'accès pour les élèves" autocomplete="new-password"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                         </div>
                     </div>
