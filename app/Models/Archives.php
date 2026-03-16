@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Archives extends Model
 {
     protected $fillable = [
-        'document',
         'file_name',
         'adding_date',
         'teacher_name',

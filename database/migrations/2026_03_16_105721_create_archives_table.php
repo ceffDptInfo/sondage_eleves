@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
-            $table->longText('document');
             $table->string('file_name');
             $table->date('adding_date');
             $table->string('teacher_name');

@@ -1,5 +1,4 @@
 <script setup>
-import { Download } from 'lucide-vue-next';
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -9,10 +8,11 @@ const props = defineProps({
     }
 });
 
-function downloadPdf(filename = "document.pdf") {
+function downloadPdf() {
+    const url = `/storage/archives/${props.archive.file_name}`;
     const link = document.createElement('a');
-    link.href = "data:application/pdf;base64," + props.archive.document;
-    link.download = filename;
+    link.href = url;
+    link.download = props.archive.file_name;
     link.click();
 }
 </script>
@@ -28,6 +28,6 @@ function downloadPdf(filename = "document.pdf") {
         <td>{{ props.archive.survey_question }}</td>
         <td>{{ props.archive.session_class }}</td>
         <td>{{ props.archive.session_remark }}</td>
-        <td><button @click="downloadPdf(props.archive.file_name)">Télécharger</button></td>
+        <td><button @click="downloadPdf()">Télécharger</button></td>
     </tr>
 </template>

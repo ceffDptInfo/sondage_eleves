@@ -9,6 +9,7 @@ use App\Models\Survey;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProbeController extends Controller
 {
@@ -94,12 +95,12 @@ class ProbeController extends Controller
         ];
 
         $pdf = $this->generatePdf($dataPdf);
-
-        $base64 = base64_encode($pdf->output());
+        $filename = 'archive_' . time() . '.pdf';
+        $path = 'archives/' . $filename;
+        Storage::disk('public')->put($path, $pdf->output());
 
         $dataArchive = [
-            'document' => $base64,
-            'file_name' => 'result_survey.pdf',
+            'file_name' => $filename,
             'adding_date' => now(),
             'teacher_name' => $user['name'],
             'teacher_email' => $user['email'],
@@ -112,7 +113,7 @@ class ProbeController extends Controller
 
         $this->saveArchive($dataArchive);
 
-        return $pdf->stream('result_survey.pdf');
+        return $pdf->stream($filename);
     }
 
     public function generatePdf($data)

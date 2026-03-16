@@ -72,7 +72,7 @@ function submit() {
 
                 <div class="pt-4">
                     <button type="submit"
-                        class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-[0.98]">
+                        class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-amber-100 transition-all active:scale-[0.98]">
                         Créer le sondage
                     </button>
                 </div>
