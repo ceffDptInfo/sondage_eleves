@@ -49,7 +49,7 @@ switch (true) {
         class="flex items-center justify-between px-8 py-4 z-[1001] fixed top-0 left-0 right-0 bg-zinc-50/95 backdrop-blur-md border-b border-zinc-200 transition">
         <img src="/logo/sondage_eleves_logo.png" class="w-10 h-10 mr-4" alt="Logo Sondage Élèves">
         <div class="flex items-center gap-3 flex-1">
-            <span class="font-semibold text-xl tracking-tight text-zinc-900">
+            <span class="font-semibold lg:text-xl text-md tracking-tight text-zinc-900">
                 <Link href="/">Sondage Élèves</Link>
             </span>
         </div>
@@ -111,7 +111,7 @@ switch (true) {
                 <Link v-for="link in currentLinks.filter(l => l.show !== false)" :key="link.name" :href="link.to"
                     @click="isMenuOpen = false" :class="[
                         'text-lg py-2 transition',
-                        $page.url === link.to ? 'text-amber-500 font-bold' : 'text-zinc-600'
+                        $page.url === link.to || link.show ? 'text-amber-500 font-bold' : 'text-zinc-600'
                     ]">
                     {{ link.name }}
                 </Link>

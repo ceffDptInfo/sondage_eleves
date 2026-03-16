@@ -29,12 +29,12 @@ function submitForm() {
     <Head title="Portail" />
     <AppLayout>
             <div>
-                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace élèves - Portail</h2>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace élèves - Portail</h2>
                 <p class="text-gray-500 mt-1">Entrez les informations de connexion.</p>
                 <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
             </div>
 
-            <div class="w-full mx-auto max-w-md p-8 rounded-lg">
+            <div class="w-full mx-auto max-w-md p-8 my-auto mt-24 -translate-y-8 rounded-lg">
                 <form @submit.prevent="submitForm" autocomplete="off">
                     <div class="mb-6">
                         <label for="inputCode" class="block text-sm font-medium text-gray-700 mb-2">

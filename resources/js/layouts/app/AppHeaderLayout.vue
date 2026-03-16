@@ -16,7 +16,7 @@ withDefaults(defineProps<Props>(), {
 <template>
     <AppShell class="flex-col">
         <Header />
-        <AppContent class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32 mb-10">
+        <AppContent class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:mt-32 mt-24 mb-10">
             <slot />
         </AppContent>
     </AppShell>

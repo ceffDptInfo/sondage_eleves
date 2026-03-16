@@ -54,56 +54,60 @@ function end() {
 
     <Head title="Session en cours" />
     <AppLayout>
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
-            <div>
-                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Sonder</h2>
-                <p class="text-gray-500 mt-1">Diffusez les informations ci-dessous à vos élèves.</p>
-                <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
-            </div>
-            <div class="flex items-center bg-amber-50 border border-amber-200 px-4 py-2 rounded-full">
-                <span class="text-amber-700 font-semibold uppercase text-sm">Temps : {{ timer }}</span>
-            </div>
-        </div>
-
-        <div class="mt-10">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <label class="text-xs font-bold text-gray-400 uppercase">Question posée</label>
-                    <p class="text-2xl font-medium text-gray-800 mt-2">{{ survey?.question || 'Chargement...' }}</p>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant -
+                        Sonder
+                    </h2>
+                    <p class="text-gray-500 mt-1">Diffusez les informations ci-dessous à vos élèves.</p>
+                    <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
                 </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">Sondage</label>
-                    <p class="text-lg text-gray-600 mt-1">{{ survey?.name }}</p>
+                <div class="flex items-center bg-amber-50 border border-amber-200 px-4 py-2 rounded-full">
+                    <span class="text-amber-700 font-semibold uppercase text-sm">Temps : {{ timer }}</span>
                 </div>
             </div>
 
-            <div class="mt-10 gap-10 grid grid-cols-2">
-                <div class="p-6 rounded-xl shadow-lg text-white">
-                    <label class="text-xs font-bold text-amber-600 uppercase">Code d'accès</label>
-                    <p class="text-5xl font-mono font-black text-amber-500 mt-2 text-center">
-                        {{ session?.code }}
-                    </p>
+            <div class="my-auto mt-24 -translate-y-8 ">
+                <div class="lg:col-span-2 md:space-y-6 grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <label class="text-xs font-bold text-gray-400 uppercase">Question posée</label>
+                        <p class="text-2xl text-gray-800 mt-1">{{ survey?.question || 'Chargement...' }}</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <label class="text-xs font-bold text-gray-400 uppercase">Sondage</label>
+                        <p class="text-2xl text-gray-600 mt-1">{{ survey?.name }}</p>
+                    </div>
                 </div>
 
-                <div class="p-6 rounded-xl shadow-lg bg-amber-500">
-                    <label class="text-xs font-bold text-white uppercase">Mot de passe</label>
-                    <p class="text-5xl font-mono font-black text-white mt-2 text-center">
-                        {{ session?.password }}
-                    </p>
+                <div class="mt-10 gap-6 grid grid-cols-2">
+                    <div class="p-6 rounded-xl shadow-lg text-white">
+                        <label class="text-xs font-bold text-amber-600 uppercase">Code d'accès</label>
+                        <p class="text-3xl md:text-5xl font-mono font-black text-amber-500 mt-2 text-center">
+                            {{ session?.code }}
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-xl shadow-lg bg-amber-500">
+                        <label class="text-xs font-bold text-white uppercase">Mot de passe</label>
+                        <p class="text-3xl md:text-5xl font-mono font-black text-white mt-2 text-center">
+                            {{ session?.password }}
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="mt-12 flex justify-center">
+                    <button @click="end"
+                        class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg hover:shadow-red-200 active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Clore la session
+                    </button>
                 </div>
             </div>
-        </div>
-
-        <div class="mt-12 flex justify-center">
-            <button @click="end"
-                class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg hover:shadow-red-200 active:scale-95">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Clore la session
-            </button>
-        </div>
     </AppLayout>
 </template>

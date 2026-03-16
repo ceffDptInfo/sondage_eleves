@@ -7,14 +7,14 @@ import AppLayout from '@/layouts/AppLayout.vue';
 
     <Head title="Accueil" />
     <AppLayout>
-        <div class="flex items-center justify-center min-h-screen bg-white p-8 -mt-32">
+        <div class="flex items-center justify-center min-h-screen bg-white p-8 md:-mt-32 -mt-24">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-5xl">
 
                 <Link href="/students/home" class="group">
                     <div
-                        class="border border-gray-200 p-16 flex flex-col items-center justify-center transition-all duration-300 hover:border-black hover:bg-gray-50">
+                        class="border border-gray-200 md:p-16 px-12 py-16 flex flex-col items-center justify-center transition-all duration-300 hover:border-black hover:bg-gray-50">
                         <h1
-                            class="text-6xl font-light tracking-tighter text-black group-hover:scale-[1.02] transition-transform">
+                            class="md:text-6xl text-5xl font-light tracking-tighter text-black group-hover:scale-[1.02] transition-transform">
                             Élèves
                         </h1>
                         <span
@@ -26,9 +26,9 @@ import AppLayout from '@/layouts/AppLayout.vue';
 
                 <Link href="/teachers/home" class="group">
                     <div
-                        class="border border-gray-200 p-16 flex flex-col items-center justify-center transition-all duration-300 hover:border-black hover:bg-gray-50">
+                        class="border border-gray-200 md:p-16 px-12 py-16 flex flex-col items-center justify-center transition-all duration-300 hover:border-black hover:bg-gray-50">
                         <h1
-                            class="text-6xl font-light tracking-tighter text-black group-hover:scale-[1.02] transition-transform">
+                            class="md:text-6xl text-5xl font-light tracking-tighter text-black group-hover:scale-[1.02] transition-transform">
                             Enseignants
                         </h1>
                         <span

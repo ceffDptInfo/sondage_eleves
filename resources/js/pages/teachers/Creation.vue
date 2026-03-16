@@ -33,12 +33,12 @@ function submit() {
 
     <Head title="Conception" />
     <AppLayout>
-        <div class="mb-10">
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Conception</h2>
+        <div>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Conception</h2>
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
 
-        <div class="rounded-2xl p-8 max-w-4xl mx-auto">
+        <div class="rounded-2xl max-w-4xl mx-auto my-auto mt-24 -translate-y-8">
             <form class="space-y-6" @submit.prevent="submit()" autocomplete="off">
                 <div>
                     <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nom du sondage</label>

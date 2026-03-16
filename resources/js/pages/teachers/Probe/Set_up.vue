@@ -49,12 +49,12 @@ function setUp() {
 <template>
     <Head title="Mise en place" />
     <AppLayout>
-            <div class="mb-10">
-                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Configuration</h2>
+            <div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Configuration</h2>
                 <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-4xl mx-auto my-auto mt-24 -translate-y-8">
                 <form @submit.prevent="setUp" class="rounded-2xl p-8 space-y-6" autocomplete="off">
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

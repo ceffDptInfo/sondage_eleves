@@ -73,7 +73,7 @@ function generatePdf() {
     <AppLayout>
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                 <div class="flex-grow">
-                    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Résultats du sondage</h2>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Résultats du sondage</h2>
                     <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
                 </div>
                 

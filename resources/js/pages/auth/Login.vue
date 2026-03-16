@@ -38,7 +38,7 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit">
-            <h1 class="text-4xl font-bold text-center mb-4 p-2">Connexion enseignant</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-4 p-2">Connexion enseignant</h1>
             <div>
                 <InputLabel for="email" value="Email" />
 

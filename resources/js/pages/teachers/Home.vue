@@ -26,7 +26,7 @@ onMounted(() => {
     <Head title="Tableau de bord" />
     <AppLayout>
         <div class="mb-10">
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Espace Enseignant</h2>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace Enseignant</h2>
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
 
