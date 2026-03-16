@@ -92,6 +92,7 @@ class ProbeController extends Controller
             'survey' => $survey,
             'session' => $session,
             'remarks' => $remarks,
+            'date' => now()->format('d/m/Y H:i:s'),
         ];
 
         $pdf = $this->generatePdf($dataPdf);

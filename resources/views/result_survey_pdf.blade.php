@@ -14,6 +14,8 @@
         <h3>Nom du sondage : {{ $survey['name'] }}</h3>
     @endif
 
+    <h3>Date de sondage : {{ $date }}</h3>
+
     @if (!empty($survey['question']))
         <h3>Question du sondage : {{ $survey['question'] }}</h3>
     @endif
