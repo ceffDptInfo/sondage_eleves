@@ -1,4 +1,5 @@
 <script setup>
+import { Download } from 'lucide-vue-next';
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -7,13 +8,26 @@ const props = defineProps({
         required: true
     }
 });
+
+function downloadPdf(filename = "document.pdf") {
+    const link = document.createElement('a');
+    link.href = "data:application/pdf;base64," + props.archive.document;
+    link.download = filename;
+    link.click();
+}
 </script>
 
 <template>
-    <div class="flex space-x-2">
-        <span>Nom : {{ props.archive.survey_name }}</span>
-        <span>Date : {{ props.archive.adding_date }}</span>
-        <span>Classe : {{ props.archive.session_class }}</span>
-        <button>Télécharger les résultats</button>
-    </div>
+    <tr>
+        <td>{{ props.archive.file_name }}</td>
+        <td>{{ props.archive.adding_date }}</td>
+        <td>{{ props.archive.teacher_name }}</td>
+        <td>{{ props.archive.teacher_email }}</td>
+        <td>{{ props.archive.survey_name }}</td>
+        <td>{{ props.archive.survey_description }}</td>
+        <td>{{ props.archive.survey_question }}</td>
+        <td>{{ props.archive.session_class }}</td>
+        <td>{{ props.archive.session_remark }}</td>
+        <td><button @click="downloadPdf(props.archive.file_name)">Télécharger</button></td>
+    </tr>
 </template>

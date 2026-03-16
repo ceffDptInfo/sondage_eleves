@@ -22,10 +22,27 @@ onMounted(() => {
     <Head title="Archives" />
     <AppLayout>
         <div class="mb-10">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Archives</h2>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant - Archives
+            </h2>
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
 
-        <ArchiveListItem v-for="archive in archives" :archive="archive" />
+        <div>
+            <table>
+                <tr>
+                    <th>Nom du fichier</th>
+                    <th>Date de l'ajout</th>
+                    <th>Nom de l'enseignant</th>
+                    <th>Email de l'enseignant</th>
+                    <th>Nom du sondage</th>
+                    <th>Description du sondage</th>
+                    <th>Question du sondage</th>
+                    <th>Classe</th>
+                    <th>Remarque</th>
+                </tr>
+                <ArchiveListItem v-for="archive in archives" :archive="archive" />
+            </table>
+        </div>
+
     </AppLayout>
 </template>
