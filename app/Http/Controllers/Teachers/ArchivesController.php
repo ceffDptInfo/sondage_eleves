@@ -12,7 +12,6 @@ class ArchivesController extends Controller
     {
         $teacher = $request->user();
         $archives = Archives::where('teacher_name', $teacher->name)->get();
-        $archives->reverse()->values();
-        return response()->json($archives);
+        return response()->json($archives->reverse()->values());
     }
 }

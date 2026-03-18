@@ -84,7 +84,7 @@ function goHome() {
                 <button v-if="remarks.some(r => r.private)" @click="filterRemarks()"
                     :class="[privateMode ? 'bg-gray-800' : 'bg-amber-500']"
                     class="flex items-center gap-2 text-white font-bold px-5 py-2.5 rounded-xl transition-all shadow-sm active:scale-95">
-                    {{ privateMode ? 'Cacher' : 'Afficher' }} les privées
+                    {{ privateMode ? 'Cacher' : 'Afficher' }} les remarques privées
                 </button>
 
                 <button @click="generatePdf" v-if="filteredRemarks.length > 0"

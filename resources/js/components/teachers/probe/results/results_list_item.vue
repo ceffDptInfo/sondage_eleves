@@ -14,7 +14,6 @@ const dislikes = props.remark.votes.filter(vote => vote.type === 'dislike').leng
             <h3 :class="[props.remark.status === 'positive' ? 'text-green-600' : 'text-red-600', 'text-lg font-bold leading-tight']">
                 {{ props.remark.value }}
             </h3>
-            <p v-if="props.remark.private" class="text-xs text-gray-400 font-medium uppercase mt-1 tracking-wider">Note privée</p>
         </div>
 
         <div class="flex items-center gap-4">
