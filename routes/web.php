@@ -13,13 +13,13 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
-});
+})->name('Welcome');
 // ----------------------------------------------------------------------
 // Routes autres
 // Adresse IP
 Route::get('/ip', function () {
     return request()->ip();
-});
+})->name('ip');
 
 // ----------------------------------------------------------------------
 
@@ -27,42 +27,42 @@ Route::get('/ip', function () {
 // Pages
 Route::get('teachers/home', function () {
     return Inertia::render('Teachers/Home');
-})->middleware(['auth']);
+})->middleware(['auth', 'verified'])->name('teachers.home');
 
 Route::get('teachers/create_survey', function () {
     return Inertia::render('Teachers/Creation');
-})->middleware(['auth']);
+})->middleware(['auth', 'verified'])->name('teachers.create-survey');
 
 Route::get('teachers/probe/set_up/{id}', function ($id) {
     return Inertia::render('Teachers/Probe/Set_up', ['surveyId' => $id]);
-})->middleware(['auth']);
+})->middleware(['auth', 'verified'])->name('teachers.probe.set_up');
 
 Route::get('teachers/probe/display/{id}', function ($id) {
     return Inertia::render('Teachers/Probe/Display', ['sessionId' => $id]);
-})->middleware(['auth']);
+})->middleware(['auth', 'verified'])->name('teachers.probe.display');
 
 Route::get('teachers/probe/results/{id}', function ($id) {
     return Inertia::render('Teachers/Probe/Results_list', ['sessionId' => $id]);
-})->middleware(['auth']);
+})->middleware(['auth', 'verified'])->name('teachers.probe.results_list');
 
 Route::get('teachers/archives', function () {
     return Inertia::render('Teachers/Archives');
-})->middleware(['auth']);
+})->middleware(['auth', 'verified'])->name('teachers.archives');
 
 // GET
-Route::get('teachers/surveys', [HomeController::class, 'getByTeacher'])->middleware(['auth']);
-Route::get('teachers/survey/{id}', [ProbeController::class, 'getSurveyById'])->middleware(['auth']);
-Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth']);
-Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth']);
-Route::get('teachers/probe/session/{id}/results/close', [ProbeController::class, 'closeSession'])->middleware(['auth']);
-Route::get('teachers/archives/list', [ArchivesController::class, 'getArchives'])->middleware(['auth']);
+Route::get('teachers/surveys', [HomeController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/survey/{id}', [ProbeController::class, 'getSurveyById'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
+Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth', 'verified'])->name('probe.session.results');
+Route::get('teachers/probe/session/{id}/results/close', [ProbeController::class, 'closeSession'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');
+Route::get('teachers/archives/list', [ArchivesController::class, 'getArchives'])->middleware(['auth', 'verified'])->name('teachers.archives.list');
 
 // POST
-Route::post('teachers/survey', [CreationController::class, 'store'])->middleware(['auth']);
-Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth']);
+Route::post('teachers/survey', [CreationController::class, 'store'])->middleware(['auth', 'verified'])->name('survey.store');
+Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
 
 // PATCH
-Route::patch('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth']);
+Route::patch('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
 
 // ----------------------------------------------------------------------
 

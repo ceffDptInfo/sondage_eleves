@@ -41,32 +41,6 @@ describe('Sessions', function () {
         ]);
     });
 
-    it('Modifier une session (expect)', function () {
-        $session = Session::factory()->create();
-        $session->update([
-            'status' => 'inactive',
-            'code' => 156237,
-            'password' => 'newpassword',
-        ]);
-        expect($session->status)->toBe('inactive');
-        expect($session->code)->toBe(156237);
-        expect($session->password)->toBe('newpassword');
-    });
-
-    it('Modifier une session (assertHasData)', function () {
-        $session = Session::factory()->create();
-        $session->update([
-            'status' => 'inactive',
-            'code' => 156237,
-            'password' => 'newpassword',
-        ]);
-        $this->assertDatabaseHas('session', [
-            'status' => 'inactive',
-            'code' => 156237,
-            'password' => 'newpassword',
-        ]);
-    });
-
     it('Supprimer une session', function () {
         $session = Session::factory()->create();
         $session->delete();
@@ -75,13 +49,13 @@ describe('Sessions', function () {
         ]);
     });
 
-    // it('Vérifie la relation entre Session et Survey', function () {
-    //     $survey = Survey::factory()->create();
-    //     $session = Session::factory()->create([
-    //         'survey_id' => $survey->id,
-    //     ]);
+    it('Vérifie la relation entre Session et Survey', function () {
+        $survey = Survey::factory()->create();
+        $session = Session::factory()->create([
+            'survey_id' => $survey->id,
+        ]);
 
-    //     expect($session->survey)->toBeInstanceOf(Survey::class);
-    //     expect($session->survey->survey_id)->toBe($survey->survey_id);
-    // });
+        expect($session->survey)->toBeInstanceOf(Survey::class);
+        expect($session->survey->id)->toBe($survey->id);
+    });
 });

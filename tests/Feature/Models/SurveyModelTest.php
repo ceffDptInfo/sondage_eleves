@@ -84,13 +84,13 @@ describe('Surveys', function () {
         ]);
     });
 
-    // it('Vérifie la relation entre Survey et User', function () {
-    //     $user = User::factory()->create();
-    //     $survey = Survey::factory()->create([
-    //         'user_id' => $user->id,
-    //     ]);
+    it('Vérifie la relation entre Survey et User', function () {
+        $user = User::factory()->create();
+        $survey = Survey::factory()->create([
+            'user_id' => $user->id,
+        ]);
 
-    //     expect($survey->user)->toBeInstanceOf(User::class);
-    //     expect($survey->user->id)->toBe($user->id);
-    // });
+        expect($survey->user)->toBeInstanceOf(User::class);
+        expect($survey->user->id)->toBe($user->id);
+    });
 });

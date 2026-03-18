@@ -24,4 +24,9 @@ class Session extends Model
     {
         return $this->hasMany(Remark::class);
     }
+
+    public function survey()
+    {
+        return $this->belongsTo(Survey::class);
+    }
 }

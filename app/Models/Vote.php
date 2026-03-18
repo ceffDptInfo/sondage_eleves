@@ -17,8 +17,8 @@ class Vote extends Model
         'remark_id',
     ];
 
-    // public function remark()
-    // {
-    //     return $this->belongsTo(Remark::class, 'remark_id');
-    // }
+    public function remark()
+    {
+        return $this->belongsTo(Remark::class, 'remark_id');
+    }
 }

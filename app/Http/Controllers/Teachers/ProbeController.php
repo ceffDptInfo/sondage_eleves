@@ -114,6 +114,8 @@ class ProbeController extends Controller
 
         $this->saveArchive($dataArchive);
 
+        $session->delete();
+
         return $pdf->stream($filename);
     }
 

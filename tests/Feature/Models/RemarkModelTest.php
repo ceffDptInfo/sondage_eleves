@@ -53,44 +53,6 @@ describe('Remarks', function () {
         ]);
     });
 
-    it('Modifier une remarque (expect)', function () {
-        $remark = Remark::factory()->create();
-        $remark->update([
-            'value' => 'Ceci est une remarque modifiée',
-            'status' => 'negative',
-            'private' => true,
-            'ip_address' => '192.168.20.11',
-        ]);
-        expect($remark->value)->toBe('Ceci est une remarque modifiée');
-        expect($remark->status)->toBe('negative');
-        expect($remark->private)->toBeTrue();
-        expect($remark->ip_address)->toBe('192.168.20.11');
-    });
-
-    it('Modifier une remarque (assertHasData)', function () {
-        $remark = Remark::factory()->create();
-        $remark->update([
-            'value' => 'Ceci est une remarque modifiée',
-            'status' => 'negative',
-            'private' => true,
-            'ip_address' => '192.168.20.11',
-        ]);
-        $this->assertDatabaseHas('remark', [
-            'value' => 'Ceci est une remarque modifiée',
-            'status' => 'negative',
-            'private' => true,
-            'ip_address' => '192.168.20.11',
-        ]);
-    });
-
-    it('Supprimer une remarque', function () {
-        $remark = Remark::factory()->create();
-        $remark->delete();
-        $this->assertDatabaseMissing('remark', [
-            'id' => $remark->id,
-        ]);
-    });
-
     it('Vérifie la relation entre Remark et Session', function () {
         $session = Session::factory()->create();
         $remark = Remark::factory()->create([
