@@ -12,10 +12,7 @@ class HomeController extends Controller
     {
         $messages = [
             'code.required' => 'Le code de session est requis.',
-            'code.integer' => 'Le code de session doit être un nombre entier.',
             'password.required' => 'Le mot de passe est requis.',
-            'password.string' => 'Le mot de passe doit être une chaîne de caractères.',
-            'password.max' => 'Le mot de passe ne doit pas dépasser 255 caractères.',
         ];
         
         $validatedData = $request->validate([

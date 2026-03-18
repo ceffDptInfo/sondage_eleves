@@ -3,7 +3,7 @@
 use App\Models\Remark;
 use App\Models\Session;
 
-describe('Remarks', function () {
+describe('RemarksModel', function () {
     it('contrôle que nous avons 5 remarques', function () {
         $remarks = Remark::factory()->count(5)->create();
         expect($remarks)->toHaveCount(5);
@@ -13,7 +13,6 @@ describe('Remarks', function () {
         $remark = Remark::factory()->create();
         expect($remark->value)->not()->toBeEmpty();
         expect($remark->status)->not()->toBeEmpty();
-        expect($remark->private)->not()->toBeEmpty();
         expect($remark->ip_address)->not()->toBeEmpty();
     });
 

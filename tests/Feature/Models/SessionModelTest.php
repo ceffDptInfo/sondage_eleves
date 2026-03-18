@@ -3,7 +3,7 @@
 use App\Models\Session;
 use App\Models\Survey;
 
-describe('Sessions', function () {
+describe('SessionsModel', function () {
     it('contrôle que nous avons 5 sessions', function () {
         $sessions = Session::factory()->count(5)->create();
         expect($sessions)->toHaveCount(5);

@@ -39,7 +39,7 @@ function negativeVote() {
 </script>
 <template>
     <div class="flex items-center mb-4 space-x-4 border-b pb-2">
-        <span :class="[props.remark.status === 'positive' ? 'text-green-500' : 'text-red-500', 'text-2xl']">{{
+        <span :class="[props.remark.status === 'positive' ? 'text-green-500' : 'text-red-500', 'text-2xl overflow-auto']">{{
             props.remark.value }}</span>
         <button @click="positiveVote" v-if="props.remark.ip_address !== props.ip"
             :class="[props.vote?.type === 'like' ? 'bg-green-400' : 'bg-green-200', 'rounded-full h-8 w-8']">

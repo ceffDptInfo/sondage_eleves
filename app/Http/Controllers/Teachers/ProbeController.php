@@ -47,7 +47,7 @@ class ProbeController extends Controller
 
         $session = Session::create($validatedData);
 
-        return response()->json(['message' => 'Sondage configuré avec succès', 'session' => $session]);
+        return response()->json(['message' => 'Session créée avec succès', 'session' => $session], 201);
     }
 
     public function getById($id)
@@ -69,7 +69,7 @@ class ProbeController extends Controller
     public function getResults($id)
     {
         $session = Session::findOrFail($id);
-        $remarks = $session->remarks()->with('votes')->get();
+        $remarks = $session->remarks()->with('votes')->get();   
 
         return response()->json($remarks);
     }

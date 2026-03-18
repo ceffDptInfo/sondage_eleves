@@ -3,7 +3,7 @@
 use App\Models\Remark;
 use App\Models\Vote;
 
-describe('Votes', function () {
+describe('VotesModel', function () {
     it('contrôle que nous avons 5 votes', function () {
         $votes = Vote::factory()->count(5)->create();
         expect($votes)->toHaveCount(5);

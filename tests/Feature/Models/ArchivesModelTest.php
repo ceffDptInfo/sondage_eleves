@@ -2,7 +2,7 @@
 
 use App\Models\Archives;
 
-describe('Archives', function () {
+describe('ArchivesModel', function () {
     it('contrôle que les archives ont un nom de fichier et une date d\'ajout', function () {
         $archive = Archives::factory()->create();
         expect($archive->file_name)->not()->toBeEmpty();

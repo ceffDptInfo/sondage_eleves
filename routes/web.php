@@ -51,7 +51,7 @@ Route::get('teachers/archives', function () {
 
 // GET
 Route::get('teachers/surveys', [HomeController::class, 'getByTeacher'])->middleware(['auth', 'verified'])->name('survey.get');
-Route::get('teachers/survey/{id}', [ProbeController::class, 'getSurveyById'])->middleware(['auth', 'verified'])->name('survey.get');
+Route::get('teachers/survey/{id}', [ProbeController::class, 'getSurveyById'])->middleware(['auth', 'verified'])->name('survey.get.by_id');
 Route::get('teachers/probe/session/{id}', [ProbeController::class, 'getById'])->middleware(['auth', 'verified'])->name('probe.session.get');
 Route::get('teachers/probe/session/{id}/results', [ProbeController::class, 'getResults'])->middleware(['auth', 'verified'])->name('probe.session.results');
 Route::get('teachers/probe/session/{id}/results/close', [ProbeController::class, 'closeSession'])->middleware(['auth', 'verified'])->name('probe.session.generatePdf');

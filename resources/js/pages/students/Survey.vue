@@ -77,16 +77,18 @@ function submitForm() {
 <template>
 
     <Head title="Sondage" />
-    <AppLayout>
+    <AppLayout class="overflow-hidden">
         <div>
-            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace élèves - Sondage {{ props.code }}
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace élèves - Sondage {{
+                props.code }}
             </h2>
             <p class="text-gray-500 mt-1">Entrez les informations de connexion.</p>
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
-
-        <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress"
-            :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0]" />
+        <div class="min-h">
+            <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress"
+                :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0]" />
+        </div>
 
         <div class="fixed bottom-0 left-0 right-0 h-16 px-4 flex items-center bg-white">
             <form @submit.prevent="submitForm" class="w-full max-w-7xl mx-auto border-t pt-4 mb-8 border-gray-200">

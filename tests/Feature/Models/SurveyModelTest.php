@@ -3,7 +3,7 @@
 use App\Models\Survey;
 use App\Models\User;
 
-describe('Surveys', function () {
+describe('SurveysModel', function () {
     it('contrôle que nous avons 5 surveys', function () {
         $surveys = Survey::factory()->count(5)->create();
         expect($surveys)->toHaveCount(5);

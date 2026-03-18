@@ -7,7 +7,7 @@ use function Pest\Laravel\assertDatabaseCount;
 
 pest()->use(RefreshDatabase::class);
 
-describe('Users', function () {
+describe('UsersModel', function () {
     it('contrôle que nous avons 5 users', function () {
         $users = User::factory()->count(5)->create();
         expect($users)->toHaveCount(5);
