@@ -9,7 +9,7 @@ const likes = props.remark.votes.filter(vote => vote.type === 'like').length;
 const dislikes = props.remark.votes.filter(vote => vote.type === 'dislike').length;
 </script>
 <template>
-    <div class="bg-white border-l-4 rounded-2xl p-5 shadow-sm flex items-center gap-6 hover:border-gray-200 transition-all" :class="props.remark.status === 'positive' ? 'border-green-500' : 'border-red-500'">
+    <div class="bg-white border-l-4 rounded-2xl p-5 shadow-sm flex items-center gap-6" :class="props.remark.status === 'positive' ? 'border-green-500' : 'border-red-500'">
         <div class="flex-1">
             <h3 class="'text-lg font-bold leading-tight'">
                 {{ props.remark.value }}

@@ -35,7 +35,6 @@ onMounted(() => {
                         <th class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap hidden md:table-cell">Nom du
                             fichier</th>
                         <th class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap">Date de l'ajout</th>
-                        <th class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap">Enseignant</th>
                         <th class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap">Sondage</th>
                         <th class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap hidden md:table-cell">
                             Question</th>

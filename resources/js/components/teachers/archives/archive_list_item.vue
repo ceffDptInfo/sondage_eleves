@@ -20,8 +20,7 @@ function downloadPdf() {
 <template>
     <tr class="hover:bg-amber-50/50 transition-colors duration-200">
         <td class="px-6 py-4 font-medium text-gray-900 hidden md:table-cell">{{ archive.file_name || '-' }}</td>
-        <td class="px-6 py-4 text-gray-600 whitespace-nowrap">{{ archive.adding_date || '-' }}</td>
-        <td class="px-6 py-4 text-gray-600">{{ archive.teacher_name || '-' }}</td>
+        <td class="px-6 py-4 text-gray-600">{{ archive.adding_date || '-' }}</td>
         <td class="px-6 py-4 text-gray-600">{{ archive.survey_name || '-' }}</td>
         <td class="px-6 py-4 text-gray-600 hidden md:table-cell">{{ archive.survey_question || '-' }}</td>
         <td class="px-6 py-4 text-gray-600">{{ archive.session_class || '-' }}</td>
