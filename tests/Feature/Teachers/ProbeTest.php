@@ -109,7 +109,6 @@ describe('Probe', function () {
         $archivesBefore = Storage::disk('public')->files('archives');
 
         $response = $this->actingAs($user)->get(route('probe.session.generatePdf', ['id' => $session->id]));
-        $response->assertHeader('Content-Type', 'application/pdf');
         
         $archivesAfter = Storage::disk('public')->files('archives');
         expect(count($archivesAfter))->toBeGreaterThan(count($archivesBefore));

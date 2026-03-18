@@ -116,7 +116,7 @@ class ProbeController extends Controller
 
         $session->delete();
 
-        return $pdf->stream($filename);
+        return response()->json(['message' => 'Session clôturée et archivée avec succès', 'archive' => $dataArchive]);
     }
 
     public function generatePdf($data)
