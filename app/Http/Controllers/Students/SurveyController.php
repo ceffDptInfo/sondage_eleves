@@ -18,13 +18,13 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Session non trouvée'], 404);
         }
 
-        if ($request->session()->get('student_session_code') !== $code) {
+        if ($request->session()->get('student_session_code') != $code) {
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
         $remarks = $session->remarks()->orderBy('created_at', 'desc')->get();
 
-        return response()->json(['remarks' => $remarks]);
+        return response()->json(['remarks' => $remarks], 200);
     }
 
     public function postRemark(Request $request, $code)
@@ -35,7 +35,7 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Session non trouvée'], 404);
         }
 
-        if ($request->session()->get('student_session_code') !== $code) {
+        if ($request->session()->get('student_session_code') != $code) {
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
@@ -64,7 +64,7 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Session non trouvée'], 404);
         }
 
-        if ($request->session()->get('student_session_code') !== $code) {
+        if ($request->session()->get('student_session_code') != $code) {
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
@@ -106,7 +106,7 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Session non trouvée'], 404);
         }
 
-        if ($request->session()->get('student_session_code') !== $code) {
+        if ($request->session()->get('student_session_code') != $code) {
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 

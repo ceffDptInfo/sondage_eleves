@@ -27,6 +27,7 @@ onMounted(() => {
     setInterval(() => {
         axios.get(`/students/survey/${props.code}/remarks`)
             .then(response => {
+                alert(JSON.stringify(response.data.remarks));
                 remarks.value = (response.data.remarks).filter(remark => !remark.private || remark.ip_address == ipAddress);
             })
             .catch(error => {

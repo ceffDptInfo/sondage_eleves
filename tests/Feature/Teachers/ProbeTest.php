@@ -6,12 +6,14 @@ use App\Models\Session;
 use App\Models\Survey;
 use App\Models\Remark;
 
-describe('Probe', function () {
-    it('contrôle la création d\'une session', function () {
-        $user = User::factory()->create();
-        Survey::factory()->create(['id' => 1, 'user_id' => $user->id]);
+describe('Teachers.Probe', function () {
+    beforeeach(function () {
+        $this->user = User::factory()->create();
+        $this->survey = Survey::factory()->create(['id' => 1, 'user_id' => $this->user->id]);
+    });
 
-        $response = $this->actingAs($user)->post(route('probe.session.store'), [
+    it('contrôle la création d\'une session', function () {
+        $response = $this->actingAs($this->user)->post(route('probe.session.store'), [
             'status' => 'active',
             'class' => 'Classe de test',
             'remark' => 'Remarque de test',
@@ -25,8 +27,6 @@ describe('Probe', function () {
     });
 
     it('contrôle la récupération de session via l\'id', function () {
-        $user = User::factory()->create();
-        Survey::factory()->create(['id' => 1, 'user_id' => $user->id]);
         $session = Session::factory()->create([
             'id' => 1,
             'status' => 'active',
@@ -37,7 +37,7 @@ describe('Probe', function () {
             'survey_id' => 1,
         ]);
 
-        $response = $this->actingAs($user)->get(route('probe.session.get', ['id' => $session->id]));
+        $response = $this->actingAs($this->user)->get(route('probe.session.get', ['id' => $session->id]));
         $response ->assertJson([
             'id' => $session->id,
             'status' => $session->status,
@@ -52,14 +52,12 @@ describe('Probe', function () {
     });
 
     it('contrôle la fermeture d\'une session', function () {
-        $user = User::factory()->create();
-        Survey::factory()->create(['id' => 1, 'user_id' => $user->id]);
         $session = Session::factory()->create([
             'id' => 1,
             'survey_id' => 1,
         ]);
 
-        $response = $this->actingAs($user)->patch(route('probe.session.complete', ['id' => $session->id]));
+        $response = $this->actingAs($this->user)->patch(route('probe.session.complete', ['id' => $session->id]));
 
         $session->refresh();
         expect($session->status)->toBe('completed');
@@ -68,8 +66,6 @@ describe('Probe', function () {
     });
 
     it('contrôle la récupération des résultats d\'une session', function () {
-        $user = User::factory()->create();
-        Survey::factory()->create(['id' => 1, 'user_id' => $user->id]);
         $session = Session::factory()->create([
             'id' => 1,
             'survey_id' => 1,
@@ -77,28 +73,23 @@ describe('Probe', function () {
 
         Remark::factory(10)->create(['session_id' => $session->id]);
 
-        $response = $this->actingAs($user)->get(route('probe.session.results', ['id' => $session->id]));
+        $response = $this->actingAs($this->user)->get(route('probe.session.results', ['id' => $session->id]));
         $response->assertJsonCount(10);
 
         $response->assertStatus(200);
     });
 
     it('contrôle la récupération d\'un sondage via l\'id', function () {
-        $user = User::factory()->create();
-        Survey::factory()->create(['id' => 1, 'user_id' => $user->id]);
-
-        $response = $this->actingAs($user)->get(route('survey.get.by_id', ['id' => 1]));
+        $response = $this->actingAs($this->user)->get(route('survey.get.by_id', ['id' => 1]));
         $response->assertJson([
             'id' => 1,
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
         ]);
 
         $response->assertStatus(200);
     });
 
     it('contrôle la fermeture d\'une session et la génération du PDF', function () {
-        $user = User::factory()->create();
-        Survey::factory()->create(['id' => 1, 'user_id' => $user->id]);
         $session = Session::factory()->create([
             'id' => 1,
             'survey_id' => 1,
@@ -108,7 +99,7 @@ describe('Probe', function () {
 
         $archivesBefore = Storage::disk('public')->files('archives');
 
-        $response = $this->actingAs($user)->get(route('probe.session.generatePdf', ['id' => $session->id]));
+        $response = $this->actingAs($this->user)->get(route('probe.session.generatePdf', ['id' => $session->id]));
         
         $archivesAfter = Storage::disk('public')->files('archives');
         expect(count($archivesAfter))->toBeGreaterThan(count($archivesBefore));
@@ -117,7 +108,7 @@ describe('Probe', function () {
 
         expect($archive->file_name)->toContain('archive_');
         expect($archive->file_name)->toContain('.pdf');
-        expect($archive->teacher_name)->toBe($user->name);
+        expect($archive->teacher_name)->toBe($this->user->name);
         expect($archive->survey_name)->toBe($session->survey->name);
         expect($archive->survey_description)->toBe($session->survey->description);
         expect($archive->survey_question)->toBe($session->survey->question);

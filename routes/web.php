@@ -84,7 +84,7 @@ Route::get('students/session/{code}', [StudentsSurveyController::class, 'getSess
 // POST
 Route::post('students/connection', [StudentsHomeController::class, 'connection'])->name('students.connection');
 Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->name('students.post_remark');
-Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'postVote'])->name('students.vote');
+Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'postVote'])->name('students.post_vote');
 
 // ----------------------------------------------------------------------
 

@@ -3,7 +3,7 @@
 use App\Models\User;
 use App\Models\Survey;
 
-describe('Home', function () {
+describe('Teachers.Home', function () {
     it('contrôle la récupération des sondages', function () {
         $user = User::factory()->create();
         Survey::factory()->create([

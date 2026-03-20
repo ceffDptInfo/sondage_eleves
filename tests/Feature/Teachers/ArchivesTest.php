@@ -3,7 +3,7 @@
 use App\Models\Archives;
 use App\Models\User;
 
-describe('Archives', function () {
+describe('Teachers.Archives', function () {
     it('contrôle le listing des archives', function () {
         $user = User::factory()->create();
         Archives::factory()->create([

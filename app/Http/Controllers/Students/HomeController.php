@@ -40,6 +40,6 @@ class HomeController extends Controller
         $request->session()->save();
         $request->session()->regenerate();
 
-        return response()->json(['message' => 'Connexion réussie', 'session' => $session]);
+        return response()->json(['message' => 'Connexion réussie', 'session' => $session], 200);
     }
 }
