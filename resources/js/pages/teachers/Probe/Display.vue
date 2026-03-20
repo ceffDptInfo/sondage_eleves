@@ -67,8 +67,8 @@ function end() {
                 </div>
             </div>
 
-            <div class="my-auto mt-24 -translate-y-8 ">
-                <div class="lg:col-span-2 md:space-y-6 grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-6">
+            <div class="my-auto mt-24 -translate-y-16">
+                <div class="md:space-y-6 grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                         <label class="text-xs font-bold text-gray-400 uppercase">Question posée</label>
                         <p class="text-2xl text-gray-800 mt-1">{{ survey?.question || 'Chargement...' }}</p>
@@ -77,6 +77,17 @@ function end() {
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                         <label class="text-xs font-bold text-gray-400 uppercase">Sondage</label>
                         <p class="text-2xl text-gray-600 mt-1">{{ survey?.name }}</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-6 mt-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <label class="text-xs font-bold text-gray-400 uppercase">Classe</label>
+                        <p class="text-lg text-gray-800 mt-1">{{ session?.class || 'Chargement...' }}</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <label class="text-xs font-bold text-gray-400 uppercase">Remarque</label>
+                        <p class="text-lg text-gray-600 mt-1">{{ session?.remark || 'Chargement...' }}</p>
                     </div>
                 </div>
 

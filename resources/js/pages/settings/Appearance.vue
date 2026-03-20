@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import AppearanceTabs from '@/components/AppearanceTabs.vue';
-import Heading from '@/components/Heading.vue';
+import AppearanceTabs from '@/components/base/AppearanceTabs.vue';
+import Heading from '@/components/base/Heading.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { edit } from '@/routes/appearance';
+// import { edit } from '@/routes/appearance';
 
-const breadcrumbItems: BreadcrumbItem[] = [
-    {
-        title: 'Appearance settings',
-        href: edit().url,
-    },
-];
+// const breadcrumbItems: BreadcrumbItem[] = [
+//     {
+//         title: 'Appearance settings',
+//         href: edit().url,
+//     },
+// ];
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbItems">
+    <!-- <AppLayout :breadcrumbs="breadcrumbItems"> -->
+    <AppLayout>
         <Head title="Appearance settings" />
 
         <h1 class="sr-only">Appearance Settings</h1>

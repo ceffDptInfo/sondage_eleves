@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import Heading from '@/components/Heading.vue';
-import InputError from '@/components/InputError.vue';
+import Heading from '@/components/base/Heading.vue';
+import InputError from '@/components/base/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
-import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
-import { edit } from '@/routes/user-password';
+import PasswordController from '@/actions/App/Http/Controllers/Auth/PasswordController';
+// import { edit } from '@/routes/user-password';
 
-const breadcrumbItems: BreadcrumbItem[] = [
-    {
-        title: 'Password settings',
-        href: edit().url,
-    },
-];
+// const breadcrumbItems: BreadcrumbItem[] = [
+//     {
+//         title: 'Password settings',
+//         href: edit().url,
+//     },
+// ];
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbItems">
+    <!-- <AppLayout :breadcrumbs="breadcrumbItems"> -->
+    <AppLayout>
         <Head title="Password settings" />
 
         <h1 class="sr-only">Password Settings</h1>
