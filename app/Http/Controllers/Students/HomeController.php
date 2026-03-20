@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function connection(Request $request)
+    public function connection(Request $request, $code = null, $password = null)
     {
+        if ($code && $password) {
+            $request->merge(['code' => $code, 'password' => $password]);
+        }
         $messages = [
             'code.required' => 'Le code de session est requis.',
             'password.required' => 'Le mot de passe est requis.',
         ];
-        
+
         $validatedData = $request->validate([
             'code' => 'required|integer',
             'password' => 'required|string|max:255',
@@ -26,7 +29,7 @@ class HomeController extends Controller
             return response()->json(['message' => 'Session non trouvée.'], 404);
         }
 
-        if($session->status === 'completed') {
+        if ($session->status === 'completed') {
             return response()->json(['message' => 'Cette session est terminée.'], 403);
         }
 
@@ -40,6 +43,6 @@ class HomeController extends Controller
         $request->session()->save();
         $request->session()->regenerate();
 
-        return response()->json(['message' => 'Connexion réussie', 'session' => $session], 200);
+        return redirect()->route('students.access_survey', ['code' => $validatedData['code']]);
     }
 }

@@ -12,6 +12,7 @@ const session = ref(null);
 const survey = ref(null);
 const timeSeconds = ref(0);
 const timer = ref(new Date(0).toISOString().substr(14, 5));
+const filepath = '/qrcode/session_' + props.sessionId + '.png';
 
 onMounted(() => {
     axios.get(`/teachers/probe/session/${props.sessionId}`)
@@ -54,71 +55,75 @@ function end() {
 
     <Head title="Session en cours" />
     <AppLayout>
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant -
-                        Sonder
-                    </h2>
-                    <p class="text-gray-500 mt-1">Diffusez les informations ci-dessous à vos élèves.</p>
-                    <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace enseignant -
+                    Sonder
+                </h2>
+                <p class="text-gray-500 mt-1">Diffusez les informations ci-dessous à vos élèves.</p>
+                <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
+            </div>
+            <div class="flex items-center bg-amber-50 border border-amber-200 px-4 py-2 rounded-full">
+                <span class="text-amber-700 font-semibold uppercase text-sm">Temps : {{ timer }}</span>
+            </div>
+        </div>
+
+        <div>
+            <img :src="`${filepath}`" alt="QR Code de la session" class="w-48 h-48 object-contain mx-auto">
+        </div>
+
+        <div class="my-auto mt-24 -translate-y-16">
+            <div class="md:space-y-6 grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <label class="text-xs font-bold text-gray-400 uppercase">Question posée</label>
+                    <p class="text-2xl text-gray-800 mt-1">{{ survey?.question || 'Chargement...' }}</p>
                 </div>
-                <div class="flex items-center bg-amber-50 border border-amber-200 px-4 py-2 rounded-full">
-                    <span class="text-amber-700 font-semibold uppercase text-sm">Temps : {{ timer }}</span>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <label class="text-xs font-bold text-gray-400 uppercase">Sondage</label>
+                    <p class="text-2xl text-gray-600 mt-1">{{ survey?.name }}</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-6 mt-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <label class="text-xs font-bold text-gray-400 uppercase">Classe</label>
+                    <p class="text-lg text-gray-800 mt-1">{{ session?.class || 'Chargement...' }}</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <label class="text-xs font-bold text-gray-400 uppercase">Remarque</label>
+                    <p class="text-lg text-gray-600 mt-1">{{ session?.remark || 'Chargement...' }}</p>
                 </div>
             </div>
 
-            <div class="my-auto mt-24 -translate-y-16">
-                <div class="md:space-y-6 grid grid-cols-2 md:grid-cols-1 md:gap-0 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <label class="text-xs font-bold text-gray-400 uppercase">Question posée</label>
-                        <p class="text-2xl text-gray-800 mt-1">{{ survey?.question || 'Chargement...' }}</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <label class="text-xs font-bold text-gray-400 uppercase">Sondage</label>
-                        <p class="text-2xl text-gray-600 mt-1">{{ survey?.name }}</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-6 mt-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <label class="text-xs font-bold text-gray-400 uppercase">Classe</label>
-                        <p class="text-lg text-gray-800 mt-1">{{ session?.class || 'Chargement...' }}</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <label class="text-xs font-bold text-gray-400 uppercase">Remarque</label>
-                        <p class="text-lg text-gray-600 mt-1">{{ session?.remark || 'Chargement...' }}</p>
-                    </div>
+            <div class="mt-10 gap-6 grid grid-cols-2">
+                <div class="p-6 rounded-xl shadow-lg text-white">
+                    <label class="text-xs font-bold text-amber-600 uppercase">Code d'accès</label>
+                    <p class="text-3xl md:text-5xl font-mono font-black text-amber-500 mt-2 text-center">
+                        {{ session?.code }}
+                    </p>
                 </div>
 
-                <div class="mt-10 gap-6 grid grid-cols-2">
-                    <div class="p-6 rounded-xl shadow-lg text-white">
-                        <label class="text-xs font-bold text-amber-600 uppercase">Code d'accès</label>
-                        <p class="text-3xl md:text-5xl font-mono font-black text-amber-500 mt-2 text-center">
-                            {{ session?.code }}
-                        </p>
-                    </div>
-
-                    <div class="p-6 rounded-xl shadow-lg bg-amber-500">
-                        <label class="text-xs font-bold text-white uppercase">Mot de passe</label>
-                        <p class="text-3xl md:text-5xl font-mono font-black text-white mt-2 text-center">
-                            {{ session?.password }}
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="mt-12 flex justify-center">
-                    <button @click="end"
-                        class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg hover:shadow-red-200 active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        Terminer le sondage
-                    </button>
+                <div class="p-6 rounded-xl shadow-lg bg-amber-500">
+                    <label class="text-xs font-bold text-white uppercase">Mot de passe</label>
+                    <p class="text-3xl md:text-5xl font-mono font-black text-white mt-2 text-center">
+                        {{ session?.password }}
+                    </p>
                 </div>
             </div>
+
+
+            <div class="mt-12 flex justify-center">
+                <button @click="end"
+                    class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg hover:shadow-red-200 active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Terminer le sondage
+                </button>
+            </div>
+        </div>
     </AppLayout>
 </template>

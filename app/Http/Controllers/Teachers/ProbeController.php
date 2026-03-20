@@ -8,6 +8,7 @@ use App\Models\Session;
 use App\Models\Survey;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use HeroQR\Core\QRCodeGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,6 +48,13 @@ class ProbeController extends Controller
 
         $session = Session::create($validatedData);
 
+        $qrCodeManager = new QRCodeGenerator;
+        $qrCode = $qrCodeManager
+            ->setData(route('students.connection.get', ['code' => $session->code, 'password' => $session->password]))
+            ->generate();
+
+        $qrCode->saveTo('qrcode/session_'.$session->id); 
+
         return response()->json(['message' => 'Session créée avec succès', 'session' => $session], 201);
     }
 
@@ -63,13 +71,15 @@ class ProbeController extends Controller
         $session->status = 'completed';
         $session->save();
 
+        Storage::disk('public')->delete('qrcode/session_'.$session->id.'.png');
+
         return response()->json(['message' => 'Sondage terminé avec succès', 'session' => $session]);
     }
 
     public function getResults($id)
     {
         $session = Session::findOrFail($id);
-        $remarks = $session->remarks()->with('votes')->get();   
+        $remarks = $session->remarks()->with('votes')->get();
 
         return response()->json($remarks);
     }
@@ -96,8 +106,8 @@ class ProbeController extends Controller
         ];
 
         $pdf = $this->generatePdf($dataPdf);
-        $filename = 'archive_' . time() . '.pdf';
-        $path = 'archives/' . $filename;
+        $filename = 'archive_'.time().'.pdf';
+        $path = 'archives/'.$filename;
         Storage::disk('public')->put($path, $pdf->output());
 
         $dataArchive = [
@@ -122,6 +132,7 @@ class ProbeController extends Controller
     public function generatePdf($data)
     {
         $pdf = Pdf::loadView('result_survey_pdf', $data);
+
         return $pdf;
     }
 
