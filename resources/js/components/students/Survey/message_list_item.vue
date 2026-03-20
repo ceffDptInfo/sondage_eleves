@@ -40,7 +40,7 @@ function negativeVote() {
 }
 </script>
 <template>
-    <div class="group flex items-center justify-between bg-white p-4 mb-3 rounded-xl shadow-sm border-l-4 transition-all hover:shadow-md"
+    <div class="group flex items-center justify-between bg-white p-4 mb-3 rounded-xl shadow-sm border-l-4 transition-all"
         :class="props.remark.status === 'positive' ? 'border-green-500' : 'border-red-500'">
         
         <div class="flex items-center gap-3 overflow-hidden">
@@ -53,7 +53,7 @@ function negativeVote() {
             </span>
         </div>
 
-        <div class="flex items-center gap-2 shrink-0 ml-4">
+        <div class="flex items-center gap-2 ml-4">
             <template v-if="props.remark.ip_address !== props.ip">
                 <button @click="positiveVote" 
                     :class="[props.vote?.type === 'like' ? 'bg-green-500 scale-110' : 'bg-gray-100 hover:bg-green-100', 'p-2 rounded-lg transition-all active:scale-95']">

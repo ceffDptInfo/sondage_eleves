@@ -77,21 +77,22 @@ function submitForm() {
 <template>
 
     <Head title="Sondage" />
-    <AppLayout class="overflow-hidden">
-        <div>
-            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Espace élèves - Sondage {{
-                props.code }}
+    <AppLayout class="h-screen overflow-hidden flex flex-col">
+        <div class="p-6 bg-white flex flex-col">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
+                Espace élèves - Sondage {{ props.code }}
             </h2>
             <p class="text-gray-500 mt-1">Entrez les informations de connexion.</p>
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
-        <div class="min-h">
-            <MessageListItem class="mt-4" v-for="remark in remarks" :remark="remark" :ip="ipAddress"
+        <div class="flex-1 overflow-y-auto px-6 pb-52 mb-4">
+            <MessageListItem v-for="remark in remarks" :remark="remark" :ip="ipAddress"
                 :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0]" />
         </div>
 
-        <div class="fixed bottom-0 left-0 right-0 h-16 px-4 flex items-center bg-white">
-            <form @submit.prevent="submitForm" class="w-full max-w-7xl mx-auto border-t pt-4 mb-8 border-gray-200">
+         <div class="flex fixed bottom-0 left-0 right-0 h-16 items-center bg-white">
+            <form @submit.prevent="submitForm"
+                class="w-full max-w-7xl mx-auto border-t pt-4 mb-8 px-6 border-gray-200 bg-white">
                 <div class="flex flex-wrap items-center gap-3 mb-8">
 
                     <div class="flex-grow min-w-[280px]">
