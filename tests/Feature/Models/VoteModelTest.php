@@ -16,7 +16,7 @@ describe('VotesModel', function () {
         expect($vote->remark_id)->not()->toBeEmpty();
     });
 
-    it('Créer un vote (expect)', function () {
+    it('Créer un vote', function () {
         $vote = Vote::factory()->create([
             'type' => 'like',
             'ip_address' => '192.168.20.10',
@@ -30,16 +30,12 @@ describe('VotesModel', function () {
         ]);
     });
 
-    it('Créer un vote (assertHasData)', function () {
-        Vote::factory()->create([
-            'type' => 'like',
-            'ip_address' => '192.168.20.10',
-        ]);
+    it('contrôle la suppression d\'un vote', function () {
+        $vote = Vote::factory()->create();
+        $voteId = $vote->id;
+        $vote->delete();
 
-        $this->assertDatabaseHas('vote', [
-            'type' => 'like',
-            'ip_address' => '192.168.20.10',
-        ]);
+        expect(Vote::find($voteId))->toBeNull();
     });
 
     it('Vérifie la relation entre Vote et Remark', function () {

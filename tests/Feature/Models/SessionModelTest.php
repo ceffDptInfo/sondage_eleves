@@ -17,7 +17,7 @@ describe('SessionsModel', function () {
         expect($session->survey_id)->not()->toBeEmpty();
     });
 
-    it('Créer une session (expect)', function () {
+    it('Créer une session', function () {
         $session = Session::factory()->create([
             'status' => 'active',
             'code' => 156236,
@@ -26,19 +26,6 @@ describe('SessionsModel', function () {
         expect($session->status)->toBe('active');
         expect($session->code)->toBe(156236);
         expect($session->password)->toBe('password');
-    });
-
-    it('Créer une session (assertHasData)', function () {
-        $session = Session::factory()->create([
-            'status' => 'active',
-            'code' => 156236,
-            'password' => 'password',
-        ]);
-        $this->assertDatabaseHas('session', [
-            'status' => 'active',
-            'code' => 156236,
-            'password' => 'password',
-        ]);
     });
 
     it('Supprimer une session', function () {

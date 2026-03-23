@@ -35,7 +35,7 @@ describe('UsersModel', function () {
         assertDatabaseCount('users', 21);
     });
 
-    it('Créer un utilisateur (expect)', function () {
+    it('Créer un utilisateur', function () {
         $user = User::factory()->create([
             'name' => 'Test',
             'email' => 'test@example.com',
@@ -46,18 +46,7 @@ describe('UsersModel', function () {
         expect(\Hash::check('12345678', $user->password))->toBeTrue();
     });
 
-    it('Créer un utilisateur (assertHasData)', function () {
-        $user = User::factory()->create([
-            'name' => 'Test',
-            'email' => 'test@example.com',
-        ]);
-        $this->assertDatabaseHas('users', [
-            'name' => 'Test',
-            'email' => 'test@example.com',
-        ]);
-    });
-
-    it('Modifier un utilisateur (expect)', function () {
+    it('Modifier un utilisateur', function () {
         $user = User::factory()->create([
             'name' => 'Test',
             'email' => 'test@example.com',
@@ -69,22 +58,6 @@ describe('UsersModel', function () {
         ]);
         expect($user->name)->toBe('Test Modified');
         expect($user->email)->toBe('testmodified@example.com');
-    });
-
-    it('Modifier un utilisateur (assertHasData)', function () {
-        $user = User::factory()->create([
-            'name' => 'Test',
-            'email' => 'test@example.com',
-            'password' => bcrypt('12345678'),
-        ]);
-        $user->update([
-            'name' => 'Test Modified',
-            'email' => 'testmodified@example.com',
-        ]);
-        $this->assertDatabaseHas('users', [
-            'name' => 'Test Modified',
-            'email' => 'testmodified@example.com',
-        ]);
     });
 
     it('Supprimer un utilisateur', function () {

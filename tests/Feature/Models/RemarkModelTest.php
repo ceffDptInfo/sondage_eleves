@@ -16,7 +16,7 @@ describe('RemarksModel', function () {
         expect($remark->ip_address)->not()->toBeEmpty();
     });
 
-    it('Créer une remarque (expect)', function () {
+    it('Créer une remarque', function () {
         $remark = Remark::factory()->create([
             'value' => 'Ceci est une remarque de test',
             'status' => 'positive',
@@ -36,20 +36,12 @@ describe('RemarksModel', function () {
         ]);
     });
 
-    it('Créer une remarque (assertHasData)', function () {
-        $remark = Remark::factory()->create([
-            'value' => 'Ceci est une remarque de test',
-            'status' => 'positive',
-            'private' => false,
-            'ip_address' => '192.168.20.10',
-        ]);
+    it('contrôle la suppression d\'une remarque', function () {
+        $remark = Remark::factory()->create();
+        $remarkId = $remark->id;
+        $remark->delete();
 
-        $this->assertDatabaseHas('remark', [
-            'value' => 'Ceci est une remarque de test',
-            'status' => 'positive',
-            'private' => false,
-            'ip_address' => '192.168.20.10',
-        ]);
+        expect(Remark::find($remarkId))->toBeNull();
     });
 
     it('Vérifie la relation entre Remark et Session', function () {

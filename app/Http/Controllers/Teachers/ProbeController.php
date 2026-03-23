@@ -56,6 +56,10 @@ class ProbeController extends Controller
 
         $directory = public_path('qrcode');
 
+        if (!File::exists($directory)) {
+            File::makeDirectory($directory, 0755, true);
+        }
+
         $qrCode->saveTo($directory.'/session_'.$session->id); 
 
         return response()->json(['message' => 'Session créée avec succès', 'session' => $session], 201);

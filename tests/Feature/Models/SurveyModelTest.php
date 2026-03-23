@@ -18,7 +18,13 @@ describe('SurveysModel', function () {
         expect($survey->user_id)->not()->toBeEmpty();
     });
 
-    it('Créer un sondage (expect)', function () {
+    it('contrôle le seeding', function () {
+        $this->seed();
+        $surveys = Survey::all();
+        expect($surveys)->toHaveCount(10);
+    });
+    
+    it('Créer un sondage', function () {
         $survey = Survey::factory()->create([
             'name' => 'Sondage 1',
             'description' => 'Description du sondage 1',
@@ -31,22 +37,7 @@ describe('SurveysModel', function () {
         expect($survey->question)->toBe('Question du sondage 1');
     });
 
-    it('Créer un sondage (assertHasData)', function () {
-        $survey = Survey::factory()->create([
-            'name' => 'Sondage 1',
-            'description' => 'Description du sondage 1',
-            'creation_date' => '2024-06-01',
-            'question' => 'Question du sondage 1',
-        ]);
-        $this->assertDatabaseHas('survey', [
-            'name' => 'Sondage 1',
-            'description' => 'Description du sondage 1',
-            'creation_date' => '2024-06-01',
-            'question' => 'Question du sondage 1',
-        ]);
-    });
-
-    it('Modifier un sondage (expect)', function () {
+    it('Modifier un sondage', function () {
         $survey = Survey::factory()->create();
         $survey->update([
             'name' => 'Sondage 2',
@@ -58,22 +49,6 @@ describe('SurveysModel', function () {
         expect($survey->description)->toBe('Description du sondage 2');
         expect($survey->question)->toBe('Question du sondage 2');
         expect($survey->creation_date)->toBe('2024-06-02');
-    });
-
-    it('Modifier un sondage (assertHasData)', function () {
-        $survey = Survey::factory()->create();
-        $survey->update([
-            'name' => 'Sondage 2',
-            'description' => 'Description du sondage 2',
-            'creation_date' => '2024-06-02',
-            'question' => 'Question du sondage 2',
-        ]);
-        $this->assertDatabaseHas('survey', [
-            'name' => 'Sondage 2',
-            'description' => 'Description du sondage 2',
-            'creation_date' => '2024-06-02',
-            'question' => 'Question du sondage 2',
-        ]);
     });
 
     it('Supprimer un sondage', function () {

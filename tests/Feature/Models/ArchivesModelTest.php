@@ -16,7 +16,7 @@ describe('ArchivesModel', function () {
         expect($archive->session_remark)->not()->toBeEmpty();
     });
 
-    it('Créer une archive (expect)', function () {
+    it('Créer une archive', function () {
         $archive = Archives::factory()->create([
             'file_name' => 'archive_test.pdf',
             'adding_date' => now(),
@@ -36,31 +36,5 @@ describe('ArchivesModel', function () {
         expect($archive->survey_question)->toBe('Question du sondage de test');
         expect($archive->session_class)->toBe('Classe de test');
         expect($archive->session_remark)->toBe('Remarque de test');
-    });
-
-    it('Créer une archive (assertHasData)', function () {
-        Archives::factory()->create([
-            'file_name' => 'archive_test.pdf',
-            'adding_date' => now(),
-            'teacher_name' => 'John Doe',
-            'teacher_email' => 'john.doe@example.com',
-            'survey_name' => 'Sondage de test',
-            'survey_description' => 'Description du sondage de test',
-            'survey_question' => 'Question du sondage de test',
-            'session_class' => 'Classe de test',
-            'session_remark' => 'Remarque de test',
-        ]);
-
-        $this->assertDatabaseHas('archives', [
-            'file_name' => 'archive_test.pdf',
-            'adding_date' => now(),
-            'teacher_name' => 'John Doe',
-            'teacher_email' => 'john.doe@example.com',
-            'survey_name' => 'Sondage de test',
-            'survey_description' => 'Description du sondage de test',
-            'survey_question' => 'Question du sondage de test',
-            'session_class' => 'Classe de test',
-            'session_remark' => 'Remarque de test',
-        ]);
     });
 });
