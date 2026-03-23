@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Archives;
-use App\Models\User;
+use App\Models\Remark;
 use App\Models\Session;
 use App\Models\Survey;
-use App\Models\Remark;
+use App\Models\User;
 
 describe('Teachers.Probe', function () {
     beforeeach(function () {
@@ -19,7 +19,7 @@ describe('Teachers.Probe', function () {
             'remark' => 'Remarque de test',
             'code' => 123456,
             'password' => 'motdepasse',
-            'survey_id' => 1,
+            'survey_id' => $this->survey->id,
         ]
         );
 
@@ -38,7 +38,7 @@ describe('Teachers.Probe', function () {
         ]);
 
         $response = $this->actingAs($this->user)->get(route('probe.session.get', ['id' => $session->id]));
-        $response ->assertJson([
+        $response->assertJson([
             'id' => $session->id,
             'status' => $session->status,
             'class' => $session->class,
@@ -100,7 +100,7 @@ describe('Teachers.Probe', function () {
         $archivesBefore = Storage::disk('public')->files('archives');
 
         $response = $this->actingAs($this->user)->get(route('probe.session.generatePdf', ['id' => $session->id]));
-        
+
         $archivesAfter = Storage::disk('public')->files('archives');
         expect(count($archivesAfter))->toBeGreaterThan(count($archivesBefore));
 

@@ -19,14 +19,13 @@ describe('Students.Home', function () {
             'status' => 'active',
         ]);
 
-        $response = $this->actingAs($user)->post(route('students.connection'), [
+        $response = $this->actingAs($user)->post(route('students.connection.post'), [
             'code' => 123456,
             'password' => '1234',
         ]);
-        $response->assertStatus(200)->assertJson(['message' => 'Connexion réussie']);
-        $_SESSION = session()->all();
-        expect($_SESSION['student_session_code'])->toBe(123456);
-        expect($_SESSION['student_session_id'])->toBe(Session::where('code', 123456)->first()->id);
-        expect($_SESSION['student_authentificated'])->toBe('true');
+        $response->assertStatus(301);
+        expect(session()->get('student_session_code'))->toBe(123456);
+        expect(session()->get('student_session_id'))->toBe(Session::where('code', 123456)->first()->id);
+        expect(session()->get('student_authentificated'))->toBe('true');
     });
 });

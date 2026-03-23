@@ -18,7 +18,7 @@
 
         .title {
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: -0.5px;
@@ -127,14 +127,14 @@
         <tbody>
             @foreach ($remarks as $remark)
                 <tr>
-                    <td style="font-weight: 500">{{ $remark['value'] }}</td>
+                    <td style="font-weight: semibold">{{ $remark['value'] }}</td>
                     <td>{{ $remark['status'] }}</td>
                     <td>{{ $remark['private'] ? 'Privé' : 'Public' }}</td>
                     @if ($remark['private'] == false)
-                        <td style="text-align: center; color: #dc2626;">
-                            {{ collect($remark['votes'])->where('type', 'dislike')->count() }}</td>
                         <td style="text-align: center; color: #059669;">
                             {{ collect($remark['votes'])->where('type', 'like')->count() }}</td>
+                        <td style="text-align: center; color: #dc2626;">
+                            {{ collect($remark['votes'])->where('type', 'dislike')->count() }}</td>
                     @else
                         <td style="text-align: center">-</td>
                         <td style="text-align: center">-</td>
