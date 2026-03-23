@@ -100,7 +100,7 @@ function goHome() {
         </div>
 
         <div class="space-y-4" v-if="filteredRemarks.length > 0">
-            <ResultsListItem v-for="remark in filteredRemarks" :key="remark.id" :remark="remark" />
+            <ResultsListItem v-for="remark in filteredRemarks" :remark="remark" />
         </div>
         <div v-else class="text-center py-12">
             <p class="text-gray-500 text-lg">Ce sondage n'a pas obtenu de résultats.</p>

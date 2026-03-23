@@ -67,7 +67,7 @@ onMounted(() => {
             </div>
 
             <div v-if="surveys.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <SurveyListItem v-for="survey in surveys" :key="survey.id" :survey="survey" />
+                <SurveyListItem v-for="survey in surveys" :survey="survey" />
             </div>
 
             <div v-else class="border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center">

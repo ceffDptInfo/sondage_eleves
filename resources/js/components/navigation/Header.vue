@@ -108,7 +108,7 @@ switch (true) {
             isMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
         ]">
             <div class="flex flex-col p-6 gap-4">
-                <Link v-for="link in currentLinks.filter(l => l.show !== false)" :key="link.name" :href="link.to"
+                <Link v-for="link in currentLinks.filter(l => l.show !== false)" :href="link.to"
                     @click="isMenuOpen = false" :class="[
                         'text-lg py-2 transition',
                         $page.url === link.to || link.show ? 'text-amber-500 font-bold' : 'text-zinc-600'

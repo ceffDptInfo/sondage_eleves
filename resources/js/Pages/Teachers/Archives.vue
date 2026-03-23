@@ -43,7 +43,7 @@ onMounted(() => {
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
-                    <ArchiveListItem v-for="archive in archives" :key="archive.id" :archive="archive" />
+                    <ArchiveListItem v-for="archive in archives" :archive="archive" />
                 </tbody>
             </table>
         </div>
