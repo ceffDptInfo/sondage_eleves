@@ -10,6 +10,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use HeroQR\Core\QRCodeGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ProbeController extends Controller
@@ -53,7 +54,9 @@ class ProbeController extends Controller
             ->setData(route('students.connection.get', ['code' => $session->code, 'password' => $session->password]))
             ->generate();
 
-        $qrCode->saveTo('qrcode/session_'.$session->id); 
+        $directory = public_path('qrcode');
+
+        $qrCode->saveTo($directory.'/session_'.$session->id); 
 
         return response()->json(['message' => 'Session créée avec succès', 'session' => $session], 201);
     }
@@ -71,7 +74,11 @@ class ProbeController extends Controller
         $session->status = 'completed';
         $session->save();
 
-        Storage::disk('public')->delete('qrcode/session_'.$session->id.'.png');
+        $qrFilePath = public_path('qrcode/session_'.$session->id.'.png');
+
+        if (File::exists($qrFilePath)) {
+            File::delete($qrFilePath);
+        }
 
         return response()->json(['message' => 'Sondage terminé avec succès', 'session' => $session]);
     }

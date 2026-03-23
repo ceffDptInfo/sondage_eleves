@@ -43,6 +43,6 @@ class HomeController extends Controller
         $request->session()->save();
         $request->session()->regenerate();
 
-        return redirect()->route('students.access_survey', ['code' => $validatedData['code']]);
+        return redirect()->route('students.access_survey', ['code' => $validatedData['code']], 301);
     }
 }
