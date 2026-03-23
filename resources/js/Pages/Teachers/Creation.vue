@@ -38,7 +38,7 @@ function submit() {
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
 
-        <div class="rounded-2xl max-w-4xl mx-auto my-auto mt-24 -translate-y-8">
+        <div class="rounded-2xl w-full lg:max-w-5xl mx-auto mt-16">
             <form class="space-y-6" @submit.prevent="submit()" autocomplete="off">
                 <div>
                     <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nom du sondage</label>
