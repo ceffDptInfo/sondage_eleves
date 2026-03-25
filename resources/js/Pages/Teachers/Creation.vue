@@ -41,7 +41,7 @@ function submit() {
         <div class="rounded-2xl w-full lg:max-w-5xl mx-auto mt-16">
             <form class="space-y-6" @submit.prevent="submit()" autocomplete="off">
                 <div>
-                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nom du sondage</label>
+                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nom du sondage*</label>
                     <input type="text" id="name" v-model="survey.name" placeholder="Ex: ICH-0183"
                         class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                 </div>
@@ -57,14 +57,13 @@ function submit() {
 
                 <div>
                     <label for="question" class="block text-sm font-semibold text-gray-700 mb-1">Question
-                        principale</label>
+                        principale*</label>
                     <input type="text" id="question" v-model="survey.question" placeholder="Quelle est votre question ?"
                         class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                 </div>
 
                 <div>
-                    <label for="description" class="block text-sm font-semibold text-gray-700 mb-1">Description
-                        (optionnel)</label>
+                    <label for="description" class="block text-sm font-semibold text-gray-700 mb-1">Description</label>
                     <textarea id="description" v-model="survey.description" rows="3"
                         placeholder="Précisez le contexte du sondage..."
                         class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"></textarea>
