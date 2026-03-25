@@ -57,13 +57,13 @@ function filterRemarks() {
 }
 
 function generatePdf() {
-    axios.get('/teachers/probe/session/' + props.sessionId + '/results/close', { responseType: 'blob' })
+    axios.get('/teachers/probe/session/' + props.sessionId + '/results/close')
         .then(response => {
             console.log('PDF généré avec succès:', response.data);
             window.location.href = '/teachers/archives';
         })
         .catch(error => {
-            console.error('Erreur lors de la génération du PDF:', error.response.data);
+            console.error('Erreur lors de la génération du PDF:', error.response.data?.error || error.message);
         });
 }
 

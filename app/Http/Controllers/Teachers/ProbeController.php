@@ -56,11 +56,11 @@ class ProbeController extends Controller
 
         $directory = public_path('qrcode');
 
-        if (!File::exists($directory)) {
+        if (! File::exists($directory)) {
             File::makeDirectory($directory, 0755, true);
         }
 
-        $qrCode->saveTo($directory.'/session_'.$session->id); 
+        $qrCode->saveTo($directory.'/session_'.$session->id);
 
         return response()->json(['message' => 'Session créée avec succès', 'session' => $session], 201);
     }
@@ -127,12 +127,12 @@ class ProbeController extends Controller
             'teacher_name' => $user['name'],
             'teacher_email' => $user['email'],
             'survey_name' => $survey['name'],
-            'survey_description' => $survey['description'],
+            'survey_description' => $survey['description'] || '',
             'survey_question' => $survey['question'],
-            'session_class' => $session['class'],
-            'session_remark' => $session['remark'],
+            'session_class' => $session['class'] || '',
+            'session_remark' => $session['remark']  || '',
         ];
-
+        
         $this->saveArchive($dataArchive);
 
         $session->delete();

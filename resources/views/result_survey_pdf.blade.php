@@ -102,6 +102,10 @@
             <div class="meta-item"><span class="label">Question :</span> {{ $survey['question'] }}</div>
         @endif
 
+        @if (!empty($survey['description']))
+            <div class="meta-item"><span class="label">Description :</span> {{ $survey['description'] }}</div>
+        @endif
+
         @if (!empty($session['class']))
             <div class="meta-item"><span class="label">Classe :</span> <span
                     class="badge badge-amber">{{ $session['class'] }}</span></div>
