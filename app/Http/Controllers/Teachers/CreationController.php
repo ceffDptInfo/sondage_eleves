@@ -16,7 +16,6 @@ class CreationController extends Controller
             'name.max' => 'Le nom du sondage ne doit pas dépasser 255 caractères.',
             'creation_date.required' => 'La date de création est requise.',
             'creation_date.date' => 'La date de création doit être une date valide.',
-            'description.required' => 'La description est requise.',
             'description.string' => 'La description doit être une chaîne de caractères.',
             'question.required' => 'La question du sondage est requise.',
             'question.string' => 'La question du sondage doit être une chaîne de caractères.',
@@ -25,7 +24,7 @@ class CreationController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'creation_date' => 'required|date',
-            'description' => 'required|string',
+            'description' => 'string',
             'question' => 'required|string',
         ], $messages);
 

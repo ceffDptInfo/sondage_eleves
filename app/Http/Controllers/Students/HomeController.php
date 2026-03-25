@@ -34,14 +34,13 @@ class HomeController extends Controller
         }
 
         if ($session->password && $session->password !== $validatedData['password']) {
-            return response()->json(['message' => 'Mot de passe incorrect.'], 401);
+            return response()->json(['message' => 'Mot de passe incorrect.'], 403);
         }
 
         $request->session()->put('student_session_code', $validatedData['code']);
         $request->session()->put('student_session_id', $session->id);
         $request->session()->put('student_authentificated', 'true');
         $request->session()->save();
-        $request->session()->regenerate();
 
         return redirect()->route('students.access_survey', ['code' => $validatedData['code']], 301);
     }
