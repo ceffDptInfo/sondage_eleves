@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('survey', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->date('creation_date')->nullable();
+            $table->string('description')->nullable();
+            $table->date('creation_date');
             $table->string('question');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
