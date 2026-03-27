@@ -48,8 +48,7 @@ function submit() {
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="creation_date" class="block text-sm font-semibold text-gray-700 mb-1">Date de
-                            création</label>
+                        <label for="creation_date" class="block text-sm font-semibold text-gray-700 mb-1">Date (par défaut : aujourd'hui)</label>
                         <input type="date" id="creation_date" v-model="survey.creation_date"
                             class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
                     </div>
