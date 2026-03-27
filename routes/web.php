@@ -85,16 +85,16 @@ Route::get('students/survey/{code}', function ($code) {
 })->middleware('check.student.access')->name('students.access_survey');
 
 // GET
-Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->name('students.get_remarks');
-Route::get('students/survey/{code}/votes', [StudentsSurveyController::class, 'getVotes'])->name('students.get_votes');
-Route::get('students/session/{code}', [StudentsSurveyController::class, 'getSession'])->name('students.get_session');
-Route::get('students/connection/{code}/{password}', [StudentsHomeController::class, 'connection'])->name('students.connection.get');
+Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->middleware('check.student.access')->name('students.get_remarks');
+Route::get('students/survey/{code}/votes', [StudentsSurveyController::class, 'getVotes'])->middleware('check.student.access')->name('students.get_votes');
+Route::get('students/session/{code}', [StudentsSurveyController::class, 'getSession'])->middleware('check.student.access')->name('students.get_session');
+Route::get('students/connection/{code}/{password}', [StudentsHomeController::class, 'connection'])->middleware('check.student.access')->name('students.connection.get');
 
 
 // POST
 Route::post('students/connection', [StudentsHomeController::class, 'connection'])->name('students.connection.post');
-Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->name('students.post_remark');
-Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'postVote'])->name('students.post_vote');
+Route::post('students/survey/{code}/remark', [StudentsSurveyController::class, 'postRemark'])->middleware('check.student.access')->name('students.post_remark');
+Route::post('students/survey/remark/{id}/vote', [StudentsSurveyController::class, 'postVote'])->middleware('check.student.access')->name('students.post_vote');
 
 // ----------------------------------------------------------------------
 
