@@ -14,4 +14,17 @@ class HomeController extends Controller
 
         return response()->json($surveys);
     }
+
+    public function destroy($id)
+    {
+        $survey = Survey::findOrFail($id);
+
+        if ($survey->user_id !== auth()->id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $survey->delete();
+
+        return response()->json(['message' => 'Sondage supprimé avec succès.']);
+    }
 }

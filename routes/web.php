@@ -33,6 +33,10 @@ Route::get('teachers/create_survey', function () {
     return Inertia::render('Teachers/Creation');
 })->middleware(['auth', 'verified'])->name('teachers.create-survey');
 
+Route::get('teachers/survey/{id}/edit', function ($id) {
+    return Inertia::render('Teachers/Edit', ['surveyId' => $id]);
+})->middleware(['auth', 'verified'])->name('teachers.edit-survey');
+
 Route::get('teachers/probe/set_up/{id}', function ($id) {
     return Inertia::render('Teachers/Probe/Set_up', ['surveyId' => $id]);
 })->middleware(['auth', 'verified'])->name('teachers.probe.set_up');
@@ -62,7 +66,11 @@ Route::post('teachers/survey', [CreationController::class, 'store'])->middleware
 Route::post('teachers/probe/session', [ProbeController::class, 'setUp'])->middleware(['auth', 'verified'])->name('probe.session.store');
 
 // PATCH
+Route::patch('teachers/survey/{id}', [CreationController::class, 'update'])->middleware(['auth', 'verified'])->name('survey.update');
 Route::patch('teachers/probe/session/{id}/complete', [ProbeController::class, 'complete'])->middleware(['auth', 'verified'])->name('probe.session.complete');
+
+// DELETE
+Route::delete('teachers/survey/{id}', [HomeController::class, 'destroy'])->middleware(['auth', 'verified'])->name('survey.delete');
 
 // ----------------------------------------------------------------------
 

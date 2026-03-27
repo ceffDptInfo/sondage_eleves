@@ -129,8 +129,8 @@ class ProbeController extends Controller
             'survey_name' => $survey['name'],
             'survey_description' => $survey['description'] || '',
             'survey_question' => $survey['question'],
-            'session_class' => $session['class'] || '',
-            'session_remark' => $session['remark']  || '',
+            'session_class' => $session['class']? $session['class'] : 'Non renseignée',
+            'session_remark' => $session['remark']? $session['remark'] : 'Non renseignée',
         ];
         
         $this->saveArchive($dataArchive);

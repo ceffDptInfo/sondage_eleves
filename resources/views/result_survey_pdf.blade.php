@@ -96,7 +96,7 @@
             <div class="meta-item"><span class="label">Sondage :</span> {{ $survey['name'] }}</div>
         @endif
 
-        <div class="meta-item"><span class="label">Date :</span> {{ $date }}</div>
+        <div class="meta-item"><span class="label">Date de sondage :</span> {{ $date }}</div>
 
         @if (!empty($survey['question']))
             <div class="meta-item"><span class="label">Question :</span> {{ $survey['question'] }}</div>
