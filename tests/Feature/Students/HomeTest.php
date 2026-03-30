@@ -23,7 +23,7 @@ describe('Students.Home', function () {
             'code' => 123456,
             'password' => '1234',
         ]);
-        $response->assertStatus(301);
+        $response->assertStatus(302);
         expect(session()->get('student_session_code'))->toBe(123456);
         expect(session()->get('student_session_id'))->toBe(Session::where('code', 123456)->first()->id);
         expect(session()->get('student_authentificated'))->toBe('true');
