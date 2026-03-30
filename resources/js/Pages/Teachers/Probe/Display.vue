@@ -33,6 +33,8 @@ onMounted(() => {
             } else {
                 timer.value = new Date(timeSeconds.value * 1000).toISOString().substr(14, 5);
             }
+        } else {
+            clearInterval();
         }
     }, 1000);
 });
