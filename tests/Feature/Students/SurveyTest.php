@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Vote;
 
 describe('Students.Survey', function () {
-    beforeeach(function () {
+    beforeEach(function () {
         $this->user = User::factory()->create();
         $this->survey = Survey::factory()->create([
             'user_id' => $this->user->id,
@@ -25,7 +25,8 @@ describe('Students.Survey', function () {
         ]);
 
         $response = $this->actingAs($this->user)->withSession([
-            'student_session_code' => $this->session->code,
+            'student_authentificated' => 'true',
+            'student_session_code' => (string) $this->session->code,
         ])->get(route('students.get_remarks', ['code' => $this->session->code]));
 
         $response->assertStatus(200);
@@ -34,7 +35,8 @@ describe('Students.Survey', function () {
 
     it('contrôle le post de remarques', function () {
         $response = $this->actingAs($this->user)->withSession([
-            'student_session_code' => $this->session->code,
+            'student_authentificated' => 'true',
+            'student_session_code' => (string) $this->session->code,
         ])->post(route('students.post_remark', ['code' => $this->session->code]), [
             'value' => 'Test remark',
             'status' => 'positive',
@@ -48,16 +50,17 @@ describe('Students.Survey', function () {
     });
 
     it('contrôle la récupération des votes', function () {
-        Remark::factory()->create([
+        $remark = Remark::factory()->create([
             'session_id' => $this->session->id,
         ]);
 
         Vote::factory(10)->create([
-            'remark_id' => $this->session->id,
+            'remark_id' => $remark->id,
         ]);
 
         $response = $this->actingAs($this->user)->withSession([
-            'student_session_code' => $this->session->code,
+            'student_authentificated' => 'true',
+            'student_session_code' => (string) $this->session->code,
         ])->get(route('students.get_votes', ['code' => $this->session->code]));
 
         $response->assertStatus(200);
@@ -69,11 +72,11 @@ describe('Students.Survey', function () {
             'session_id' => $this->session->id,
         ]);
         $response = $this->actingAs($this->user)->withSession([
-            'student_session_code' => $this->session->code,
+            'student_authentificated' => 'true',
+            'student_session_code' => (string) $this->session->code,
         ])->post(route('students.post_vote', ['id' => $remark->id]), [
             'type' => 'like',
-            'ip_address' => request()->ip(),
-            'session_id' => $this->session->id,
+            'code' => (string) $this->session->code,
         ]);
 
         $response->assertStatus(200);
@@ -87,7 +90,8 @@ describe('Students.Survey', function () {
 
     it('contrôle la récupération de session', function () {
         $response = $this->actingAs($this->user)->withSession([
-            'student_session_code' => $this->session->code,
+            'student_authentificated' => 'true',
+            'student_session_code' => (string) $this->session->code,
         ])->get(route('students.get_session', ['code' => $this->session->code]));
 
         $response->assertStatus(200);
