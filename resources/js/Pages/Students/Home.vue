@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const credentials = ref({
     code: '',
-    password: ''
 });
 
 const errorMsg = ref('');
@@ -42,15 +41,6 @@ function submitForm() {
                             Entrez le code du sondage
                         </label>
                         <input type="text" id="inputCode" name="inputCode" v-model="credentials.code" placeholder="Code"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-
-                    <div class="mb-6">
-                        <label for="inputPassword" class="block text-sm font-medium text-gray-700 mb-2">
-                            Entrez le mot de passe du sondage
-                        </label>
-                        <input type="password" id="inputPassword" name="inputPassword" v-model="credentials.password"
-                            placeholder="Mot de passe" autocomplete="new-password"
                             class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
                     </div>
 

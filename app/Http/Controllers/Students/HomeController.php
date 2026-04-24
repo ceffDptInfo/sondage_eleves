@@ -8,19 +8,17 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function connection(Request $request, $code = null, $password = null)
+    public function connection(Request $request, $code = null)
     {
-        if ($code && $password) {
-            $request->merge(['code' => $code, 'password' => $password]);
+        if ($code) {
+            $request->merge(['code' => $code]);
         }
         $messages = [
             'code.required' => 'Le code de session est requis.',
-            'password.required' => 'Le mot de passe est requis.',
         ];
 
         $validatedData = $request->validate([
             'code' => 'required|integer',
-            'password' => 'required|string|max:255',
         ], $messages);
 
         $session = Session::where('code', $validatedData['code'])->first();
@@ -31,10 +29,6 @@ class HomeController extends Controller
 
         if ($session->status === 'completed') {
             return response()->json(['message' => 'Cette session est terminée.'], 403);
-        }
-
-        if ($session->password && $session->password !== $validatedData['password']) {
-            return response()->json(['message' => 'Mot de passe incorrect.'], 403);
         }
 
         $request->session()->put('student_session_code', $validatedData['code']);

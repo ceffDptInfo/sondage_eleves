@@ -68,8 +68,7 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
-        $votes = Vote::whereIn('remark_id', $session->remarks()->pluck('id'))->get(); // wherein methode pour supprimer les éléments non conformes de la liste
-        // pluck permet de récupérer une liste d'id de remarque associée à la session, puis on récupère tous les votes associés à ces remarques
+        $votes = Vote::whereIn('remark_id', $session->remarks()->pluck('id'))->get(); 
 
         return response()->json(['votes' => $votes]);
     }

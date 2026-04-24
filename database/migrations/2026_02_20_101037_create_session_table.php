@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('class')->nullable();
             $table->string('remark')->nullable();
             $table->integer('code')->unique();
-            $table->string('password');
             $table->foreignId('survey_id')->constrained('survey')->onDelete('cascade');
             $table->timestamps();
         });

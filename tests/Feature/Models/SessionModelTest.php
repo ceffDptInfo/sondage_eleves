@@ -13,7 +13,6 @@ describe('SessionsModel', function () {
         $session = Session::factory()->create();
         expect($session->status)->not()->toBeEmpty();
         expect($session->code)->not()->toBeEmpty();
-        expect($session->password)->not()->toBeEmpty();
         expect($session->survey_id)->not()->toBeEmpty();
     });
 
@@ -21,11 +20,9 @@ describe('SessionsModel', function () {
         $session = Session::factory()->create([
             'status' => 'active',
             'code' => 156236,
-            'password' => 'password',
         ]);
         expect($session->status)->toBe('active');
         expect($session->code)->toBe(156236);
-        expect($session->password)->toBe('password');
     });
 
     it('Supprimer une session', function () {

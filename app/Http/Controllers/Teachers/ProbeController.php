@@ -33,9 +33,6 @@ class ProbeController extends Controller
             'code.required' => 'Le code de session est requis.',
             'code.integer' => 'Le code de session doit être un entier.',
             'code.unique' => 'Le code de session doit être unique.',
-            'password.required' => 'Le mot de passe est requis.',
-            'password.string' => 'Le mot de passe doit être une chaîne de caractères.',
-            'password.max' => 'Le mot de passe ne doit pas dépasser 255 caractères.',
         ];
 
         $validatedData = $request->validate([
@@ -44,14 +41,13 @@ class ProbeController extends Controller
             'class' => 'nullable|string|max:255',
             'remark' => 'nullable|string|max:1000',
             'code' => 'required|integer|unique:sessions,code',
-            'password' => 'required|string|max:255',
         ], $messages);
 
         $session = Session::create($validatedData);
 
         $qrCodeManager = new QRCodeGenerator;
         $qrCode = $qrCodeManager
-            ->setData(route('students.connection.get', ['code' => $session->code, 'password' => $session->password]))
+            ->setData(route('students.connection.get', ['code' => $session->code]))
             ->generate();
 
         $directory = public_path('qrcode');

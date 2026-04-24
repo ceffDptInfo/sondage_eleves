@@ -16,7 +16,6 @@ class Session extends Model
         'class',
         'remark',
         'code',
-        'password',
         'survey_id',
     ];
 
