@@ -5,6 +5,10 @@ import MessageListItem from '@/components/students/Survey/message_list_item.vue'
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
+const props = defineProps({
+    code: String
+});
+
 const remark = ref({
     value: '',
     status: 'positive',
@@ -52,10 +56,6 @@ onMounted(() => {
     }, 1000);
 });
 
-const props = defineProps({
-    code: String
-});
-
 function submitForm() {
     axios.post(`/students/survey/${props.code}/remark`, remark.value)
         .then(response => {
@@ -75,7 +75,6 @@ function submitForm() {
 </script>
 
 <template>
-
     <Head title="Sondage" />
     <AppLayout class="h-screen overflow-hidden flex flex-col">
         <div class="p-6 bg-white flex flex-col">
@@ -85,7 +84,7 @@ function submitForm() {
             <div class="mt-3 h-1.5 w-20 bg-amber-500 rounded-full"></div>
         </div>
         <div class="flex-1 overflow-y-auto px-6 pb-52 mb-4">
-            <MessageListItem v-for="remark in remarks" :remark="remark" :ip="ipAddress"
+            <MessageListItem v-for="remark in remarks" :remark="remark" :ip="ipAddress" :code="props.code"
                 :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0]" />
         </div>
 

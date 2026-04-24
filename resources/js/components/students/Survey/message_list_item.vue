@@ -6,14 +6,15 @@ import { ref } from 'vue';
 const props = defineProps({
     remark: Object,
     ip: String,
-    vote: Object
+    vote: Object,
+    code: Number
 });
 
 const err = ref('');
 
 function positiveVote() {
     // props.vote.type = 'like';
-    axios.post(`/students/survey/remark/${props.remark.id}/vote`, { type: 'like' })
+    axios.post(`/students/survey/remark/${props.remark.id}/vote`, { type: 'like', code: props.code })
     .then(response => {
             props.vote.type = 'like';
             console.log('Remarque likée :', response.data);
@@ -27,7 +28,7 @@ function positiveVote() {
 
 function negativeVote() {
     // props.vote.type = 'dislike';
-    axios.post(`/students/survey/remark/${props.remark.id}/vote`, { type: 'dislike' })
+    axios.post(`/students/survey/remark/${props.remark.id}/vote`, { type: 'dislike', code: props.code })
         .then(response => {
             props.vote.type = 'dislike';
             err.value = '';
