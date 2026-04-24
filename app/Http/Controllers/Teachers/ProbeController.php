@@ -127,7 +127,7 @@ class ProbeController extends Controller
             'teacher_name' => $user['name'],
             'teacher_email' => $user['email'],
             'survey_name' => $survey['name'],
-            'survey_description' => $survey['description'] || '',
+            'survey_description' => $survey['description'] ?? '',
             'survey_question' => $survey['question'],
             'session_class' => $session['class']? $session['class'] : 'Non renseignée',
             'session_remark' => $session['remark']? $session['remark'] : 'Non renseignée',

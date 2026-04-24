@@ -110,6 +110,7 @@ describe('Teachers.Probe', function () {
         expect($archive->file_name)->toContain('.pdf');
         expect($archive->teacher_name)->toBe($this->user->name);
         expect($archive->survey_name)->toBe($session->survey->name);
+        expect($archive->survey_description)->toBe($session->survey->description);
         expect($archive->survey_question)->toBe($session->survey->question);
 
         $response->assertStatus(200);
