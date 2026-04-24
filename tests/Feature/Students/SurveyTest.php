@@ -14,7 +14,6 @@ describe('Students.Survey', function () {
         ]);
         $this->session = Session::factory()->create([
             'code' => 123456,
-            'password' => '1234',
             'survey_id' => $this->survey->id,
         ]);
     });
@@ -98,7 +97,6 @@ describe('Students.Survey', function () {
                 'class' => $this->session->class,
                 'remark' => $this->session->remark,
                 'code' => $this->session->code,
-                'password' => $this->session->password,
                 'survey_id' => $this->session->survey_id,
             ],
         ]);

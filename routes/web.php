@@ -88,7 +88,7 @@ Route::get('students/survey/{code}', function ($code) {
 Route::get('students/survey/{code}/remarks', [StudentsSurveyController::class, 'getRemarks'])->name('students.get_remarks');
 Route::get('students/survey/{code}/votes', [StudentsSurveyController::class, 'getVotes'])->name('students.get_votes');
 Route::get('students/session/{code}', [StudentsSurveyController::class, 'getSession'])->name('students.get_session');
-Route::get('students/connection/{code}/{password}', [StudentsHomeController::class, 'connection'])->name('students.connection.get');
+Route::get('students/connection/{code}', [StudentsHomeController::class, 'connection'])->name('students.connection.get');
 
 
 // POST

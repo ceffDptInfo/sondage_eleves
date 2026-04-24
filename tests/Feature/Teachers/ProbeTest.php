@@ -18,7 +18,6 @@ describe('Teachers.Probe', function () {
             'class' => 'Classe de test',
             'remark' => 'Remarque de test',
             'code' => 123456,
-            'password' => 'motdepasse',
             'survey_id' => $this->survey->id,
         ]
         );
@@ -33,7 +32,6 @@ describe('Teachers.Probe', function () {
             'class' => 'Classe de test',
             'remark' => 'Remarque de test',
             'code' => 123456,
-            'password' => 'motdepasse',
             'survey_id' => 1,
         ]);
 
@@ -44,7 +42,6 @@ describe('Teachers.Probe', function () {
             'class' => $session->class,
             'remark' => $session->remark,
             'code' => $session->code,
-            'password' => $session->password,
             'survey_id' => $session->survey_id,
         ]);
 

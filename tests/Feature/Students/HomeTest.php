@@ -15,13 +15,11 @@ describe('Students.Home', function () {
         ]);
         Session::factory()->create([
             'code' => 123456,
-            'password' => '1234',
             'status' => 'active',
         ]);
 
         $response = $this->actingAs($user)->post(route('students.connection.post'), [
             'code' => 123456,
-            'password' => '1234',
         ]);
         $response->assertStatus(301);
         expect(session()->get('student_session_code'))->toBe(123456);
