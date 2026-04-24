@@ -102,7 +102,7 @@ function end() {
 
                 <div class="mt-8 gap-6">
                     <div class="p-6 rounded-xl shadow-md shadow-amber-200 bg-amber-500">
-                        <label class="text-xs font-bold text-white uppercase">Mot de passe</label>
+                        <label class="text-xs font-bold text-white uppercase">Code de session</label>
                         <p class="text-3xl md:text-5xl font-mono font-black text-white mt-2 text-center">
                             {{ session?.code }}
                         </p>

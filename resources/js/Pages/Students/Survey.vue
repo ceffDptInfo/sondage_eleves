@@ -28,40 +28,47 @@ onMounted(() => {
         .catch(error => {
             console.error('Erreur lors de la récupération de l\'adresse IP :', error);
         });
-    setInterval(() => {
-        axios.get(`/students/survey/${props.code}/remarks`)
-            .then(response => {
-                remarks.value = (response.data.remarks).filter(remark => !remark.private || remark.ip_address == ipAddress);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des messages :', error);
-            });
-        axios.get(`/students/survey/${props.code}/votes`)
-            .then(response => {
-                votes.value = response.data.votes;
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des votes :', error);
-            });
 
-        axios.get(`/students/session/${props.code}`)
-            .then(response => {
-                if (response.data.session.status === 'completed') {
-                    window.location.href = '/students/home';
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération du statut de la session :', error);
-            });
-    }, 1000);
+    axios.get(`/students/survey/${props.code}/remarks`)
+        .then(response => {
+            remarks.value = (response.data.remarks).filter(remark => !remark.private || remark.ip_address == ipAddress);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des messages :', error);
+        });
+    axios.get(`/students/survey/${props.code}/votes`)
+        .then(response => {
+            votes.value = response.data.votes;
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des votes :', error);
+        });
+
+    axios.get(`/students/session/${props.code}`)
+        .then(response => {
+            if (response.data.session.status === 'completed') {
+                window.location.href = '/students/home';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération du statut de la session :', error);
+        });
+
+    window.Echo.channel('remarks')
+        .listen('RemarkAdded', (e) => {
+            console.log('Nouvelle remarque reçue :', e.remark);
+            if (!e.remark.private || e.remark.ip_address === ipAddress) {
+                remarks.value.unshift(e.remark);
+            }
+        });
 });
 
 function submitForm() {
     axios.post(`/students/survey/${props.code}/remark`, remark.value)
         .then(response => {
             console.log('Remarque ajoutée :', response.data);
-            remarks.value.unshift(response.data.remark); // mettre au début
-            remark.value = { // nécessaire pour réinitialiser le formulaire - ne pas avoir de rechargement sur le input
+            remarks.value.unshift(response.data.remark);
+            remark.value = {
                 value: '',
                 status: 'positive',
                 private: false
@@ -75,6 +82,7 @@ function submitForm() {
 </script>
 
 <template>
+
     <Head title="Sondage" />
     <AppLayout class="h-screen overflow-hidden flex flex-col">
         <div class="p-6 bg-white flex flex-col">
