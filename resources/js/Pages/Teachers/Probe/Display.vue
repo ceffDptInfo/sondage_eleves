@@ -100,18 +100,11 @@ function end() {
                     </div>
                 </div>
 
-                <div class="mt-8 gap-6 grid grid-cols-2">
-                    <div class="p-6 rounded-xl shadow-md text-white">
-                        <label class="text-xs font-bold text-amber-600 uppercase">Code d'accès</label>
-                        <p class="text-3xl md:text-5xl font-mono font-black text-amber-500 mt-2 text-center">
-                            {{ session?.code }}
-                        </p>
-                    </div>
-
+                <div class="mt-8 gap-6">
                     <div class="p-6 rounded-xl shadow-md shadow-amber-200 bg-amber-500">
                         <label class="text-xs font-bold text-white uppercase">Mot de passe</label>
                         <p class="text-3xl md:text-5xl font-mono font-black text-white mt-2 text-center">
-                            {{ session?.password }}
+                            {{ session?.code }}
                         </p>
                     </div>
                 </div>
