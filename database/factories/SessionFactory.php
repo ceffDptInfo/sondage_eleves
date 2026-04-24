@@ -22,7 +22,6 @@ class SessionFactory extends Factory
             'class' => fake()->optional()->word(),
             'remark' => fake()->optional()->sentence(),
             'code' => fake()->unique()->numberBetween(100000, 999999),
-            'password' => fake()->word(),
             'survey_id' => Survey::factory(),
         ];
     }
