@@ -18,7 +18,7 @@ class VoteFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => fake()->randomElement(['upvote', 'downvote']),
+            'type' => fake()->randomElement(['like', 'dislike']),
             'ip_address' => fake()->ipv4(),
             'remark_id' => Remark::factory(),
         ];
