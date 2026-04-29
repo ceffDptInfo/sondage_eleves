@@ -30,52 +30,50 @@ onMounted(() => {
         .catch(error => {
             console.error('Erreur lors de la récupération de l\'adresse IP :', error);
         });
-    setInterval(() => {
-        axios.get(`/students/survey/${props.code}/remarks/public`)
-            .then(response => {
-                publicRemarks.value = response.data.remarks;
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des remarques publiques :', error);
-            });
-        axios.get(`/students/survey/${props.code}/remarks`)
-            .then(response => {
-                ownRemarks.value = response.data.remarks;
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération de vos remarques :', error);
-            });
-        
-        remarks.value = [...publicRemarks.value, ...ownRemarks.value];
-        remarks.value = [...new Map(remarks.value.map(item => [item.id, item])).values()];
-        remarks.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));   
-        
-        axios.get(`/students/survey/${props.code}/votes`)
-            .then(response => {
-                votes.value = response.data.votes;
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des votes :', error);
-            });
+    axios.get(`/students/survey/${props.code}/remarks/public`)
+        .then(response => {
+            publicRemarks.value = response.data.remarks;
+        })
+        .then(() => {
+            axios.get(`/students/survey/${props.code}/remarks`)
+                .then(response => {
+                    ownRemarks.value = response.data.remarks;
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération de vos remarques :', error);
+                });
+        })
+        .then(() => {
+            remarks.value = [...publicRemarks.value, ...ownRemarks.value];
+            remarks.value = [...new Map(remarks.value.map(item => [item.id, item])).values()];
+            remarks.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des remarques publiques :', error);
+        });
 
-        axios.get(`/students/session/${props.code}`)
-            .then(response => {
-                if (response.data.session.status === 'completed') {
-                    window.location.href = '/students/home';
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération du statut de la session :', error);
-            });
-    }, 1000);
+    axios.get(`/students/survey/${props.code}/votes`)
+        .then(response => {
+            votes.value = response.data.votes;
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des votes :', error);
+        });
+
+    window.Echo.channel('remarks')
+        .listen('.remark.added', (e) => {
+            console.log('Nouvelle remarque reçue :', e.remark);
+            if (!e.remark.private || e.remark.ip_address === ipAddress) {
+                remarks.value.unshift(e.remark);
+            }
+        });
 });
 
 function submitForm() {
     axios.post(`/students/survey/${props.code}/remark`, remark.value)
         .then(response => {
             console.log('Remarque ajoutée :', response.data);
-            remarks.value.unshift(response.data.remark); // mettre au début
-            remark.value = { // nécessaire pour réinitialiser le formulaire - ne pas avoir de rechargement sur le input
+            remark.value = {
                 value: '',
                 status: 'positive',
                 private: false
@@ -83,12 +81,12 @@ function submitForm() {
         })
         .catch(error => {
             console.error('Erreur lors de l\'ajout de la remarque :', error.response.data.message);
-            alert(error.response.data.message || 'Une erreur est survenue lors de l\'ajout de la remarque.');
         });
 }
 </script>
 
 <template>
+
     <Head title="Sondage" />
     <AppLayout class="h-screen overflow-hidden flex flex-col">
         <div class="p-6 bg-white flex flex-col">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Students;
 
+use App\Events\RemarkAdded;
+use App\Events\VoteAdded;
 use App\Http\Controllers\Controller;
 use App\Models\Remark;
 use App\Models\Session;
@@ -71,10 +73,15 @@ class SurveyController extends Controller
 
         $remark = Remark::create($validatedData);
 
+        if (! $remark->private || $remark->ip_address == $request->ip()) {
+            RemarkAdded::dispatch($remark);
+        }
+
         return response()->json(['message' => 'Remarque ajoutée avec succès', 'remark' => $remark]);
     }
 
-    public function getVotes(Request $request, $code) {
+    public function getVotes(Request $request, $code)
+    {
         $session = Session::where('code', $code)->first();
 
         if (! $session) {
@@ -85,15 +92,16 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
-        $votes = Vote::whereIn('remark_id', $session->remarks()->pluck('id'))->get(); 
+        $votes = Vote::whereIn('remark_id', $session->remarks()->pluck('id'))->get();
 
         return response()->json(['votes' => $votes]);
     }
 
-    public function postVote(Request $request, $id) {
+    public function postVote(Request $request, $id)
+    {
         $remark = Remark::where('id', $id)->first();
 
-        if (!$remark) {
+        if (! $remark) {
             return response()->json(['message' => 'Session ou remarque non trouvée'], 404);
         }
 
@@ -104,18 +112,23 @@ class SurveyController extends Controller
         $validatedData['ip_address'] = $request->ip();
         $validatedData['remark_id'] = $remark->id;
 
+        $vote = null;
+
         if (Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->where('type', $validatedData['type'])->exists()) {
             return response()->json(['message' => 'Vous avez déjà voté pour cette remarque'], 400);
         } elseif (Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->exists()) {
-            Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->update(['type' => $validatedData['type']]);
+            $vote = Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->update(['type' => $validatedData['type']]);
         } else {
-            Vote::create($validatedData);
+            $vote = Vote::create($validatedData);
         }
+
+        VoteAdded::dispatch($vote);
 
         return response()->json(['message' => 'Remarque votée avec succès']);
     }
 
-    public function getSession(Request $request, $code) {
+    public function getSession(Request $request, $code)
+    {
         $session = Session::where('code', $code)->first();
 
         if (! $session) {
