@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
-    public function getRemarks(Request $request, $code)
+    public function getOwnRemarks(Request $request, $code)
     {
         $session = Session::where('code', $code)->first();
 
@@ -22,7 +22,24 @@ class SurveyController extends Controller
             return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
         }
 
-        $remarks = $session->remarks()->orderBy('created_at', 'desc')->get();
+        $remarks = $session->remarks()->where('ip_address', $request->ip())->orderBy('created_at', 'desc')->get();
+
+        return response()->json(['remarks' => $remarks], 200);
+    }
+
+    public function getPublicRemarks(Request $request, $code)
+    {
+        $session = Session::where('code', $code)->first();
+
+        if (! $session) {
+            return response()->json(['message' => 'Session non trouvée'], 404);
+        }
+
+        if ($request->session()->get('student_session_code') != $code) {
+            return response()->json(['message' => 'Accès non autorisé à cette session'], 403);
+        }
+
+        $remarks = $session->remarks()->where('private', false)->orderBy('created_at', 'desc')->get();
 
         return response()->json(['remarks' => $remarks], 200);
     }

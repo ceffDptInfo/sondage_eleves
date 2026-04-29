@@ -18,15 +18,31 @@ describe('Students.Survey', function () {
         ]);
     });
 
-    it('contrôle la récupération des remarques', function () {
+    it('contrôle la récupération de vos remarques', function () {
         Remark::factory(10)->create([
             'session_id' => $this->session->id,
+            'ip_address' => request()->ip(),
         ]);
 
         $response = $this->actingAs($this->user)->withSession([
             'student_authentificated' => 'true',
             'student_session_code' => (string) $this->session->code,
-        ])->get(route('students.get_remarks', ['code' => $this->session->code]));
+        ])->get(route('students.get_own_remarks', ['code' => $this->session->code]));
+
+        $response->assertStatus(200);
+        $response->assertJsonCount(10, 'remarks');
+    });
+
+    it('contrôle la récupération des remarques publiques', function () {
+        Remark::factory(10)->create([
+            'session_id' => $this->session->id,
+            'private' => false,
+        ]);
+
+        $response = $this->actingAs($this->user)->withSession([
+            'student_authentificated' => 'true',
+            'student_session_code' => (string) $this->session->code,
+        ])->get(route('students.get_public_remarks', ['code' => $this->session->code]));
 
         $response->assertStatus(200);
         $response->assertJsonCount(10, 'remarks');
