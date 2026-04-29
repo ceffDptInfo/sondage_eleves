@@ -15,6 +15,8 @@ const remark = ref({
     private: false
 });
 
+const publicRemarks = ref([]);
+const ownRemarks = ref([]);
 const remarks = ref([]);
 const votes = ref([]);
 let ipAddress = '';
@@ -29,13 +31,25 @@ onMounted(() => {
             console.error('Erreur lors de la récupération de l\'adresse IP :', error);
         });
     setInterval(() => {
-        axios.get(`/students/survey/${props.code}/remarks`)
+        axios.get(`/students/survey/${props.code}/remarks/public`)
             .then(response => {
-                remarks.value = (response.data.remarks).filter(remark => !remark.private || remark.ip_address == ipAddress);
+                publicRemarks.value = response.data.remarks;
             })
             .catch(error => {
-                console.error('Erreur lors de la récupération des messages :', error);
+                console.error('Erreur lors de la récupération des remarques publiques :', error);
             });
+        axios.get(`/students/survey/${props.code}/remarks`)
+            .then(response => {
+                ownRemarks.value = response.data.remarks;
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération de vos remarques :', error);
+            });
+        
+        remarks.value = [...publicRemarks.value, ...ownRemarks.value];
+        remarks.value = [...new Map(remarks.value.map(item => [item.id, item])).values()];
+        remarks.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));   
+        
         axios.get(`/students/survey/${props.code}/votes`)
             .then(response => {
                 votes.value = response.data.votes;
