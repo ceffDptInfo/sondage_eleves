@@ -111,14 +111,12 @@ class SurveyController extends Controller
         $validatedData['ip_address'] = $request->ip();
         $validatedData['remark_id'] = $remark->id;
 
-        $vote = null;
-
         if (Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->where('type', $validatedData['type'])->exists()) {
             return response()->json(['message' => 'Vous avez déjà voté pour cette remarque'], 400);
         } elseif (Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->exists()) {
-            $vote = Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->update(['type' => $validatedData['type']]);
+            Vote::where('ip_address', request()->ip())->where('remark_id', $remark->id)->update(['type' => $validatedData['type']]);
         } else {
-            $vote = Vote::create($validatedData);
+            Vote::create($validatedData);
         }
 
         return response()->json(['message' => 'Remarque votée avec succès']);

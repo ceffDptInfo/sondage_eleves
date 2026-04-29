@@ -15,6 +15,10 @@ const remark = ref({
     private: false
 });
 
+const vote = {
+    type: null
+}
+
 const publicRemarks = ref([]);
 const ownRemarks = ref([]);
 const remarks = ref([]);
@@ -97,7 +101,7 @@ function submitForm() {
         </div>
         <div class="flex-1 overflow-y-auto px-6 pb-52 mb-4">
             <MessageListItem v-for="remark in remarks" :remark="remark" :ip="ipAddress" :code="props.code"
-                :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0]" />
+                :vote="votes.filter(vote => vote.remark_id === remark.id && vote.ip_address === ipAddress)[0] || vote" />
         </div>
 
         <div class="flex fixed bottom-0 left-0 right-0 h-16 items-center bg-white">
