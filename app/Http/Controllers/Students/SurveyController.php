@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Students;
 
 use App\Events\RemarkAdded;
-use App\Events\VoteAdded;
 use App\Http\Controllers\Controller;
 use App\Models\Remark;
 use App\Models\Session;
@@ -121,8 +120,6 @@ class SurveyController extends Controller
         } else {
             $vote = Vote::create($validatedData);
         }
-
-        VoteAdded::dispatch($vote);
 
         return response()->json(['message' => 'Remarque votée avec succès']);
     }
