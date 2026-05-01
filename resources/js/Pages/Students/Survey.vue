@@ -71,6 +71,13 @@ onMounted(() => {
                 remarks.value.unshift(e.remark);
             }
         });
+
+    window.Echo.channel('sessions')
+        .listen('.session.completed', (e) => {
+            console.log('Session terminée :', e);
+            alert('La session a été terminée par l\'enseignant. Vous allez être redirigé vers la page d\'accueil.');
+            window.location.href = '/students/home';
+        }); 
 });
 
 function submitForm() {

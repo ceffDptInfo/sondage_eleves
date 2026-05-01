@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Teachers;
 
+use App\Events\SessionCompleted;
+
 use App\Http\Controllers\Controller;
 use App\Models\Archives;
 use App\Models\Session;
@@ -73,6 +75,8 @@ class ProbeController extends Controller
         $session = Session::findOrFail($id);
         $session->status = 'completed';
         $session->save();
+
+        SessionCompleted::dispatch($session);
 
         $qrFilePath = public_path('qrcode/session_'.$session->id.'.png');
 
